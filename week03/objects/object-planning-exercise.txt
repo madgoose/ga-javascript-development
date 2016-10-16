@@ -1,0 +1,31 @@
+A user who had reserved a Zipcar arrives to find it has not been returned yet, and customer service transfers her reservation to an available car.
+
+
+User
+	name
+	DOB
+	drivingLicenseID
+	currentCar
+	accountBalance
+
+CarPool
+	availableCars
+	date
+
+Car
+	registrationNumber
+	availabilityStatus
+	location
+	colour
+	startHire
+	endHire
+
+Map
+	cars
+	latitude
+	longitude
+	zoomLevel
+
+Diary
+	cars
+	users

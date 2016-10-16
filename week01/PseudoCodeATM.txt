@@ -1,0 +1,46 @@
+Write the pseudocode for a program for that controls an ATM.
+
+This program will have to handle the different scenarios with:
+
+The Credit Card.
+The Keypad.
+The Screen.
+The Cash dispenser.
+
+Some Examples Cases:
+
+What happens when the card inserted is not a credit/debit card.
+What's happening when the ATM cannot provide the amount requested.
+What's happening when the amount requested is too big compared to the maximum authorised withdrawal amount.
+What's happening when 3 wrong pins have been entered by the card's owner ?
+===================
+
+
+main
+	set machineState to 'standby'
+
+
+// check inserted card
+checkCard
+	IF cardInserted === 'debit card' || 'credit card'
+		DO checkPinNumber
+	ELSE
+		PRINT 'Please enter a credit card or a debit card'
+		DO ejectCard
+	ENDIF
+
+// check PIN number
+checkPinNumber
+	READ card details
+	IF
+
+
+READ name, hourlyRate, hoursWorked
+grossPay = hourlyRate * hoursWorked
+IF grossPay >= 100
+	deduction = grossPay * deductionRate
+ELSE
+	deduction = 0
+ENDIF
+netPay = grossPay – deduction
+WRITE name, grossPay, deduction, netPay
