@@ -1,1 +1,1 @@
-# ga-javascript-development
+# General Assembly, JavaScript Development coursework
