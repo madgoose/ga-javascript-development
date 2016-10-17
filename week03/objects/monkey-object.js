@@ -14,47 +14,36 @@
 var Monkey = function(name, species, foodsEaten){
 	this.name = name,
 	this.species = species,
-	this.foodsEaten = foodsEaten,
-	this.introduceSelf = function(){
-		console.log('my name is ' + this.name + ' and i am a ' + this.species + ' monkey');
-	},
-	this.speakFoodsEaten = function(){
-		console.log('i have eaten ' + this.foodsEaten);
-	},
-	this.eatFood = function(newFood){
-		this.foodsEaten.push(newFood);
-	}
+	this.foodsEaten = foodsEaten
 };
 
 Monkey.prototype.introduce = function() {
-	console.log('This ' + this.species + ' monkey is called ' + this.name + '. ' + this.name + ' has eaten ' + this.foodsEaten);
+	console.log('my name is ' + this.name + ' and i am a ' + this.species + ' monkey. i\'ve eaten ' + this.foodsEaten);
+};
+Monkey.prototype.speakFoodEaten = function() {
+	console.log(this.name + ' has eaten ' + this.foodsEaten);
 };
 
-// prevent duplicate items being added !! TODO !!
+// no lteIE11 support for some(), okay to use in node.js environment
+Monkey.prototype.checkFoodsEaten = function(value) {
+	return this.foodsEaten.some(arrVal => value === arrVal);
+}
+
+// check foodsEaten for newFood, add newFood to foodsEaten array if not duplicate
 Monkey.prototype.eatSomething = function(newFood) {
-/*
-	if (this.foodsEaten.indexOf(newFood)) {
-		console.log('i have eaten this before');
-		return false;
+	if (this.checkFoodsEaten(newFood)) {
+		console.log(this.name + ' has already eaten ' + newFood);
 	} else {
+		console.log(this.name + ' has not eaten ' + newFood + ' before');
 		this.foodsEaten.push(newFood);
-		console.log('have not eaten this before');
 	}
-*/
-	this.foodsEaten.push(newFood);
 };
 
 var monkey1 = new Monkey('Henry', 'Bonobo', ['nuts', 'stuff', 'thangs', 'filet Mignon']);
 var monkey2 = new Monkey('Barry', 'Spider', ['bananas', 'spam', 'eggs']);
 var monkey3 = new Monkey('Mildred', 'Cheeky', 'pizza');
 
-monkey1.speakFoodsEaten();
-monkey1.eatFood('ham');
-monkey1.eatFood = 'lasagne';
-console.log(monkey1.eatFood);
-monkey1.speakFoodsEaten();
-console.log('\n');
-monkey2.speakFoodsEaten();
-monkey2.eatSomething('melons');
-monkey2.eatSomething = 'ginger';
-monkey2.speakFoodsEaten();
+monkey1.speakFoodEaten(); // print current array 
+monkey1.eatSomething('calzone'); // try add new item to array
+monkey1.eatSomething('nuts'); // try add existing item to array
+monkey1.speakFoodEaten(); // print current array 
