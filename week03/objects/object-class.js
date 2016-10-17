@@ -8,7 +8,7 @@ var ins1 = new Class(),
     ins2 = new Class();
 
 // Test the calc method:
-console.log(ins1.calc(1,1), ins2.calc(1,1));
+console.log('ins1: ' + ins1.calc(1,1), 'ins2: ' + ins2.calc(1,1));
 // -> 2, 2
 
 // Change the prototype method
