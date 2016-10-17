@@ -25,8 +25,14 @@ Monkey.prototype.speakFoodEaten = function() {
 };
 
 // no lteIE11 support for some(), okay to use in node.js environment
-Monkey.prototype.checkFoodsEaten = function(value) {
+Monkey.prototype.checkFoodsEatenES6 = function(value) {
 	return this.foodsEaten.some(arrVal => value === arrVal); // arrow functions --> ES6 --> not yet covered in course
+}
+
+Monkey.prototype.checkFoodsEaten = function(value) {
+	return this.foodsEaten.some(function(arrVal) {
+        return value === arrVal;
+    });
 }
 
 // check foodsEaten for newFood, add newFood to foodsEaten array if not duplicate
