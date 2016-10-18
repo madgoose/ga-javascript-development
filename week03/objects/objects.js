@@ -9,7 +9,7 @@ var myHouse = {
 // for-in statement to enumerate over object properties
 for (var key in myHouse) { // http://stackoverflow.com/questions/921789/how-to-loop-through-plain-javascript-object-with-objects-as-members
 	//console.log(key + ' = ' + myHouse[key]); // key:value pairs
-} 
+}
 
 // when using for-in loops, always make use of the hasOwnProperty method to determine if the
 // current property in iteration is really a property of the object you're checking on, not the prototype object
@@ -26,9 +26,9 @@ for (var prop in myHouse) {
 
 
 /*
-var secondHouse = myHouse; 	// _copying_ the original object 
-secondHouse.floor = 45; 	// however, it is just a reference to the original variable 
-							// and changing this property will change the value in the first variable 
+var secondHouse = myHouse; 	// _copying_ the original object
+secondHouse.floor = 45; 	// however, it is just a reference to the original variable
+							// and changing this property will change the value in the first variable
 console.log('> myHouse.floor = ' + myHouse.floor + '\n> secondHouse.floor = ' + secondHouse.floor);
 */
 // Person is a class. This is a constructor method.
@@ -37,8 +37,7 @@ var Person = function(firstName, lastName){
 	this.lastName = lastName;
 };
 
-// always use prototype when defining a function that will be unique for each instance // check
-// eg if this function was in the constructor, it would show gerry for all // poorly worded
+// always use prototype when defining a function because reasons
 Person.prototype.identity = function(){
 	console.log(this.firstName + ' is ' + this.age + ' years old.');
 };
