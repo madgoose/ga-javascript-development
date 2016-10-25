@@ -17,7 +17,7 @@ $(function(){
 		var regexMatch = /\{\{([a-zA-Z]*)\}\}/g; // g at end means global - it will not stop after the first instance
 		var matches = templateString.match(regexMatch);
 		
-		matches.forEach(function(key){
+		matches.map(function(key){
 
 			key = key.replace(/{{/g, '').replace(/}}/g, '');
 			var correspondingValue = values[key];
