@@ -9,17 +9,17 @@ Making a favorites list: DOM manipulation
 - Also, when a new item is added to the list, clear the input box.
 
 */
-MyNamespace = {};
+MyApp = {};
 
-MyNamespace.btnCreate = document.getElementById("new-thing-button");
+MyApp.btnCreate = document.getElementById("new-thing-button");
 
-MyNamespace.addToList = function(list, newThing){
+MyApp.addToList = function(list, newThing){
 	console.log("something");
 }
 
 window.onload = function() {
   // when someone clicks the button...
-  MyNamespace.btnCreate.onclick = function(){
+  MyApp.btnCreate.onclick = function(){
   	console.log("button clicked");
   	return false;
   }

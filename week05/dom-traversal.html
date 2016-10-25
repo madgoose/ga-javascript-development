@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>DOM traversal</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			// find() // moves down the DOM
+			$("li.B").find("li").css("background-color", "red");
+
+			// children() // moves down the DOM
+			$("li.B").children().children("li").css("background-color", "blue");
+			$("li.B").children("ul").css("background-color", "purple");
+
+			// closest() // moves up the DOM. selects only one element, including itself
+			$("li.B").closest("li").css("background-color", "pink");
+
+			// parent()
+			$("li.a").parent("ul").css("background-color", "papayawhip");
+
+			// next()
+			$("li.B").next("li").css("background-color", "silver");
+
+			// prev()
+			$("li.C").prev("li").css("background-color", "gold");
+
+			// first() // no relation to children/parent, this method returns the first instance of the selector in the collection
+			$("ul.three li").first().css("background-color", "peachpuff");
+
+			// last()
+			$("ul.three li").last().css("background-color", "lightgoldenrodyellow");
+		});
+	</script>
+</head>
+<body>
+	<ul class="one">
+		<li class="A">A</li>
+		<li class="B">
+			B
+			<ul class="two">
+				<li class="I">I</li>
+				<li class="II">II
+					<ul class="three">
+						<li class="a">a</li>
+						<li class="b">b</li>
+						<li class="c">c</li>
+					</ul>
+				</li>
+				<li class="III">III</li>
+			</ul>
+		</li>
+		<li class="C">C</li>
+	</ul>
+</body>
+</html>

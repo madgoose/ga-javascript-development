@@ -1,3 +1,5 @@
+MyApp = {};
+
 function appendH1() {
 	var headingMain = document.createElement("h1");
 	var headingMainText = document.createTextNode("Hello world");
@@ -28,7 +30,6 @@ function watchForm(){
 	}
 }
 
-MyApp = {};
 
 MyApp.doSomething = function(name){
 	alert("Hello " + name);
