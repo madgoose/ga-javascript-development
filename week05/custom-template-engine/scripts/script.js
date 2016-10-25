@@ -17,12 +17,12 @@ $(function(){
 		var regexMatch = /\{\{([a-zA-Z]*)\}\}/g; // g at end means global - it will not stop after the first instance
 		var matches = templateString.match(regexMatch);
 		
-		for(var i = 0; i < matches.length; i++){
-			var key = matches[i].replace(/{{/g, '').replace(/}}/g, '');
+		matches.forEach(function(key){
+
+			key = key.replace(/{{/g, '').replace(/}}/g, '');
 			var correspondingValue = values[key];
-			templateString = templateString.replace(key, correspondingValue);
-			templateString = templateString.replace(/{{/g, '').replace(/}}/g, '');
-		};
+			templateString = templateString.replace(key, correspondingValue).replace(/{{/g, '').replace(/}}/g, '');
+		});
 
 		// write to DOM
 		$("body").append(templateString);
