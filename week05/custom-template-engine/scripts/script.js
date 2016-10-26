@@ -18,12 +18,16 @@ $(function(){
 		
 		// new array containing strings that match regex expression
 		var matches = templateString.match(regexMatch);
+		console.log(matches);
 		
 		// iterate over array
 		matches.map(function(key){
 
+			// replace double parentheses with empty string
 			key = key.replace(/{{/g, '').replace(/}}/g, '');
+			// assign value to variable
 			var correspondingValue = values[key];
+			// replace key with value
 			templateString = templateString.replace(key, correspondingValue).replace(/{{/g, '').replace(/}}/g, '');
 		});
 
@@ -31,5 +35,6 @@ $(function(){
 		$("body").append(templateString);
 	};
 
+	// function call
 	convertTemplate($template, data.myDetails);
 });
