@@ -18,7 +18,6 @@ $(function(){
 		
 		// new array containing strings that match regex expression
 		var matches = templateString.match(regexMatch);
-		console.log(matches);
 		
 		// iterate over array
 		matches.map(function(key){
