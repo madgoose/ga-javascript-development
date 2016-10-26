@@ -18,9 +18,24 @@ function generateRandomName() {
 
 // save current sentence to favourites
 function addToFavourites() {
-	favouritesList.push(targetElement.textContent);
-	console.log('Favourite \"' + targetElement.textContent + '\" added');
+	if(inArray(targetElement.textContent, favouritesList) === false){
+		favouritesList.push(targetElement.textContent);
+		console.log('Favourite \"' + targetElement.textContent + '\" added');
+	} else {
+		console.log('\"' + targetElement.textContent + '\" is already saved');
+	}
 };
+
+// http://stackoverflow.com/questions/7378228/check-if-an-element-is-present-in-an-array
+function inArray(target,array) {
+    var count=array.length;
+    for(var i=0;i<count;i++) {
+        if(array[i]===target) {
+        	return true;
+        }
+    }
+    return false;
+}
 
 // print array of favourites to ordered list
 function printFavourites() {
