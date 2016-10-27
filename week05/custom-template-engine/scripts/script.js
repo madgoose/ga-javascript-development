@@ -11,16 +11,33 @@ $(function(){
 		// new array containing strings that match regex expression
 		var matches = templateString.match(regexMatch);
 
-		// iterate over array
+		// iterate over array using for loop
+		for (var i = 0; i < matches.length; i++) {
+
+			var key = matches[i];
+			key = key.replace(/{{/g, '').replace(/}}/g, '');
+			
+			// assign value to variable
+			var correspondingValue = values[key];
+			
+			// replace key with value
+			templateString = templateString.replace(matches[i], correspondingValue);
+		}
+
+/*		
+		// iterate over array using Array.map()
 		matches.map(function(key, index){
 
 			// replace double parentheses with empty string
 			key = key.replace(/{{/g, '').replace(/}}/g, '');
+			
 			// assign value to variable
 			var correspondingValue = values[key];
+			
 			// replace key with value
-			templateString = templateString.replace(matches[index], correspondingValue)
+			templateString = templateString.replace(matches[index], correspondingValue);
 		});
+*/
 
 		// write to DOM
 		$("body").append(templateString);
