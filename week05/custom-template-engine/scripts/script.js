@@ -1,11 +1,3 @@
-// separate the concerns: data
-var data = {}
-data.myDetails = {
-  firstName: "Bob",
-  lastName: "Hope",
-  birthDate: "30 December 1856"
-};
-
 $(function(){
 
 	// declare local variables

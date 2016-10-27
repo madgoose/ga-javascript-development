@@ -10,8 +10,8 @@ $(function(){
 		url: url,
 		success: function(data, status) {
 			for (var i = 0; i < data.length; i++) {
-				var parking = data[i];
-				$("#parking-list").append(template(parking));
+				var CarPark = data[i];
+				$("#parking-list").append(template(CarPark));
 			}
 		},
 		error: function(xhr, status) {
