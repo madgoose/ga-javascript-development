@@ -56,8 +56,9 @@ data.cards = [
 		- currentCard // number 0-51 corresponding to newCards array index
 		- updateScore() // method
 		- updateCard() // method: Game.getRandomCard()
-	- getRandomCard() // method: pop the return value from Board.newCards and push to Board.oldCards
-	-  // method: pop the return value from Board.newCards and push to Board.oldCards
+	- getRandomCard() // method: currentCard = Board.newCards(random array element)
+	- checkResult() // method: if Board.currentCard ===  Player.guessCard then credits = credits + wager && display winner message
+	- pop the return value from Board.newCards and push to Board.oldCards
 	- endGame() // method
 
 ###Presentation layer
