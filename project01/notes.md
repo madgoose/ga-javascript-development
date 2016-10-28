@@ -1,12 +1,20 @@
-things and actions required for turn-based game, such as 0s and Xs
+#things and actions required for turn-based games
 
-- player
-	- name
-	- score
-	- placeMarker()
-- board
-	- current player
-	- grid/matrix/2D array
-	- 
-- marker
-	
+<!--##0s and Xs
+- Game
+	- Player
+		- name
+		- score
+		- icon/avatar
+		- putMarker(marker)
+	- Board
+		- current player
+			- binary switch 
+		- grid/matrix/2D array
+			- logic to handle 
+		- displayScores() // foreach player
+	- Marker
+		- positionOnGrid
+		- ownedBy(player)-->
+
+##blackjack
