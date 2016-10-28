@@ -32,7 +32,7 @@ data.cards = [
 	];
 ```
 
-###Class design
+###Logic/objects
 
 - Game // object
 	- Player // object
@@ -50,14 +50,14 @@ data.cards = [
 		- suite // string
 		- value // string
 		- symbol // string (unicode character)
-	- Cards // array of
-		- getRandomCard() // method: pop the return value from Board.newCards and push to Board.oldCards
 	- Board // object
 		- newCards // array: data.cards.map()
 		- oldCards // array: initialised empty
-		- currentCard // number 0-51
+		- currentCard // number 0-51 corresponding to newCards array index
 		- updateScore() // method
-		- updateCard() // method: CardDeck.getRandomCard
+		- updateCard() // method: Game.getRandomCard()
+	- getRandomCard() // method: pop the return value from Board.newCards and push to Board.oldCards
+	-  // method: pop the return value from Board.newCards and push to Board.oldCards
 	- endGame() // method
 
 ###Presentation layer
