@@ -1,4 +1,8 @@
-// new Game constructor
+/*
+ * Game class
+ */
+
+// constructor
 var Game = function(gameName, instructions){
 	this.gameName = gameName;
 	this.instructions = instructions;
@@ -31,28 +35,43 @@ Game.prototype.getCredits = function(){
 
 // populate newCards array with data from external JSON
 // i.e. deal a new hand
-Game.prototype.setNewCards = function() {
-	
-	// populate new array with 
-	this.newCards = gameData.cards.map(function(arrayItem){
-		this.value = arrayItem.value;
-		this.suite = arrayItem.suite;
-		this.symbol = arrayItem.symbol;
-		return arrayItem;
-	});
+Game.prototype.setNewCards = function(newCards) {
 
-	return this.newCards;
+	// assign card collection from external JSON to local variable
+	this.newCards = newCards;
+	// initialise/declare local empty array variable for card collection
+	this.dealersHand = [];
+	// sublime text 3 syntax helper, revised for loop
+	// http://stackoverflow.com/questions/17484227/javascript-improved-native-for-loop
+	// iterate over cards array
+	for (var i = newCards.length - 1; i >= 0; i--) {
+		// new Card constructor
+		this.card = new Card(newCards[i].value, newCards[i].suite, newCards[i].symbol);
+		this.dealersHand.push(this.card);
+	}
+
 };
 
 // get credits
 Game.prototype.getNewCards = function(){
-	return this.newCards;
+	return this.dealersHand;
 };
 
+/*
+ * Card class
+ */
+
+// constructor
+var Card = function(cardvalue, cardSuite, cardSymbol){
+	this.cardvalue = cardvalue;
+	this.cardSuite = cardSuite;
+	this.cardSymbol = cardSymbol;
+};
 
 // construct new Game instance, assign to local variable hitorbust
 var hitorbust = new Game(gameData.gameName, gameData.instructions);
 
 // newCredits value will eventually be taken from text input on game interface
 hitorbust.setCredits(gameData.startingCredit);
-hitorbust.setNewCards();
+hitorbust.setNewCards(gameData.cards);
+//console.log(hitorbust.newCards[6].suite);
