@@ -1,10 +1,12 @@
-var data = {};
+var gameData = {};
 
-data.gameName = "*hit or bust"; 
+gameData.gameName = "*hit or bust"; 
 
-data.startingCredit = 50; 
+gameData.instructions = "Win money by guessing which card the computer will deal next!\nBe a hero. Live the dream."; 
 
-data.cards = [
+gameData.startingCredit = 50; 
+
+gameData.cards = [
 	{
 		value: "1",
 		suite: "Diamonds",
