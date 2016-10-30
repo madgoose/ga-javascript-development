@@ -1,5 +1,5 @@
 function Class () {}
-	Class.prototype.calc = function (a, b) {
+Class.prototype.calc = function (a, b) {
     return a + b;
 }
 

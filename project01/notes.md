@@ -1,8 +1,10 @@
 #Things and actions required for turn-based games
 
-##Blackjack
+##*hit-or-bust
 
-Make a one player game where people down on their luck can lose all their money by guessing which card the computer will deal next!
+"Make a one player game where people down on their luck can lose all their money by guessing which card the computer will deal next!"
+
+Be a hero. Live the dream.
 
 ###Data
 ```
@@ -37,7 +39,10 @@ data.cards = [
 - Game // object
 	- Player // object
 		- name // string
+			- get()
+			- set() // player types name in text input element
 		- credits // number: 1 credit = £1
+			- get() and set()
 			- if credits <= 0 then endGame
 		- guessCard() // method
 			- setGuess() // method
@@ -50,15 +55,14 @@ data.cards = [
 		- suite // string
 		- value // string
 		- symbol // string (unicode character)
-	- Board // object
-		- newCards // array: data.cards.map()
-		- oldCards // array: initialised empty
-		- currentCard // number 0-51 corresponding to newCards array index
-		- updateScore() // method
-		- updateCard() // method: Game.getRandomCard()
-	- getRandomCard() // method: currentCard = Board.newCards(random array element)
-	- checkResult() // method: if Board.currentCard ===  Player.guessCard then credits = credits + wager && display winner message
-	- pop the return value from Board.newCards and push to Board.oldCards
+	- newCards // array: data.cards.map()
+	- oldCards // array: initialised empty
+	- currentCard // number 0-51 corresponding to newCards array index
+	- updateScore() // method
+	- updateCard() // method: Game.getRandomCard()
+	- getRandomCard() // method: currentCard = newCards(random array element)
+	- checkResult() // method: if currentCard ===  Player.guessCard then credits = credits + wager && notify player
+	- pop the return value from newCards[] and push to oldCards[]
 	- endGame() // method
 
 ###Presentation layer

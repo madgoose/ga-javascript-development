@@ -1,134 +1,138 @@
 var data = {};
 
+data.gameName = "*hit or bust"; 
+
+data.startingCredit = 50; 
+
 data.cards = [
 	{
 		value: "1",
-		suite: "Clubs",
-		symbol: "♣"
+		suite: "Diamonds",
+		symbol: "♦"
 	},
 	{
 		value: "2",
-		suite: "Clubs",
-		symbol: "♣"
+		suite: "Diamonds",
+		symbol: "♦"
 	},
 	{
 		value: "3",
-		suite: "Clubs",
-		symbol: "♣"
+		suite: "Diamonds",
+		symbol: "♦"
 	},
 	{
 		value: "4",
-		suite: "Clubs",
-		symbol: "♣"
+		suite: "Diamonds",
+		symbol: "♦"
 	},
 	{
 		value: "5",
-		suite: "Clubs",
-		symbol: "♣"
+		suite: "Diamonds",
+		symbol: "♦"
 	},
 	{
 		value: "6",
-		suite: "Clubs",
-		symbol: "♣"
+		suite: "Diamonds",
+		symbol: "♦"
 	},
 	{
 		value: "7",
-		suite: "Clubs",
-		symbol: "♣"
+		suite: "Diamonds",
+		symbol: "♦"
 	},
 	{
 		value: "8",
-		suite: "Clubs",
-		symbol: "♣"
+		suite: "Diamonds",
+		symbol: "♦"
 	},
 	{
 		value: "9",
-		suite: "Clubs",
-		symbol: "♣"
+		suite: "Diamonds",
+		symbol: "♦"
 	},
 	{
 		value: "Jack",
-		suite: "Clubs",
-		symbol: "♣"
+		suite: "Diamonds",
+		symbol: "♦"
 	},
 	{
 		value: "Queen",
-		suite: "Clubs",
-		symbol: "♣"
+		suite: "Diamonds",
+		symbol: "♦"
 	},
 	{
 		value: "King",
-		suite: "Clubs",
-		symbol: "♣"
+		suite: "Diamonds",
+		symbol: "♦"
 	},
 	{
 		value: "Ace",
-		suite: "Clubs",
+		suite: "Diamonds",
 		symbol: "♣"
 	},
 	{
 		value: "1",
-		suite: "Diamonds",
-		symbol: "♦"
+		suite: "Clubs",
+		symbol: "♣"
 	},
 	{
 		value: "2",
-		suite: "Diamonds",
-		symbol: "♦"
+		suite: "Clubs",
+		symbol: "♣"
 	},
 	{
 		value: "3",
-		suite: "Diamonds",
-		symbol: "♦"
+		suite: "Clubs",
+		symbol: "♣"
 	},
 	{
 		value: "4",
-		suite: "Diamonds",
-		symbol: "♦"
+		suite: "Clubs",
+		symbol: "♣"
 	},
 	{
 		value: "5",
-		suite: "Diamonds",
-		symbol: "♦"
+		suite: "Clubs",
+		symbol: "♣"
 	},
 	{
 		value: "6",
-		suite: "Diamonds",
-		symbol: "♦"
+		suite: "Clubs",
+		symbol: "♣"
 	},
 	{
 		value: "7",
-		suite: "Diamonds",
-		symbol: "♦"
+		suite: "Clubs",
+		symbol: "♣"
 	},
 	{
 		value: "8",
-		suite: "Diamonds",
-		symbol: "♦"
+		suite: "Clubs",
+		symbol: "♣"
 	},
 	{
 		value: "9",
-		suite: "Diamonds",
-		symbol: "♦"
+		suite: "Clubs",
+		symbol: "♣"
 	},
 	{
 		value: "Jack",
-		suite: "Diamonds",
-		symbol: "♦"
+		suite: "Clubs",
+		symbol: "♣"
 	},
 	{
 		value: "Queen",
-		suite: "Diamonds",
-		symbol: "♦"
+		suite: "Clubs",
+		symbol: "♣"
 	},
 	{
 		value: "King",
-		suite: "Diamonds",
-		symbol: "♦"
+		suite: "Clubs",
+		symbol: "♣"
 	},
 	{
 		value: "Ace",
-		suite: "Diamonds",
+		suite: "Clubs",
 		symbol: "♣"
 	},
 	{
