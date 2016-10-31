@@ -1,3 +1,5 @@
 # General Assembly JavaScript Development course
 ## Coursework
-[https://generalassemb.ly/education/javascript-development](https://generalassemb.ly/education/javascript-development)
+[Course description](https://generalassemb.ly/education/javascript-development)
+
+[View this coursework served as web pages](https://madgoose.github.io/ga-javascript-development/)
