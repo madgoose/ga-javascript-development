@@ -3,6 +3,12 @@
 	margin: 1rem 0;
 	padding: 1rem;
 }
+#game-container > div {
+	margin: 1rem 0;
+}
+.block {
+	display: block;
+}
 .hidden {
 	display: none;
 }

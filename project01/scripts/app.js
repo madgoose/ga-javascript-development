@@ -1,38 +1,14 @@
+// jqueizzle
 $(function(){
-
-	// the button _belongs_ to the document
-	var btnStartNewGame = document.getElementById("start-new-game");
-
-	// construct new Game instance, assign to local variable hitorbust
-	var hitorbust = new Game(gameData.gameName, gameData.instructions);
-
-	// "Start new game" button clicked
-	btnStartNewGame.addEventListener('click', function() {
-		var player1 = new Player("Bob", 100); // abstract later to something like setPlayers()
-		hitorbust.startGame(); // need to pass all the below as arguments setCredits etc
-		hitorbust.setRandomCard(); // tee-up first card to be flipped over
-/*
-	hitorbust.setCredits(gameData.startingCredit); // newCredits value will be user-set via text input
-	// hitorbust.setNewCards(gameData.cards);
-
-	//console.log(hitorbust.getRandomCard());
-	//console.log(hitorbust.dealersHand[0],hitorbust.dealersHand[51]);
-
-
-	*/
-
-	}, false);
-
-	//
-	hitorbust.btnFlipCard.addEventListener('click', function() {
-		hitorbust.setRandomCard();
-
-	}, false);
-
-
+	$("#suits li").on("click", function(){
+		var chosenSuite = $(this).data("suit");
+		var filteredPack = hitorbust.dealersHand.filter(function(item){ //filter returns a boolean; if true item added to new array
+			return chosenSuite === item.cardSuite;
+		});
+		console.log(filteredPack);
+		// filter() data.suit to create subset
+	})
 });
-
-
 
 /*
  * Game class
@@ -41,30 +17,26 @@ $(function(){
 // new Game constructor
 var Game = function(gameName, instructions){
 
-	// bind DOM elements to this Game object
-	this.btnFlipCard = document.getElementById("flip-card");
-	this.gameContainer = document.getElementById("game-container");
-
 	// initialise local variables
 	this.gameName = gameName;
 	this.instructions = instructions;
-	// declare variables for later use
+
+	// declare empty arrays etc for later use
+	this.dealersHand = [];
 	this.flippedCards = [];
 	this.currentCard = null;
-
 
 };
 
 // start new game
 Game.prototype.startGame = function() {
-	this.gameContainer.className = "";
+	// remove .hidden css class from game container
+	gameContainer.className = "";
+	var player1 = new Player("Bob", 100); // abstract later to something like setPlayers()
+	// display game name and instructions
 	console.log("Welcome to " + gameData.gameName + "!\n" + gameData.instructions + "\n");
 	this.setNewCards(gameData.cards);
-};
 
-// display game name and instructions
-Game.prototype.introduceGame = function() {
-	console.log("Welcome to " + this.gameName + "!\n" + this.instructions);
 };
 
 // display game end message
@@ -94,8 +66,7 @@ Game.prototype.setNewCards = function(newCards) {
 
 	// assign "card" collection from external JSON to local variable
 	this.newCards = newCards;
-	// initialise/declare empty array variable for local "card" collection
-	this.dealersHand = [];
+
 
 	// sublime text 3 syntax helper, revised for loop // http://stackoverflow.com/questions/17484227/javascript-improved-native-for-loop
 	// iterate over cards array
@@ -134,10 +105,11 @@ Game.prototype.setRandomCard = function(){
 	var random = Math.floor((Math.random() * this.dealersHand.length));
 	this.randomCard = this.dealersHand[random];
 	this.flipCard(this.randomCard);
+	//return this.randomCard;
 };
 
 //
-Game.prototype.flipCard = function(){ // do i even use this variable?
+Game.prototype.flipCard = function(){
 	this.currentCard = this.randomCard;
 	this.dealersHand.pop(this.currentCard);
 	this.flippedCards.push(this.currentCard);
@@ -145,18 +117,23 @@ Game.prototype.flipCard = function(){ // do i even use this variable?
 };
 
 //
-Game.prototype.checkCard = function(){
+Game.prototype.compareCards = function(){
+
+	var cardToCompare = playerGuess.value;
+
+	//console.log("current card: " + this.currentCard.cardValue + " " + this.currentCard.cardSuite, "\nPlayer's guess: " + cardToCompare);
+	if (cardToCompare === this.currentCard.cardValue + this.currentCard.cardSuite) {
+		console.log("you guessed correctly!")
+	}
+
 	//	if player.guessCard.value && player.guessCard.suite === currentCard.guessCard.value && currentCard.guessCard.suite
-	//		success! winHand() // // credits = credits + (wager * 10)
+	//		success! winHand() // // credits = credits + (wager * 100) // adjust odds as deck gets smaller
 	//	else
 	//		fail! loseHand() // credits = credits + (wager * -1)
 };
 
 //
 Game.prototype.updateScore = function(){};
-
-//
-Game.prototype.someFunction = function(){};
 
 /*
  * Player class
@@ -169,11 +146,7 @@ var Player = function(name, credits){
 };
 
 // player enters card value and suite // duplication of setGuess() ?
-Player.prototype.guessCard = function(){
-	/*this.guessValue = "Ace"; // hard-coded for now
-	this.guessSuite = "Spades";*/
-
-};
+Player.prototype.guessCard = function(){};
 
 // value will be received from text input
 Player.prototype.setGuess = function(){
@@ -191,3 +164,38 @@ Player.prototype.setWager = function(){
 };
 Player.prototype.cashOut = function(){}; // method: endsGame + winner message
 
+
+// bind DOM elements to this Game object
+var gameContainer = document.getElementById("game-container");
+var btnMakeBet = document.getElementById("make-bet");
+var btnFlipCard = document.getElementById("flip-card");
+var playerGuess = document.getElementById("guess");
+
+var btnStartNewGame = document.getElementById("start-new-game");
+
+// construct new Game instance, assign to local variable hitorbust
+var hitorbust = new Game(gameData.gameName, gameData.instructions);
+
+// "Start new game" button clicked
+btnStartNewGame.addEventListener('click', function() {
+
+	hitorbust.startGame(); // need to pass all the below as arguments setCredits etc
+	hitorbust.setRandomCard(); // tee-up first card to be flipped over
+
+}, false);
+
+// "Make bet" button clicked
+btnMakeBet.addEventListener('click', function() {
+
+	hitorbust.compareCards();
+
+}, false);
+
+// "Flip card" button clicked
+btnFlipCard.addEventListener('click', function() {
+
+	hitorbust.setRandomCard();
+	//var guess = document.getElementById("guess").value;
+	//hitorbust.compareCards(hitorbust.getRandomCard(), guess);
+
+}, false);
