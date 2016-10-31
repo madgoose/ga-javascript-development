@@ -8,7 +8,7 @@ var Game = function(gameName, instructions){
 	this.gameName = gameName;
 	this.instructions = instructions;
 	// declare null variables for later use
-	this.flippedCards = null;
+	this.flippedCards = [];
 	this.currentCard = null;
 };
 
@@ -22,7 +22,7 @@ Game.prototype.endGame = function() {
 	console.log("Game over!\nBad luck +playerNameToBeAddedLater+");
 };
 
-// set credit value
+// set game credits
 Game.prototype.setCredits = function(newCredits){
 
 	if (newCredits < 0){ // can't gamble with zero credits or less
@@ -58,7 +58,7 @@ Game.prototype.setNewCards = function(newCards) {
 
 };
 
-// returns array of 52 playing cards
+// returns array of playing cards
 Game.prototype.getNewCards = function(){
 	return this.dealersHand;
 };
@@ -74,16 +74,74 @@ var Card = function(cardValue, cardSuite, cardSymbol){
 	this.cardSymbol = cardSymbol;
 };
 
-// returns random card from dealersHand
+// returns randomCard from "this" object
 Game.prototype.getRandomCard = function(){
 	return this.randomCard;
 };
 
-// returns random card from dealersHand
+// sets randomCard with value of random item from dealersHand array
 Game.prototype.setRandomCard = function(){
 	var random = Math.floor((Math.random() * this.dealersHand.length));
 	this.randomCard = this.dealersHand[random];
+	this.flipCard(this.randomCard);
 };
+
+//
+Game.prototype.flipCard = function(randomCard){
+	console.log(this.dealersHand.length, this.flippedCards.length);
+	this.currentCard = this.randomCard;
+	this.dealersHand.pop(this.currentCard);
+	this.flippedCards.push(this.currentCard);
+	console.log(this.dealersHand.length, this.flippedCards.length);
+};
+
+//
+Game.prototype.checkCard = function(){
+	//	if player.guessCard.value && player.guessCard.suite === currentCard.guessCard.value && currentCard.guessCard.suite
+	//		success! winHand() // // credits = credits + wager
+	//	else
+	//		fail! loseHand() // credits = credits + (wager * -1)
+};
+
+//
+Game.prototype.updateScore = function(){};
+
+//
+Game.prototype.someFunction = function(){};
+
+/*
+ * Player class
+ */
+
+// constructor
+var Player = function(name, credits){
+	this.name = name;
+	this.credits = credits;
+};
+
+// player enters card value and suite
+Player.prototype.guessCard = function(){
+	/*this.guessValue = "Ace"; // hard-coded for now
+	this.guessSuite = "Spades";*/
+
+};
+
+// value will be received from text input
+Player.prototype.setGuess = function(){
+	// this.guessCard
+	// pick a number
+	// pick a suit
+	var guessValue = "Ace"; // something like $("input#guess-value.val")
+	var guessSuite = "Spades";
+	return
+};
+
+// if wager > wallet then no bet // value will be user-set via text input: this.setGuess()
+Player.prototype.setWager = function(){
+
+};
+Player.prototype.cashOut = function(){}; // method: endsGame + winner message
+
 /*
  * new Game instance "*hit or bust"
  */
@@ -91,9 +149,10 @@ Game.prototype.setRandomCard = function(){
 // construct new Game instance, assign to local variable hitorbust
 var hitorbust = new Game(gameData.gameName, gameData.instructions);
 
-// newCredits value will eventually be taken from text input on game interface
-hitorbust.setCredits(gameData.startingCredit);
+hitorbust.setCredits(gameData.startingCredit); // newCredits value will be user-set via text input
 hitorbust.setNewCards(gameData.cards);
-// tee-up first card to be flipped over
-hitorbust.setRandomCard();
+hitorbust.setRandomCard(); // tee-up first card to be flipped over
+//console.log(hitorbust.getRandomCard());
 //console.log(hitorbust.dealersHand[0],hitorbust.dealersHand[51]);
+
+var player1 = new Player("Bob", 100);
