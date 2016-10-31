@@ -7,7 +7,7 @@ var Game = function(gameName, instructions){
 	// initialise local variables
 	this.gameName = gameName;
 	this.instructions = instructions;
-	// declare null variables for later use
+	// declare variables for later use
 	this.flippedCards = [];
 	this.currentCard = null;
 };
@@ -88,11 +88,9 @@ Game.prototype.setRandomCard = function(){
 
 //
 Game.prototype.flipCard = function(randomCard){
-	console.log(this.dealersHand.length, this.flippedCards.length);
 	this.currentCard = this.randomCard;
 	this.dealersHand.pop(this.currentCard);
 	this.flippedCards.push(this.currentCard);
-	console.log(this.dealersHand.length, this.flippedCards.length);
 };
 
 //
