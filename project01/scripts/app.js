@@ -8,18 +8,27 @@ $(function(){
 
 	// "Start new game" button clicked
 	btnStartNewGame.addEventListener('click', function() {
+		var player1 = new Player("Bob", 100); // abstract later to something like setPlayers()
 		hitorbust.startGame(); // need to pass all the below as arguments setCredits etc
+		hitorbust.setRandomCard(); // tee-up first card to be flipped over
 /*
 	hitorbust.setCredits(gameData.startingCredit); // newCredits value will be user-set via text input
 	// hitorbust.setNewCards(gameData.cards);
-	hitorbust.setRandomCard(); // tee-up first card to be flipped over
+
 	//console.log(hitorbust.getRandomCard());
 	//console.log(hitorbust.dealersHand[0],hitorbust.dealersHand[51]);
 
-	var player1 = new Player("Bob", 100);
+
 	*/
 
 	}, false);
+
+	//
+	hitorbust.btnFlipCard.addEventListener('click', function() {
+		hitorbust.setRandomCard();
+
+	}, false);
+
 
 });
 
@@ -31,16 +40,24 @@ $(function(){
 
 // new Game constructor
 var Game = function(gameName, instructions){
+
+	// bind DOM elements to this Game object
+	this.btnFlipCard = document.getElementById("flip-card");
+	this.gameContainer = document.getElementById("game-container");
+
 	// initialise local variables
 	this.gameName = gameName;
 	this.instructions = instructions;
 	// declare variables for later use
 	this.flippedCards = [];
 	this.currentCard = null;
+
+
 };
 
 // start new game
 Game.prototype.startGame = function() {
+	this.gameContainer.className = "";
 	console.log("Welcome to " + gameData.gameName + "!\n" + gameData.instructions + "\n");
 	this.setNewCards(gameData.cards);
 };
@@ -120,7 +137,7 @@ Game.prototype.setRandomCard = function(){
 };
 
 //
-Game.prototype.flipCard = function(randomCard){
+Game.prototype.flipCard = function(){ // do i even use this variable?
 	this.currentCard = this.randomCard;
 	this.dealersHand.pop(this.currentCard);
 	this.flippedCards.push(this.currentCard);
