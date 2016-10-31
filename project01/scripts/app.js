@@ -1,8 +1,35 @@
+$(function(){
+
+	// the button _belongs_ to the document
+	var btnStartNewGame = document.getElementById("start-new-game");
+
+	// construct new Game instance, assign to local variable hitorbust
+	var hitorbust = new Game(gameData.gameName, gameData.instructions);
+
+	// "Start new game" button clicked
+	btnStartNewGame.addEventListener('click', function() {
+		hitorbust.startGame(); // need to pass all the below as arguments setCredits etc
+/*
+	hitorbust.setCredits(gameData.startingCredit); // newCredits value will be user-set via text input
+	// hitorbust.setNewCards(gameData.cards);
+	hitorbust.setRandomCard(); // tee-up first card to be flipped over
+	//console.log(hitorbust.getRandomCard());
+	//console.log(hitorbust.dealersHand[0],hitorbust.dealersHand[51]);
+
+	var player1 = new Player("Bob", 100);
+	*/
+
+	}, false);
+
+});
+
+
+
 /*
  * Game class
  */
 
-// constructor
+// new Game constructor
 var Game = function(gameName, instructions){
 	// initialise local variables
 	this.gameName = gameName;
@@ -10,6 +37,12 @@ var Game = function(gameName, instructions){
 	// declare variables for later use
 	this.flippedCards = [];
 	this.currentCard = null;
+};
+
+// start new game
+Game.prototype.startGame = function() {
+	console.log("Welcome to " + gameData.gameName + "!\n" + gameData.instructions + "\n");
+	this.setNewCards(gameData.cards);
 };
 
 // display game name and instructions
@@ -22,13 +55,13 @@ Game.prototype.endGame = function() {
 	console.log("Game over!\nBad luck +playerNameToBeAddedLater+");
 };
 
-// set game credits
+// set game credits // possibly abstract upper limit to gameData JSON data file
 Game.prototype.setCredits = function(newCredits){
 
 	if (newCredits < 0){ // can't gamble with zero credits or less
 		console.log("No scratch, no snatch. Come back with some credits");
-	} else if (newCredits > 500) { // can't have more than 500 credits in bank
-		console.log("House limit is 500 credits, sorry");
+	} else if (newCredits > 5000) { // can't have more than 500 credits in bank
+		console.log("House limit is 5000 credits, sorry");
 	} else { // can't gamble with zero credits or less
 		this.credits = newCredits;
 	}
@@ -67,7 +100,7 @@ Game.prototype.getNewCards = function(){
  * Card class
  */
 
-// constructor
+// new Card constructor
 var Card = function(cardValue, cardSuite, cardSymbol){
 	this.cardValue = cardValue;
 	this.cardSuite = cardSuite;
@@ -91,12 +124,13 @@ Game.prototype.flipCard = function(randomCard){
 	this.currentCard = this.randomCard;
 	this.dealersHand.pop(this.currentCard);
 	this.flippedCards.push(this.currentCard);
+	console.log(this.currentCard);
 };
 
 //
 Game.prototype.checkCard = function(){
 	//	if player.guessCard.value && player.guessCard.suite === currentCard.guessCard.value && currentCard.guessCard.suite
-	//		success! winHand() // // credits = credits + wager
+	//		success! winHand() // // credits = credits + (wager * 10)
 	//	else
 	//		fail! loseHand() // credits = credits + (wager * -1)
 };
@@ -111,13 +145,13 @@ Game.prototype.someFunction = function(){};
  * Player class
  */
 
-// constructor
+// new Player constructor
 var Player = function(name, credits){
 	this.name = name;
 	this.credits = credits;
 };
 
-// player enters card value and suite
+// player enters card value and suite // duplication of setGuess() ?
 Player.prototype.guessCard = function(){
 	/*this.guessValue = "Ace"; // hard-coded for now
 	this.guessSuite = "Spades";*/
@@ -140,17 +174,3 @@ Player.prototype.setWager = function(){
 };
 Player.prototype.cashOut = function(){}; // method: endsGame + winner message
 
-/*
- * new Game instance "*hit or bust"
- */
-
-// construct new Game instance, assign to local variable hitorbust
-var hitorbust = new Game(gameData.gameName, gameData.instructions);
-
-hitorbust.setCredits(gameData.startingCredit); // newCredits value will be user-set via text input
-hitorbust.setNewCards(gameData.cards);
-hitorbust.setRandomCard(); // tee-up first card to be flipped over
-//console.log(hitorbust.getRandomCard());
-//console.log(hitorbust.dealersHand[0],hitorbust.dealersHand[51]);
-
-var player1 = new Player("Bob", 100);
