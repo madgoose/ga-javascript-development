@@ -1,13 +1,30 @@
 // jqueizzle
 $(function(){
-	$("#suits li").on("click", function(){
-		var chosenSuite = $(this).data("suit");
-		var filteredPack = hitorbust.dealersHand.filter(function(item){ //filter returns a boolean; if true item added to new array
+/*	$("#suits li").on("click", function(){
+		$this = $(this);
+		$this.siblings().removeClass("selected");
+		$this.addClass("selected");
+		var chosenSuite = $this.data("suit");
+		// filteredPack needs larger scope
+		hitorbust.filteredPack = hitorbust.dealersHand.filter(function(item){ //filter returns a boolean; if true item added to new array
 			return chosenSuite === item.cardSuite;
 		});
-		console.log(filteredPack);
-		// filter() data.suit to create subset
+		console.log(hitorbust.filteredPack);
 	})
+	$("#values li").on("click", function(){
+		$this = $(this);
+		$this.siblings().removeClass("selected");
+		$this.addClass("selected");
+		var chosenValue = $this.data("value");
+		console.log(hitorbust.filteredPack);
+		hitorbust.subFilteredPack = hitorbust.filteredPack.filter(function(item){ //filter returns a boolean; if true item added to new array
+			//console.log(chosenValue, item.cardValue);
+			console.log(item.cardValue.toString());
+			return chosenValue === item.cardValue.toString();
+		});
+		//debugger
+		console.log(hitorbust.subFilteredPack);
+	})*/
 });
 
 /*
@@ -26,12 +43,16 @@ var Game = function(gameName, instructions){
 	this.flippedCards = [];
 	this.currentCard = null;
 
+	this.filteredPack = [];
+	this.subFilteredPack = [];
+
 };
 
 // start new game
 Game.prototype.startGame = function() {
 	// remove .hidden css class from game container
 	gameContainer.className = "";
+	//this.setNewPlayer();
 	var player1 = new Player("Bob", 100); // abstract later to something like setPlayers()
 	// display game name and instructions
 	console.log("Welcome to " + gameData.gameName + "!\n" + gameData.instructions + "\n");
@@ -67,13 +88,12 @@ Game.prototype.setNewCards = function(newCards) {
 	// assign "card" collection from external JSON to local variable
 	this.newCards = newCards;
 
-
 	// sublime text 3 syntax helper, revised for loop // http://stackoverflow.com/questions/17484227/javascript-improved-native-for-loop
 	// iterate over cards array
 	for (var i = newCards.length - 1; i >= 0; i--) {
 
 		// construct new Card instance for each item of "card" collection
-		this.card = new Card(newCards[i].value, newCards[i].suite, newCards[i].symbol);
+		this.card = new Card(newCards[i].rank, newCards[i].suite, newCards[i].symbol);
 		this.dealersHand.push(this.card);
 	}
 
@@ -82,17 +102,6 @@ Game.prototype.setNewCards = function(newCards) {
 // returns array of playing cards
 Game.prototype.getNewCards = function(){
 	return this.dealersHand;
-};
-
-/*
- * Card class
- */
-
-// new Card constructor
-var Card = function(cardValue, cardSuite, cardSymbol){
-	this.cardValue = cardValue;
-	this.cardSuite = cardSuite;
-	this.cardSymbol = cardSymbol;
 };
 
 // returns randomCard from "this" object
@@ -122,7 +131,7 @@ Game.prototype.compareCards = function(){
 	var cardToCompare = playerGuess.value;
 
 	//console.log("current card: " + this.currentCard.cardValue + " " + this.currentCard.cardSuite, "\nPlayer's guess: " + cardToCompare);
-	if (cardToCompare === this.currentCard.cardValue + this.currentCard.cardSuite) {
+	if (cardToCompare === this.currentCard.rank + this.currentCard.suite) {
 		console.log("you guessed correctly!")
 	}
 
@@ -134,6 +143,17 @@ Game.prototype.compareCards = function(){
 
 //
 Game.prototype.updateScore = function(){};
+
+/*
+ * Card class
+ */
+
+// new Card constructor
+var Card = function(cardValue, cardSuite, cardSymbol){
+	this.cardValue = cardValue;
+	this.cardSuite = cardSuite;
+	this.cardSymbol = cardSymbol;
+};
 
 /*
  * Player class
@@ -153,9 +173,11 @@ Player.prototype.setGuess = function(){
 	// this.guessCard
 	// pick a number
 	// pick a suit
-	var guessValue = "Ace"; // something like $("input#guess-value.val")
-	var guessSuite = "Spades";
-	return
+/*	var guessValue = "Ace"; // something like $("input#guess-value.val")
+	var guessSuite = "Spades";*/
+	var guessSuite = inputGuessSuite.value;
+	var guessRank = inputGuessRank.value;
+	console.log(guessRank, " of ", guessSuite);
 };
 
 // if wager > wallet then no bet // value will be user-set via text input: this.setGuess()
@@ -165,13 +187,16 @@ Player.prototype.setWager = function(){
 Player.prototype.cashOut = function(){}; // method: endsGame + winner message
 
 
-// bind DOM elements to this Game object
+// bind DOM elements to local variables
 var gameContainer = document.getElementById("game-container");
 var btnMakeBet = document.getElementById("make-bet");
 var btnFlipCard = document.getElementById("flip-card");
 var playerGuess = document.getElementById("guess");
 
 var btnStartNewGame = document.getElementById("start-new-game");
+
+var inputGuessSuite = document.getElementById("guess-suite");
+var inputGuessRank = document.getElementById("guess-rank");
 
 // construct new Game instance, assign to local variable hitorbust
 var hitorbust = new Game(gameData.gameName, gameData.instructions);

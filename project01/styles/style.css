@@ -6,6 +6,9 @@
 #game-container > div {
 	margin: 1rem 0;
 }
+.selected {
+	background: #ff0;
+}
 .block {
 	display: block;
 }
