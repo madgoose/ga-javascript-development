@@ -1,6 +1,6 @@
 var gameData = {};
 
-gameData.gameName = "*hit or bust";
+gameData.name = "*hit or bust";
 
 gameData.instructions = "Win money by guessing which card the computer will deal next!\nBe a hero. Live the dream.";
 
@@ -8,11 +8,6 @@ gameData.startingCredit = 50;
 
 gameData.cards = [
 	{
-		rank: "1",
-		suite: "Diamonds",
-		symbol: "♦"
-	},
-	{
 		rank: "2",
 		suite: "Diamonds",
 		symbol: "♦"
@@ -49,6 +44,11 @@ gameData.cards = [
 	},
 	{
 		rank: "9",
+		suite: "Diamonds",
+		symbol: "♦"
+	},
+	{
+		rank: "10",
 		suite: "Diamonds",
 		symbol: "♦"
 	},
@@ -70,12 +70,7 @@ gameData.cards = [
 	{
 		rank: "Ace",
 		suite: "Diamonds",
-		symbol: "♣"
-	},
-	{
-		rank: "1",
-		suite: "Clubs",
-		symbol: "♣"
+		symbol: "♦"
 	},
 	{
 		rank: "2",
@@ -114,6 +109,11 @@ gameData.cards = [
 	},
 	{
 		rank: "9",
+		suite: "Clubs",
+		symbol: "♣"
+	},
+	{
+		rank: "10",
 		suite: "Clubs",
 		symbol: "♣"
 	},
@@ -138,11 +138,6 @@ gameData.cards = [
 		symbol: "♣"
 	},
 	{
-		rank: "1",
-		suite: "Hearts",
-		symbol: "♥"
-	},
-	{
 		rank: "2",
 		suite: "Hearts",
 		symbol: "♥"
@@ -179,6 +174,11 @@ gameData.cards = [
 	},
 	{
 		rank: "9",
+		suite: "Hearts",
+		symbol: "♥"
+	},
+	{
+		rank: "10",
 		suite: "Hearts",
 		symbol: "♥"
 	},
@@ -203,11 +203,6 @@ gameData.cards = [
 		symbol: "♥"
 	},
 	{
-		rank: "1",
-		suite: "Spades",
-		symbol: "♠"
-	},
-	{
 		rank: "2",
 		suite: "Spades",
 		symbol: "♠"
@@ -244,6 +239,11 @@ gameData.cards = [
 	},
 	{
 		rank: "9",
+		suite: "Spades",
+		symbol: "♠"
+	},
+	{
+		rank: "10",
 		suite: "Spades",
 		symbol: "♠"
 	},
