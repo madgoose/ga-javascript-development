@@ -45,15 +45,14 @@ Game.prototype.setCredits = function(newCredits){
 	console.log("House limit is 5000 credits, sorry");
 	} else { // can't gamble with zero credits or less
 	this.credits = newCredits;
-}
+	}
 };
 // returns current credit value
 Game.prototype.getCredits = function(){
 	return this.credits;
 };
 
-// populate newCards array with data from external JSON
-// i.e. deal a new hand
+// populate dealersHand array with data from external JSON i.e. deal a new hand
 Game.prototype.setNewCards = function(newCards) {
 
 	// sublime text 3 syntax helper, revised for loop // http://stackoverflow.com/questions/17484227/javascript-improved-native-for-loop
@@ -83,7 +82,7 @@ Game.prototype.getRandomCard = function(){
 Game.prototype.setRandomCard = function(){
 	var random = Math.floor((Math.random() * this.dealersHand.length));
 	//	console.log(this.currentCard, this.dealersHand[random]);
-	if (this.currentCard === this.dealersHand[random]) {
+	if (this.randomCard === this.dealersHand[random]) {
 		console.log("error - random card same as current card");
 	} else if (this.dealersHand.length === 0) {
 		console.log("no more cards left to flip!");
@@ -94,18 +93,18 @@ Game.prototype.setRandomCard = function(){
 
 //
 Game.prototype.flipCard = function(){
-	/*  currentCard is the card the player is trying to guess, not
-	 *  presented on interface at this point but available in memory
-	 */
+	//  currentCard is the card the player is trying to guess, not presented on interface at this point but available in memory
 
-	this.currentCard = this.randomCard;
-	console.log("dealersHand", this.dealersHand.length);
-	console.log("flippedCards", this.flippedCards.length);
-	this.dealersHand.pop(this.currentCard); // remove currentCard from dealersHand // TODO add condition for dealersHand reaching 0
-	console.log("dealersHand", this.dealersHand.length);
-	this.flippedCards.push(this.currentCard); // add currentCard to flippedCards
-	console.log("flippedCards", this.flippedCards.length);
-	console.log("hint:\n", this.currentCard.rank.toLowerCase(), "of", this.currentCard.suite.toLowerCase(), "\n ----"); // useful for being able guess the card ;-)
+	//this.currentCard = this.randomCard;
+	//console.log("dealersHand.length", this.dealersHand.length);
+	//console.log("flippedCards.length", this.flippedCards.length);
+	this.dealersHand.pop(this.randomCard); // remove currentCard from dealersHand // TODO add condition for dealersHand reaching 0
+	//console.log("dealersHand.pop(currentCard)");
+	//console.log("dealersHand.length", this.dealersHand.length);
+	this.flippedCards.push(this.randomCard); // add currentCard to flippedCards
+	//console.log("dealersHand.push(currentCard)");
+	//console.log("flippedCards.length", this.flippedCards.length);
+	console.log("hint:\n", this.randomCard.rank.toLowerCase(), "of", this.randomCard.suite.toLowerCase(), "\n ----"); // useful for being able guess the card ;-)
 };
 
 //
@@ -121,7 +120,7 @@ Game.prototype.compareCards = function(playerGuess){
 	} else if(typeof guessSuite === "undefined") {
 		console.log("You need to choose a suite");
 	} else {
-		if (guessRank === this.currentCard.rank.toLowerCase() && guessSuite === this.currentCard.suite.toLowerCase()) {
+		if (guessRank === this.randomCard.rank.toLowerCase() && guessSuite === this.randomCard.suite.toLowerCase()) {
 			console.log("you are teh winnar!!");
 			// credits = credits + (wager * 100) // adjust odds as dealerHand.length gets smaller
 			this.player1.credits = this.player1.credits * 3;
