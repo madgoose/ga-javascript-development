@@ -12,66 +12,52 @@
 	<p>Flip cards. Make paper.</p>
 	<p>Open browser console and hit button below to start a new game.</p>
 	<button id="start-new-game">Start new game</button>
-	<div id="game-container" class="hidden">
+	<div id="game-container" class="">
 
 		<form id="guess-rank">
 			<p>What rank do you think the card is?</p>
-			<label>Ace
-				<input type="radio" name="rank" value="ace">
-			</label>
-			<label>King
-				<input type="radio" name="rank" value="king">
-			</label>
-			<label>Queen
-				<input type="radio" name="rank" value="queen">
-			</label>
-			<label>Jack
-				<input type="radio" name="rank" value="jack">
-			</label>
-			<br />
-			<label>10
-				<input type="radio" name="rank" value="10">
-			</label>
-			<label>9
-				<input type="radio" name="rank" value="9">
-			</label>
-			<label>8
-				<input type="radio" name="rank" value="8">
-			</label>
-			<label>7
-				<input type="radio" name="rank" value="7">
-			</label>
-			<label>6
-				<input type="radio" name="rank" value="6">
-			</label>
-			<label>5
-				<input type="radio" name="rank" value="5">
-			</label>
-			<label>4
-				<input type="radio" name="rank" value="4">
-			</label>
-			<label>3
-				<input type="radio" name="rank" value="3">
-			</label>
-			<label>2
-				<input type="radio" name="rank" value="2">
-			</label>
+			<input type="radio" name="rank" value="ace" id="ace">
+			<label class="card" for="ace">Ace</label>
+			<input type="radio" name="rank" value="king" id="king">
+			<label class="card" for="king">King</label>
+			<input type="radio" name="rank" value="queen" id="queen">
+			<label class="card" for="queen">Queen</label>
+			<input type="radio" name="rank" value="jack" id="jack">
+			<label class="card" for="jack">Jack</label>
+			<input type="radio" name="rank" value="10" id="10">
+			<label class="card" for="10">10</label>
+			<input type="radio" name="rank" value="9" id="9">
+			<label class="card" for="9">9</label>
+			<input type="radio" name="rank" value="8" id="8">
+			<label class="card" for="8">8</label>
+			<input type="radio" name="rank" value="7" id="7">
+			<label class="card" for="7">7</label>
+			<input type="radio" name="rank" value="6" id="6">
+			<label class="card" for="6">6</label>
+			<input type="radio" name="rank" value="5" id="5">
+			<label class="card" for="5">5</label>
+			<input type="radio" name="rank" value="4" id="4">
+			<label class="card" for="4">4</label>
+			<input type="radio" name="rank" value="3" id="3">
+			<label class="card" for="3">3</label>
+			<input type="radio" name="rank" value="2" id="2">
+			<label class="card" for="2">2</label>
 		</form>
 
 		<form id="guess-suite">
 			<p>What suite do you think the card is?</p>
-			<label>Diamonds
-				<input type="radio" name="suite" id="diamonds" value="diamonds">
-			</label>
-			<label>Clubs
-				<input type="radio" name="suite" id="clubs" value="clubs">
-			</label>
-			<label>Hearts
-				<input type="radio" name="suite" id="hearts" value="hearts">
-			</label>
-			<label>Spades
-				<input type="radio" name="suite" id="spades" value="spades">
-			</label>
+
+			<input type="radio" name="suite" id="diamonds" value="diamonds">
+			<label for="diamonds" class="card">&diams;</label>
+
+			<input type="radio" name="suite" id="clubs" value="clubs">
+			<label for="clubs" class="card">&clubs;</label>
+
+			<input type="radio" name="suite" id="hearts" value="hearts">
+			<label for="hearts" class="card">&hearts;</label>
+
+			<input type="radio" name="suite" id="spades" value="spades">
+			<label for="spades" class="card">&spades;</label>
 		</form>
 		<!--
 		<p>

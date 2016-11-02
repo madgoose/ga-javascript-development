@@ -13,10 +13,6 @@ var Game = function(name, instructions){
 	this.name = name;
 	this.instructions = instructions;
 
-	// declare variables for later use
-	this.dealersHand = [];
-	this.flippedCards = [];
-
 };
 
 // start new game
@@ -24,6 +20,9 @@ Game.prototype.startGame = function() {
 
 	// show game container on web page
 	gameContainer.className = "";
+	// initialise/reset card arrays
+	this.dealersHand = [];
+	this.flippedCards = [];
 	this.player1 = new Player("Bob", 100); // abstract later to something like this.setNewPlayer();
 	// display game name and instructions
 	console.log("Welcome to " + gameData.name + "!\n" + gameData.instructions + "\n");
@@ -88,49 +87,50 @@ Game.prototype.setRandomCard = function(){
 Game.prototype.flipCard = function(){
 	//  randomCard is the card the player is trying to guess, not presented on interface at this point but available in memory
 
-	// remove randomCard from dealersHand
-	var position = this.dealersHand.indexOf(this.randomCard)
+	// extract randomCard from dealersHand
+	var position = this.dealersHand.indexOf(this.randomCard);
 	var splitArray = this.dealersHand.splice(position, 1);
 	var extractedCard = splitArray.shift();
 
-	// add currentCard to flippedCards
+	// add extractedCard to flippedCards
 	if (this.dealersHand.length !== 0) {
 		this.flippedCards.push(extractedCard);
-		console.log("hint:", extractedCard.rank.toLowerCase(), "of", extractedCard.suite.toLowerCase(), "\n.flippedCards:", this.flippedCards.length, "\n.dealersHand:", this.dealersHand.length, "\n ----");
+		console.log("hint:", extractedCard.rank.toLowerCase(), "of", extractedCard.suite.toLowerCase());
 	} else {
 		console.log("no more cards left to flip!");
 	};
-
 
 };
 
 //
 Game.prototype.compareCards = function(playerGuess){
 
-	var guessRank = playerGuess[0];
-	var guessSuite = playerGuess[1];
+	if (!(this.flippedCards.indexOf(this.randomCard))) {
 
-	if (typeof guessSuite === "undefined" && typeof guessRank === "undefined") {
-		console.log("You need to choose both a rank and suite");
-	} else if(typeof guessRank === "undefined") {
-		console.log("You need to choose a rank");
-	} else if(typeof guessSuite === "undefined") {
-		console.log("You need to choose a suite");
-	} else {
-		if (guessRank === this.randomCard.rank.toLowerCase() && guessSuite === this.randomCard.suite.toLowerCase()) {
-			console.log("you are teh winnar!!");
-			// credits = credits + (wager * 100) // adjust odds as dealerHand.length gets smaller
-			this.player1.credits = this.player1.credits * 3;
+		var guessRank = playerGuess[0];
+		var guessSuite = playerGuess[1];
 
-			this.setRandomCard();
-			this.flipCard();
-
+		if (typeof guessSuite === "undefined" && typeof guessRank === "undefined") {
+			console.log("You need to choose both a rank and suite");
+		} else if(typeof guessRank === "undefined") {
+			console.log("You need to choose a rank");
+		} else if(typeof guessSuite === "undefined") {
+			console.log("You need to choose a suite");
 		} else {
-			// if guess doesn't match currentCard then check flippedCards[]
-			// to see if the guessed card has already been flipped
-			console.log("unlucky buster");
-			// credits = credits + (wager * -1)
+			if (guessRank === this.randomCard.rank.toLowerCase() && guessSuite === this.randomCard.suite.toLowerCase()) {
+				console.log("you are teh winnar!!");
+				// credits = credits + (wager * 100) // adjust odds as dealerHand.length gets smaller
+				this.player1.credits = this.player1.credits * 3;
+				this.setRandomCard();
+				this.flipCard();
+
+			} else {
+				console.log("unlucky buster");
+				// credits = credits + (wager * -1) //
+			}
 		}
+	} else {
+		console.log("That card has already been flipped!");
 	}
 
 };
@@ -216,18 +216,24 @@ var hitorbust = new Game(gameData.name, gameData.instructions);
 
 // "Start new game" button clicked
 btnStartNewGame.addEventListener('click', function() {
+
 	hitorbust.startGame(); // need to pass all the below as arguments setCredits etc
 	hitorbust.setRandomCard(); // tee-up first card to be flipped over
 	hitorbust.flipCard(); // move randomCard from newCards[] to flippedCards[]
+
 }, false);
 
 // "Make bet" button clicked
 btnMakeBet.addEventListener('click', function() {
+
 	hitorbust.player1.makeBet();
+
 }, false);
 
 // "Flip card" button clicked
 btnFlipCard.addEventListener('click', function() {
+
 	hitorbust.setRandomCard();
 	hitorbust.flipCard();
+
 }, false);

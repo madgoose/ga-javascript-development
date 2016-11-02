@@ -6,9 +6,32 @@
 #game-container > div {
 	margin: 1rem 0;
 }
-.selected {
-	background: #ff0;
+label {
+	cursor: pointer;
+	font-size: .9rem;
+	font-family: sans-serif;
 }
+#guess-suite label {
+	font-size: 1.6rem
+}
+.card {
+/* 	width: 3rem;
+height: 4rem; */
+	border: 2px solid #222;
+	display: inline-block;
+	margin: .6rem;
+	padding: .6rem;
+}
+
+input[type=radio] {
+   position: absolute;
+   /* top: -9999px; */
+   left: -9999px;
+}
+input[type=radio]:checked + label {
+  border-color: #0f0;
+}
+
 .block {
 	display: block;
 }
