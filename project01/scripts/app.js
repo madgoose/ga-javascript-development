@@ -81,30 +81,27 @@ Game.prototype.getRandomCard = function(){
 // assigns randomCard with value of random item from dealersHand array
 Game.prototype.setRandomCard = function(){
 	var random = Math.floor((Math.random() * this.dealersHand.length));
-	//	console.log(this.currentCard, this.dealersHand[random]);
-	if (this.randomCard === this.dealersHand[random]) {
-		console.log("error - random card same as current card");
-	} else if (this.dealersHand.length === 0) {
-		console.log("no more cards left to flip!");
-	} else {
-		this.randomCard = this.dealersHand[random];
-	}
+	this.randomCard = this.dealersHand[random];
 };
 
 //
 Game.prototype.flipCard = function(){
-	//  currentCard is the card the player is trying to guess, not presented on interface at this point but available in memory
+	//  randomCard is the card the player is trying to guess, not presented on interface at this point but available in memory
 
-	//this.currentCard = this.randomCard;
-	//console.log("dealersHand.length", this.dealersHand.length);
-	//console.log("flippedCards.length", this.flippedCards.length);
-	this.dealersHand.pop(this.randomCard); // remove currentCard from dealersHand // TODO add condition for dealersHand reaching 0
-	//console.log("dealersHand.pop(currentCard)");
-	//console.log("dealersHand.length", this.dealersHand.length);
-	this.flippedCards.push(this.randomCard); // add currentCard to flippedCards
-	//console.log("dealersHand.push(currentCard)");
-	//console.log("flippedCards.length", this.flippedCards.length);
-	console.log("hint:\n", this.randomCard.rank.toLowerCase(), "of", this.randomCard.suite.toLowerCase(), "\n ----"); // useful for being able guess the card ;-)
+	// remove randomCard from dealersHand
+	var position = this.dealersHand.indexOf(this.randomCard)
+	var splitArray = this.dealersHand.splice(position, 1);
+	var extractedCard = splitArray.shift();
+
+	// add currentCard to flippedCards
+	if (this.dealersHand.length !== 0) {
+		this.flippedCards.push(extractedCard);
+		console.log("hint:", extractedCard.rank.toLowerCase(), "of", extractedCard.suite.toLowerCase(), "\n.flippedCards:", this.flippedCards.length, "\n.dealersHand:", this.dealersHand.length, "\n ----");
+	} else {
+		console.log("no more cards left to flip!");
+	};
+
+
 };
 
 //
