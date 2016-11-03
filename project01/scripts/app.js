@@ -187,8 +187,9 @@ Player.prototype.setGuess = function(){
 
 	// get values of radio buttons, compress into array to pass as arguement
 	var guessRank = getRadioVal(inputGuessRank, "rank");
-	var guessSuite = getRadioVal(inputGuessSuite, "suite");
-	var playerGuess = [guessRank, guessSuite];
+	//var guessSuite = getRadioVal(inputGuessSuite, "suite");
+	//var playerGuess = [guessRank, guessSuite];
+	var playerGuess = [guessRank];
 
 	return playerGuess;
 
@@ -213,6 +214,17 @@ var inputGuessRank = document.getElementById("guess-rank");
 
 // construct new Game instance, assign to local variable hitorbust
 var hitorbust = new Game(gameData.name, gameData.instructions);
+
+/*
+ * TEMP !!
+ */
+hitorbust.startGame(); // need to pass all the below as arguments setCredits etc
+hitorbust.setRandomCard(); // tee-up first card to be flipped over
+hitorbust.flipCard(); // move randomCard from newCards[] to flippedCards[]
+/*
+ *
+ */
+
 
 // "Start new game" button clicked
 btnStartNewGame.addEventListener('click', function() {

@@ -2,71 +2,280 @@
 <html>
 <head>
 	<title>*hit-or-bust</title>
-
+	<meta charset="utf-8" />
 	<link href="styles/style.css" rel="stylesheet" />
 
 </head>
 <body>
 
-	<h1>*hit-or-bust</h1>
+	<h1><span>🃏</span>*hit-or-bust</h1>
+
 	<p>Flip cards. Make paper.</p>
 	<p>Open browser console and hit button below to start a new game.</p>
 	<button id="start-new-game">Start new game</button>
-	<div id="game-container" class="">
+	<div id="game-container" class="hidden">
 
-		<form id="guess-rank">
-			<p>What rank do you think the card is?</p>
-			<input type="radio" name="rank" value="ace" id="ace">
-			<label class="card" for="ace">Ace</label>
-			<input type="radio" name="rank" value="king" id="king">
-			<label class="card" for="king">King</label>
-			<input type="radio" name="rank" value="queen" id="queen">
-			<label class="card" for="queen">Queen</label>
-			<input type="radio" name="rank" value="jack" id="jack">
-			<label class="card" for="jack">Jack</label>
-			<input type="radio" name="rank" value="10" id="10">
-			<label class="card" for="10">10</label>
-			<input type="radio" name="rank" value="9" id="9">
-			<label class="card" for="9">9</label>
-			<input type="radio" name="rank" value="8" id="8">
-			<label class="card" for="8">8</label>
-			<input type="radio" name="rank" value="7" id="7">
-			<label class="card" for="7">7</label>
-			<input type="radio" name="rank" value="6" id="6">
-			<label class="card" for="6">6</label>
-			<input type="radio" name="rank" value="5" id="5">
-			<label class="card" for="5">5</label>
-			<input type="radio" name="rank" value="4" id="4">
-			<label class="card" for="4">4</label>
-			<input type="radio" name="rank" value="3" id="3">
-			<label class="card" for="3">3</label>
-			<input type="radio" name="rank" value="2" id="2">
-			<label class="card" for="2">2</label>
+		<form id="guess-rank"><!-- change to guess-card once radio inputs foreach value=rank-suite -->
+			<div>
+				<p>Choose a suite</p>
+				<!-- whilst i've enjoyed the challenge of using :checked radio buttons to show/hide content,
+					 for next major iteration the suite selector will only be for smaller screens.
+					 desktop will show full deck of cards
+				-->
+				<input type="radio" name="suite" id="diamonds" class="" value="diamonds" checked="checked">
+				<label for="diamonds" class="card diamonds">&diams;</label>
+
+				<input type="radio" name="suite" id="clubs" class="" value="clubs">
+				<label for="clubs" class="card">&clubs;</label>
+
+				<input type="radio" name="suite" id="hearts" value="hearts">
+				<label for="hearts" class="card hearts">&hearts;</label>
+
+				<input type="radio" name="suite" id="spades" value="spades">
+				<label for="spades" class="card">&spades;</label>
+
+				<p>Choose a card</p>
+
+				<!-- mark-up will be dynamically generated using handlebars template -->
+
+				<fieldset id="suite-diamonds" class="cards">
+					<p>Diamonds</p>
+					<ul>
+						<li>
+							<input type="radio" name="rank" value="diamonds-ace" id="diamonds-ace">
+							<label class="card diamonds" for="diamonds-ace">🃁</label>
+						</li>
+						<li>
+							<input type="radio" name="rank" value="diamonds-king" id="diamonds-king">
+							<label class="card diamonds" for="diamonds-king">🃎</label>
+						</li>
+						<li>
+							<input type="radio" name="rank" value="diamonds-queen" id="diamonds-queen">
+							<label class="card diamonds" for="diamonds-queen">🃍</label>
+						</li>
+						<li>
+							<input type="radio" name="rank" value="diamonds-jack" id="diamonds-jack">
+							<label class="card diamonds" for="diamonds-jack">🃋</label>
+						</li>
+						<li>
+							<input type="radio" name="rank" value="diamonds-10" id="diamonds-10">
+							<label class="card diamonds" for="diamonds-10">🃊</label>
+						</li>
+						<li>
+							<input type="radio" name="rank" value="diamonds-9" id="diamonds-9">
+							<label class="card diamonds" for="diamonds-9">🃉</label>
+						</li>
+						<li>
+							<input type="radio" name="rank" value="diamonds-8" id="diamonds-8">
+							<label class="card diamonds" for="diamonds-8">🃈</label>
+						</li>
+						<li>
+							<input type="radio" name="rank" value="diamonds-7" id="diamonds-7">
+							<label class="card diamonds" for="diamonds-7">🃇</label>
+						</li>
+						<li>
+							<input type="radio" name="rank" value="diamonds-6" id="diamonds-6">
+							<label class="card diamonds" for="diamonds-6">🃆</label>
+						</li>
+						<li>
+							<input type="radio" name="rank" value="diamonds-5" id="diamonds-5">
+							<label class="card diamonds" for="diamonds-5">🃅</label>
+						</li>
+						<li>
+							<input type="radio" name="rank" value="diamonds-4" id="diamonds-4">
+							<label class="card diamonds" for="diamonds-4">🃄</label>
+						</li>
+						<li>
+							<input type="radio" name="rank" value="diamonds-3" id="diamonds-3">
+							<label class="card diamonds" for="diamonds-3">🃃</label>
+						</li>
+						<li>
+							<input type="radio" name="rank" value="diamonds-2" id="diamonds-2">
+							<label class="card diamonds" for="diamonds-2">🃂</label>
+						</li>
+					</ul>
+				</fieldset>
+
+				<fieldset id="suite-clubs" class="cards">
+					<p>Clubs</p>
+					<ul>
+						<li>
+							<input type="radio" name="rank" value="clubs-ace" id="clubs-ace">
+							<label class="card clubs" for="clubs-ace">🃑</label>
+						</li>
+						<li>
+							<input type="radio" name="rank" value="clubs-king" id="clubs-king">
+							<label class="card clubs" for="clubs-king">🃞</label>
+						</li>
+						<li>
+							<input type="radio" name="rank" value="clubs-queen" id="clubs-queen">
+							<label class="card clubs" for="clubs-queen">🃝</label>
+						</li>
+						<li>
+							<input type="radio" name="rank" value="clubs-jack" id="clubs-jack">
+							<label class="card clubs" for="clubs-jack">🃛</label>
+						</li>
+						<li>
+							<input type="radio" name="rank" value="clubs-10" id="clubs-10">
+							<label class="card clubs" for="clubs-10">🃚</label>
+						</li>
+						<li>
+							<input type="radio" name="rank" value="clubs-9" id="clubs-9">
+							<label class="card clubs" for="clubs-9">🃙</label>
+						</li>
+						<li>
+							<input type="radio" name="rank" value="clubs-8" id="clubs-8">
+							<label class="card clubs" for="clubs-8">🃘</label>
+						</li>
+						<li>
+							<input type="radio" name="rank" value="clubs-7" id="clubs-7">
+							<label class="card clubs" for="clubs-7">🃗</label>
+						</li>
+						<li>
+							<input type="radio" name="rank" value="clubs-6" id="clubs-6">
+							<label class="card clubs" for="clubs-6">🃖</label>
+						</li>
+						<li>
+							<input type="radio" name="rank" value="clubs-5" id="clubs-5">
+							<label class="card clubs" for="clubs-5">🃕</label>
+						</li>
+						<li>
+							<input type="radio" name="rank" value="clubs-4" id="clubs-4">
+							<label class="card clubs" for="clubs-4">🃔</label>
+						</li>
+						<li>
+							<input type="radio" name="rank" value="clubs-3" id="clubs-3">
+							<label class="card clubs" for="clubs-3">🃓</label>
+						</li>
+						<li>
+							<input type="radio" name="rank" value="clubs-2" id="clubs-2">
+							<label class="card clubs" for="clubs-2">🃒</label>
+						</li>
+					</ul>
+				</fieldset>
+
+				<fieldset id="suite-hearts" class="cards">
+					<p>Hearts</p>
+					<ul>
+						<li>
+							<input type="radio" name="rank" value="hearts-ace" id="hearts-ace">
+							<label class="card hearts" for="hearts-ace">🂱</label>
+						</li>
+						<li>
+							<input type="radio" name="rank" value="hearts-king" id="hearts-king">
+							<label class="card hearts" for="hearts-king">🂾</label>
+						</li>
+						<li>
+							<input type="radio" name="rank" value="hearts-queen" id="hearts-queen">
+							<label class="card hearts" for="hearts-queen">🂽</label>
+						</li>
+						<li>
+							<input type="radio" name="rank" value="hearts-jack" id="hearts-jack">
+							<label class="card hearts" for="hearts-jack">🂻</label>
+						</li>
+						<li>
+							<input type="radio" name="rank" value="hearts-10" id="hearts-10">
+							<label class="card hearts" for="hearts-10">🂺</label>
+						</li>
+						<li>
+							<input type="radio" name="rank" value="hearts-9" id="hearts-9">
+							<label class="card hearts" for="hearts-9">🂹</label>
+						</li>
+						<li>
+							<input type="radio" name="rank" value="hearts-8" id="hearts-8">
+							<label class="card hearts" for="hearts-8">🂸</label>
+						</li>
+						<li>
+							<input type="radio" name="rank" value="hearts-7" id="hearts-7">
+							<label class="card hearts" for="hearts-7">🂷</label>
+						</li>
+						<li>
+							<input type="radio" name="rank" value="hearts-6" id="hearts-6">
+							<label class="card hearts" for="hearts-6">🂶</label>
+						</li>
+						<li>
+							<input type="radio" name="rank" value="hearts-5" id="hearts-5">
+							<label class="card hearts" for="hearts-5">🂵</label>
+						</li>
+						<li>
+							<input type="radio" name="rank" value="hearts-4" id="hearts-4">
+							<label class="card hearts" for="hearts-4">🂴</label>
+						</li>
+						<li>
+							<input type="radio" name="rank" value="hearts-3" id="hearts-3">
+							<label class="card hearts" for="hearts-3">🂳</label>
+						</li>
+						<li>
+							<input type="radio" name="rank" value="hearts-2" id="hearts-2">
+							<label class="card hearts" for="hearts-2">🂲</label>
+						</li>
+					</ul>
+				</fieldset>
+
+				<fieldset id="suite-spades" class="cards">
+					<p>Spades</p>
+					<ul>
+						<li>
+							<input type="radio" name="rank" value="spades-ace" id="spades-ace">
+							<label class="card spades" for="spades-ace">🂡</label>
+						</li>
+						<li>
+							<input type="radio" name="rank" value="spades-king" id="spades-king">
+							<label class="card spades" for="spades-king">🂮</label>
+						</li>
+						<li>
+							<input type="radio" name="rank" value="spades-queen" id="spades-queen">
+							<label class="card spades" for="spades-queen">🂭</label>
+						</li>
+						<li>
+							<input type="radio" name="rank" value="spades-jack" id="spades-jack">
+							<label class="card spades" for="spades-jack">🂫</label>
+						</li>
+						<li>
+							<input type="radio" name="rank" value="spades-10" id="spades-10">
+							<label class="card spades" for="spades-10">🂪</label>
+						</li>
+						<li>
+							<input type="radio" name="rank" value="spades-9" id="spades-9">
+							<label class="card spades" for="spades-9">🂩</label>
+						</li>
+						<li>
+							<input type="radio" name="rank" value="spades-8" id="spades-8">
+							<label class="card spades" for="spades-8">🂨</label>
+						</li>
+						<li>
+							<input type="radio" name="rank" value="spades-7" id="spades-7">
+							<label class="card spades" for="spades-7">🂧</label>
+						</li>
+						<li>
+							<input type="radio" name="rank" value="spades-6" id="spades-6">
+							<label class="card spades" for="spades-6">🂦</label>
+						</li>
+						<li>
+							<input type="radio" name="rank" value="spades-5" id="spades-5">
+							<label class="card spades" for="spades-5">🂥</label>
+						</li>
+						<li>
+							<input type="radio" name="rank" value="spades-4" id="spades-4">
+							<label class="card spades" for="spades-4">🂤</label>
+						</li>
+						<li>
+							<input type="radio" name="rank" value="spades-3" id="spades-3">
+							<label class="card spades" for="spades-3">🂣</label>
+						</li>
+						<li>
+							<input type="radio" name="rank" value="spades-2" id="spades-2">
+							<label class="card spades" for="spades-2">🂢</label>
+						</li>
+					</ul>
+				</fieldset>
+
+				<!-- /handlebars template -->
+
+			</div>
+
 		</form>
 
-		<form id="guess-suite">
-			<p>What suite do you think the card is?</p>
-
-			<input type="radio" name="suite" id="diamonds" value="diamonds">
-			<label for="diamonds" class="card">&diams;</label>
-
-			<input type="radio" name="suite" id="clubs" value="clubs">
-			<label for="clubs" class="card">&clubs;</label>
-
-			<input type="radio" name="suite" id="hearts" value="hearts">
-			<label for="hearts" class="card">&hearts;</label>
-
-			<input type="radio" name="suite" id="spades" value="spades">
-			<label for="spades" class="card">&spades;</label>
-		</form>
-		<!--
-		<p>
-			<label>
-				How much do you bet?
-				<input type="number" name="wager" id="wager" class="block" />
-			</label>
-		</p>
-		-->
 		<div>
 			<button id="make-bet">Make bet</button>
 		</div>
@@ -75,23 +284,8 @@
 		</div>
 	</div>
 
-	<!-- jquery cdn with local fallback -->
-	<!--
-	<script src="//ajax.aspnetcdn.com/ajax/jquery/jquery-2.0.0.min.js"></script>
-	<script>window.jQuery || document.write('<script src="../jquery.min.js">\x3C/script>')</script>
-	-->
-
 	<script type="text/javascript" src="scripts/data.js"></script>
 	<script type="text/javascript" src="scripts/app.js"></script>
-	<!-- browser will ignore attribute type anything other than "text/javascript" -->
-	<!-- use ID to target element in DOM -->
-	<script type="text/template" id="template-card">
-		<h1>
-			{{firstName}} {{lastName}}
-		</h1>
-		<p>
-			Date of birth: {{birthDate}}
-		</p>
-	</script>
+
 </body>
 </html>
