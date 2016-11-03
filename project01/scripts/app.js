@@ -105,33 +105,23 @@ Game.prototype.flipCard = function(){
 //
 Game.prototype.compareCards = function(playerGuess){
 
-	if (!(this.flippedCards.indexOf(this.randomCard))) {
+	if (typeof playerGuess !== "undefined") {
 
-		var guessRank = playerGuess[0];
-		var guessSuite = playerGuess[1];
+		playerGuess = playerGuess.split("-");
 
-		if (typeof guessSuite === "undefined" && typeof guessRank === "undefined") {
-			console.log("You need to choose both a rank and suite");
-		} else if(typeof guessRank === "undefined") {
-			console.log("You need to choose a rank");
-		} else if(typeof guessSuite === "undefined") {
-			console.log("You need to choose a suite");
+		var guessRank = playerGuess[1];
+		var guessSuite = playerGuess[0];
+		if (guessRank === this.randomCard.rank.toLowerCase() && guessSuite === this.randomCard.suite.toLowerCase()) {
+			console.log("you are teh winnar!!");
+			this.setRandomCard();
+			this.flipCard();
 		} else {
-			if (guessRank === this.randomCard.rank.toLowerCase() && guessSuite === this.randomCard.suite.toLowerCase()) {
-				console.log("you are teh winnar!!");
-				// credits = credits + (wager * 100) // adjust odds as dealerHand.length gets smaller
-				this.player1.credits = this.player1.credits * 3;
-				this.setRandomCard();
-				this.flipCard();
-
-			} else {
-				console.log("unlucky buster");
-				// credits = credits + (wager * -1) //
-			}
+			console.log("unlucky buster");
 		}
 	} else {
-		console.log("That card has already been flipped!");
+		console.log("You need to choose a card");
 	}
+
 
 };
 
@@ -186,12 +176,12 @@ Player.prototype.setGuess = function(){
 	}
 
 	// get values of radio buttons, compress into array to pass as arguement
-	var guessRank = getRadioVal(inputGuessRank, "rank");
+	var guessCard = getRadioVal(inputGuessCard, "suite-rank");
+	//var guessRank = getRadioVal(inputGuessRank, "rank");
 	//var guessSuite = getRadioVal(inputGuessSuite, "suite");
 	//var playerGuess = [guessRank, guessSuite];
-	var playerGuess = [guessRank];
-
-	return playerGuess;
+	//var playerGuess = [guessRank];
+	return guessCard;
 
 };
 
@@ -211,6 +201,7 @@ var btnStartNewGame = document.getElementById("start-new-game");
 
 var inputGuessSuite = document.getElementById("guess-suite");
 var inputGuessRank = document.getElementById("guess-rank");
+var inputGuessCard = document.getElementById("guess-card");
 
 // construct new Game instance, assign to local variable hitorbust
 var hitorbust = new Game(gameData.name, gameData.instructions);

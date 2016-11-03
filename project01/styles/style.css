@@ -27,6 +27,7 @@ label {
 .cards .card {
 	border-color: #fff;
 	font-size: 8rem;
+	font-size: 4rem;
 	line-height: 1;
 }
 .cards p {
@@ -58,7 +59,7 @@ fieldset ul {
 	padding: 0;
 	text-align: center;
 }
-#guess-rank li { /* later change to guess-card */
+#guess-card li { /* later change to guess-card */
 	list-style-type: none;
 	display: inline-block;
 	text-align: center;
@@ -72,7 +73,7 @@ fieldset ul {
 #suite-clubs,
 #suite-hearts,
 #suite-spades {
-	display: none;
+	/* display: none; */
 }
 input#diamonds:checked ~ #suite-diamonds {
   display: block;
