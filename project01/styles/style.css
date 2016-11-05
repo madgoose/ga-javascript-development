@@ -1,10 +1,8 @@
 #game-container {
+	max-width: 960px;
 	border: 1px solid #020202;
 	margin: 1rem 0;
 	padding: 1rem;
-}
-#game-container > div {
-	margin: 1rem 0;
 }
 label {
 	cursor: pointer;
@@ -16,7 +14,10 @@ label {
 	font-size: 1.6rem;
 }
 .card {
-	border: 2px solid #222;
+	/* border: 2px dotted #00f; */
+	border-width: 2px;
+	border-style: solid;
+	border-color: white;
 	display: inline-block;
 	margin-bottom: .8rem;
 }
@@ -25,29 +26,23 @@ label {
 	color: #f00;
 }
 .cards .card {
-	border-color: #fff;
+	border-style: dotted;
 	font-size: 8rem;
-	font-size: 4rem;
 	line-height: 1;
 }
 .cards p {
-	margin: 0;
+	margin-top: 0;
 	font-size: smaller;
 	font-style: italic;
 }
 
 input[type=radio] {
-   position: absolute;
-   /* top: -9999px; */
-   left: -9999px;
-   margin: 0;
-   padding: 0;
+	/* position: absolute;
+	left: -9999px; */
 }
 input[type=radio]:checked + label {
-  border: 2px #00f dotted;
+	border-color: blue;
 }
-
-
 
 fieldset {
 	border: 0;
@@ -59,7 +54,11 @@ fieldset ul {
 	padding: 0;
 	text-align: center;
 }
-#guess-card li { /* later change to guess-card */
+#guess-card .choose-suite {
+	float: left;
+	margin-right: 2rem;
+}
+#guess-card li {
 	list-style-type: none;
 	display: inline-block;
 	text-align: center;
@@ -73,7 +72,7 @@ fieldset ul {
 #suite-clubs,
 #suite-hearts,
 #suite-spades {
-	/* display: none; */
+	display: none;
 }
 input#diamonds:checked ~ #suite-diamonds {
   display: block;
@@ -89,3 +88,17 @@ input#spades:checked ~ #suite-spades {
 }
 
 .hidden { display: none; }
+
+.visually-hidden { /*https://developer.yahoo.com/blogs/ydn/clip-hidden-content-better-accessibility-53456.html*/
+    position: absolute !important;
+    clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+    clip: rect(1px, 1px, 1px, 1px);
+    padding:0 !important;
+    border:0 !important;
+    height: 1px !important;
+    width: 1px !important;
+    overflow: hidden;
+}
+
+
+

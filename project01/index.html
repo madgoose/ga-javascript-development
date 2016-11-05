@@ -17,15 +17,15 @@
 
 		<form id="guess-card"><!-- change to guess-card once radio inputs foreach value=rank-suite -->
 			<div>
-				<p>Choose a suite</p>
+				<p class="choose-suite">Choose a suite</p>
 				<!-- whilst i've enjoyed the challenge of using :checked radio buttons to show/hide content,
 					 for next major iteration the suite selector will only be for smaller screens.
 					 desktop will show full deck of cards
 				-->
-				<input type="radio" name="suite" id="diamonds" class="" value="diamonds" checked="checked">
+				<input type="radio" name="suite" id="diamonds" class="suits" value="diamonds" checked="checked">
 				<label for="diamonds" class="card diamonds">&diams;</label>
 
-				<input type="radio" name="suite" id="clubs" class="" value="clubs">
+				<input type="radio" name="suite" id="clubs" class="suits" value="clubs">
 				<label for="clubs" class="card">&clubs;</label>
 
 				<input type="radio" name="suite" id="hearts" value="hearts">
@@ -39,115 +39,115 @@
 				<!-- mark-up will be dynamically generated using handlebars template -->
 
 				<fieldset id="suite-diamonds" class="cards">
-					<p>Diamonds</p>
+					<p class="visually-hidden">Diamonds</p>
 					<ul>
-						<li>
+						<li id="card1">
 							<input type="radio" name="suite-rank" value="diamonds-ace" id="diamonds-ace">
-							<label class="card diamonds" for="diamonds-ace">🃁</label>
+							<label class="card diamonds" for="diamonds-ace" title="Ace of Diamonds">🃁 <span class="visually-hidden">Ace of Diamonds</span></label>
 						</li>
-						<li>
+						<li id="card2">
 							<input type="radio" name="suite-rank" value="diamonds-king" id="diamonds-king">
-							<label class="card diamonds" for="diamonds-king">🃎</label>
+							<label class="card diamonds" for="diamonds-king" title="King of Diamonds">🃎 <span class="visually-hidden">King of Diamonds</span></label>
 						</li>
-						<li>
+						<li id="card3">
 							<input type="radio" name="suite-rank" value="diamonds-queen" id="diamonds-queen">
-							<label class="card diamonds" for="diamonds-queen">🃍</label>
+							<label class="card diamonds" for="diamonds-queen" title="Queen of Diamonds" title="King of Diamonds">🃍 <span class="visually-hidden">Queen of Diamonds</span></label>
 						</li>
-						<li>
+						<li id="card4">
 							<input type="radio" name="suite-rank" value="diamonds-jack" id="diamonds-jack">
-							<label class="card diamonds" for="diamonds-jack">🃋</label>
+							<label class="card diamonds" for="diamonds-jack" title="Jack of Diamonds" title="King of Diamonds">🃋 <span class="visually-hidden">Jack of Diamonds</span></label>
 						</li>
-						<li>
+						<li id="card5">
 							<input type="radio" name="suite-rank" value="diamonds-10" id="diamonds-10">
-							<label class="card diamonds" for="diamonds-10">🃊</label>
+							<label class="card diamonds" for="diamonds-10" title="10 of Diamonds" title="King of Diamonds">🃊 <span class="visually-hidden">10 of Diamonds</span></label>
 						</li>
-						<li>
+						<li id="card6">
 							<input type="radio" name="suite-rank" value="diamonds-9" id="diamonds-9">
-							<label class="card diamonds" for="diamonds-9">🃉</label>
+							<label class="card diamonds" for="diamonds-9" title="9 of Diamonds" title="King of Diamonds">🃉 <span class="visually-hidden">9 of Diamonds</span></label>
 						</li>
-						<li>
+						<li id="card7">
 							<input type="radio" name="suite-rank" value="diamonds-8" id="diamonds-8">
-							<label class="card diamonds" for="diamonds-8">🃈</label>
+							<label class="card diamonds" for="diamonds-8" title="8 of Diamonds" title="King of Diamonds">🃈 <span class="visually-hidden">8 of Diamonds</span></label>
 						</li>
-						<li>
+						<li id="card8">
 							<input type="radio" name="suite-rank" value="diamonds-7" id="diamonds-7">
-							<label class="card diamonds" for="diamonds-7">🃇</label>
+							<label class="card diamonds" for="diamonds-7" title="7 of Diamonds" title="King of Diamonds">🃇 <span class="visually-hidden">7 of Diamonds</span></label>
 						</li>
-						<li>
+						<li id="card9">
 							<input type="radio" name="suite-rank" value="diamonds-6" id="diamonds-6">
-							<label class="card diamonds" for="diamonds-6">🃆</label>
+							<label class="card diamonds" for="diamonds-6" title="6 of Diamonds" title="King of Diamonds">🃆 <span class="visually-hidden">6 of Diamonds</span></label>
 						</li>
-						<li>
+						<li id="card10">
 							<input type="radio" name="suite-rank" value="diamonds-5" id="diamonds-5">
-							<label class="card diamonds" for="diamonds-5">🃅</label>
+							<label class="card diamonds" for="diamonds-5" title="5 of Diamonds" title="King of Diamonds">🃅 <span class="visually-hidden">5 of Diamonds</span></label>
 						</li>
-						<li>
+						<li id="card11">
 							<input type="radio" name="suite-rank" value="diamonds-4" id="diamonds-4">
-							<label class="card diamonds" for="diamonds-4">🃄</label>
+							<label class="card diamonds" for="diamonds-4" title="4 of Diamonds" title="King of Diamonds">🃄 <span class="visually-hidden">4 of Diamonds</span></label>
 						</li>
-						<li>
+						<li id="card12">
 							<input type="radio" name="suite-rank" value="diamonds-3" id="diamonds-3">
-							<label class="card diamonds" for="diamonds-3">🃃</label>
+							<label class="card diamonds" for="diamonds-3" title="3 of Diamonds" title="King of Diamonds">🃃 <span class="visually-hidden">3 of Diamonds</span></label>
 						</li>
-						<li>
+						<li id="card13">
 							<input type="radio" name="suite-rank" value="diamonds-2" id="diamonds-2">
-							<label class="card diamonds" for="diamonds-2">🃂</label>
+							<label class="card diamonds" for="diamonds-2" title="2 of Diamonds" title="King of Diamonds">🃂 <span class="visually-hidden">2 of Diamonds</span></label>
 						</li>
 					</ul>
 				</fieldset>
 
 				<fieldset id="suite-clubs" class="cards">
-					<p>Clubs</p>
+					<p class="visually-hidden">Clubs</p>
 					<ul>
-						<li>
+						<li id="card14">
 							<input type="radio" name="suite-rank" value="clubs-ace" id="clubs-ace">
 							<label class="card clubs" for="clubs-ace">🃑</label>
 						</li>
-						<li>
+						<li id="card15">
 							<input type="radio" name="suite-rank" value="clubs-king" id="clubs-king">
 							<label class="card clubs" for="clubs-king">🃞</label>
 						</li>
-						<li>
+						<li id="card16">
 							<input type="radio" name="suite-rank" value="clubs-queen" id="clubs-queen">
 							<label class="card clubs" for="clubs-queen">🃝</label>
 						</li>
-						<li>
+						<li id="card17">
 							<input type="radio" name="suite-rank" value="clubs-jack" id="clubs-jack">
 							<label class="card clubs" for="clubs-jack">🃛</label>
 						</li>
-						<li>
+						<li id="card18">
 							<input type="radio" name="suite-rank" value="clubs-10" id="clubs-10">
 							<label class="card clubs" for="clubs-10">🃚</label>
 						</li>
-						<li>
+						<li id="card19">
 							<input type="radio" name="suite-rank" value="clubs-9" id="clubs-9">
 							<label class="card clubs" for="clubs-9">🃙</label>
 						</li>
-						<li>
+						<li id="card20">
 							<input type="radio" name="suite-rank" value="clubs-8" id="clubs-8">
 							<label class="card clubs" for="clubs-8">🃘</label>
 						</li>
-						<li>
+						<li id="card21">
 							<input type="radio" name="suite-rank" value="clubs-7" id="clubs-7">
 							<label class="card clubs" for="clubs-7">🃗</label>
 						</li>
-						<li>
+						<li id="card22">
 							<input type="radio" name="suite-rank" value="clubs-6" id="clubs-6">
 							<label class="card clubs" for="clubs-6">🃖</label>
 						</li>
-						<li>
+						<li id="card23">
 							<input type="radio" name="suite-rank" value="clubs-5" id="clubs-5">
 							<label class="card clubs" for="clubs-5">🃕</label>
 						</li>
-						<li>
+						<li id="card24">
 							<input type="radio" name="suite-rank" value="clubs-4" id="clubs-4">
 							<label class="card clubs" for="clubs-4">🃔</label>
 						</li>
-						<li>
+						<li id="card25">
 							<input type="radio" name="suite-rank" value="clubs-3" id="clubs-3">
 							<label class="card clubs" for="clubs-3">🃓</label>
 						</li>
-						<li>
+						<li id="card26">
 							<input type="radio" name="suite-rank" value="clubs-2" id="clubs-2">
 							<label class="card clubs" for="clubs-2">🃒</label>
 						</li>
@@ -155,7 +155,7 @@
 				</fieldset>
 
 				<fieldset id="suite-hearts" class="cards">
-					<p>Hearts</p>
+					<p class="visually-hidden">Hearts</p>
 					<ul>
 						<li>
 							<input type="radio" name="suite-rank" value="hearts-ace" id="hearts-ace">
@@ -213,11 +213,11 @@
 				</fieldset>
 
 				<fieldset id="suite-spades" class="cards">
-					<p>Spades</p>
+					<p class="visually-hidden">Spades</p>
 					<ul>
 						<li>
 							<input type="radio" name="suite-rank" value="spades-ace" id="spades-ace">
-							<label class="card spades" for="spades-ace">🂡</label>
+							<label class="card spades" for="spades-ace" title="Ace of Spades">🂡</label>
 						</li>
 						<li>
 							<input type="radio" name="suite-rank" value="spades-king" id="spades-king">
@@ -276,11 +276,13 @@
 
 		</form>
 
+		<p>Your guess: <span id="playerGuess"></span></p>
+
 		<div>
 			<button id="make-bet">Make bet</button>
 		</div>
 		<div>
-			<button id="flip-card">Flip card</button>
+			<button id="flip-card">Flip card</button><!-- player can *pass* for an arbitrary penalty cost -->
 		</div>
 	</div>
 

@@ -1,7 +1,3 @@
-// jqueizzle
-// $(function(){
-// });
-
 /*
  * Game class
  */
@@ -30,26 +26,6 @@ Game.prototype.startGame = function() {
 
 };
 
-// display game end message
-Game.prototype.endGame = function() {
-	console.log("Game over!\nBad luck, ", player1.name);
-};
-
-// set game credits // possibly abstract upper limit to gameData JSON data file
-Game.prototype.setCredits = function(newCredits){
-
-	if (newCredits < 0){ // can't gamble with zero credits or less
-		console.log("No scratch, no snatch. Come back with some credits");
-	} else if (newCredits > 5000) { // can't have more than 500 credits in bank
-	console.log("House limit is 5000 credits, sorry");
-	} else { // can't gamble with zero credits or less
-	this.credits = newCredits;
-	}
-};
-// returns current credit value
-Game.prototype.getCredits = function(){
-	return this.credits;
-};
 
 // populate dealersHand array with data from external JSON i.e. deal a new hand
 Game.prototype.setNewCards = function(newCards) {
@@ -67,15 +43,6 @@ Game.prototype.setNewCards = function(newCards) {
 
 };
 
-// returns array of playing cards
-Game.prototype.getNewCards = function(){
-	return this.dealersHand;
-};
-
-// returns randomCard from "this" object
-Game.prototype.getRandomCard = function(){
-	return this.randomCard;
-};
 
 // assigns randomCard with value of random item from dealersHand array
 Game.prototype.setRandomCard = function(){
@@ -87,10 +54,12 @@ Game.prototype.setRandomCard = function(){
 Game.prototype.flipCard = function(){
 	//  randomCard is the card the player is trying to guess, not presented on interface at this point but available in memory
 
+	console.log(this.dealersHand.length, this.flippedCards.length)
 	// extract randomCard from dealersHand
 	var position = this.dealersHand.indexOf(this.randomCard);
 	var splitArray = this.dealersHand.splice(position, 1);
 	var extractedCard = splitArray.shift();
+	console.log(this.dealersHand.length, this.flippedCards.length);
 
 	// add extractedCard to flippedCards
 	if (this.dealersHand.length !== 0) {
@@ -111,22 +80,25 @@ Game.prototype.compareCards = function(playerGuess){
 
 		var guessRank = playerGuess[1];
 		var guessSuite = playerGuess[0];
+
 		if (guessRank === this.randomCard.rank.toLowerCase() && guessSuite === this.randomCard.suite.toLowerCase()) {
+
 			console.log("you are teh winnar!!");
-			this.setRandomCard();
-			this.flipCard();
+
+
 		} else {
+
 			console.log("unlucky buster");
+
 		}
+
 	} else {
-		console.log("You need to choose a card");
+
+		alert("You need to choose a card");
+
 	}
 
-
 };
-
-//
-Game.prototype.updateScore = function(){};
 
 /*
  * Card class
@@ -149,17 +121,12 @@ var Player = function(name, credits){
 	this.credits = credits;
 };
 
-// player enters card value and suite // duplication of setGuess() ?
-Player.prototype.makeBet = function(){
-	var playerGuess = this.setGuess();
-	hitorbust.compareCards(playerGuess);
-};
 
-// value will be received from text input
+// value received from radio input
 Player.prototype.setGuess = function(){
 
 	// http://www.dyn-web.com/tutorials/forms/radio/get-selected.php
-	function getRadioVal(form, name) {
+	function getRadioVal(form, name) {  // move to a utils object?
 
 		var val;
 	    // get list of radio buttons with specified name
@@ -177,22 +144,23 @@ Player.prototype.setGuess = function(){
 
 	// get values of radio buttons, compress into array to pass as arguement
 	var guessCard = getRadioVal(inputGuessCard, "suite-rank");
-	//var guessRank = getRadioVal(inputGuessRank, "rank");
-	//var guessSuite = getRadioVal(inputGuessSuite, "suite");
-	//var playerGuess = [guessRank, guessSuite];
-	//var playerGuess = [guessRank];
+
 	return guessCard;
 
 };
 
-// if wager > wallet then no bet // value will be user-set via text input: this.setGuess()
-// wager must be more than 0
-Player.prototype.setWager = function(){};
-Player.prototype.getWager = function(){};
-Player.prototype.cashOut = function(){}; // method: endsGame + winner message
 
+// get playerGuess then compare to Game.randomCard
+Player.prototype.makeBet = function(){
+	// playerGuess = value of selected radio button
+	var playerGuess = this.setGuess();
+	hitorbust.compareCards(playerGuess);
+};
 
-// bind DOM elements to local variables
+/*
+ * assign DOM elements to local variables
+ */
+
 var gameContainer = document.getElementById("game-container");
 var btnMakeBet = document.getElementById("make-bet");
 var btnFlipCard = document.getElementById("flip-card");
@@ -203,18 +171,7 @@ var inputGuessSuite = document.getElementById("guess-suite");
 var inputGuessRank = document.getElementById("guess-rank");
 var inputGuessCard = document.getElementById("guess-card");
 
-// construct new Game instance, assign to local variable hitorbust
-var hitorbust = new Game(gameData.name, gameData.instructions);
-
-/*
- * TEMP !!
- */
-hitorbust.startGame(); // need to pass all the below as arguments setCredits etc
-hitorbust.setRandomCard(); // tee-up first card to be flipped over
-hitorbust.flipCard(); // move randomCard from newCards[] to flippedCards[]
-/*
- *
- */
+var textPlayerGuess = document.getElementById("playerGuess");
 
 
 // "Start new game" button clicked
@@ -240,3 +197,16 @@ btnFlipCard.addEventListener('click', function() {
 	hitorbust.flipCard();
 
 }, false);
+
+
+// construct new Game instance, assign to local variable hitorbust
+var hitorbust = new Game(gameData.name, gameData.instructions);
+/*
+ * TEMP !!
+ */
+hitorbust.startGame(); // need to pass all the below as arguments setCredits etc
+hitorbust.setRandomCard(); // tee-up first card to be flipped over
+hitorbust.flipCard(); // move randomCard from newCards[] to flippedCards[]
+/*
+ *
+ */
