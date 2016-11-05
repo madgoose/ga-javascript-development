@@ -38,7 +38,6 @@ $(function(){
 			templateString = templateString.replace(matches[index], correspondingValue);
 		});
 */
-
 		// write to DOM
 		$("body").append(templateString);
 	};
