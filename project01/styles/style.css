@@ -1,3 +1,6 @@
+h1:before {
+	content: "🃏 ";
+}
 #game-container {
 	max-width: 960px;
 	border: 1px solid #020202;
@@ -27,8 +30,8 @@ label {
 }
 .cards .card {
 	border-style: dotted;
-	font-size: 8rem;
-	line-height: 1;
+	font-size: 5rem;
+	-webkit-font-size:8rem;
 }
 .cards p {
 	margin-top: 0;
@@ -37,8 +40,8 @@ label {
 }
 
 input[type=radio] {
-	/* position: absolute;
-	left: -9999px; */
+	position: absolute;
+	left: -9999px;
 }
 input[type=radio]:checked + label {
 	border-color: blue;
