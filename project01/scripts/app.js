@@ -49,11 +49,11 @@ Game.prototype.flipCard = function(){
 	var position = this.dealersHand.indexOf(this.randomCard);
 	var splitArray = this.dealersHand.splice(position, 1);
 	var extractedCard = splitArray.shift();
-	console.log("dealer's hand", this.dealersHand.length, "flipped cards", this.flippedCards.length);
 	// add extractedCard to flippedCards
 	if (this.dealersHand.length > 0) {
 		this.flippedCards.push(extractedCard);
-		console.log("hint:", extractedCard.rank.toLowerCase(), "of", extractedCard.suite.toLowerCase());
+		console.log("flipped card hint:", extractedCard.rank, "of", extractedCard.suite);
+		console.log("dealer's hand", this.dealersHand.length, "flipped cards", this.flippedCards.length);
 	} else {
 		console.log("no more cards left to flip!");
 	};
@@ -65,7 +65,7 @@ Game.prototype.compareCards = function(playerGuess) {
 		playerGuess = playerGuess.split("-");
 		var guessRank = playerGuess[1];
 		var guessSuite = playerGuess[0];
-		if (guessRank === this.randomCard.rank.toLowerCase() && guessSuite === this.randomCard.suite.toLowerCase()) {
+		if (guessRank === this.randomCard.rank && guessSuite === this.randomCard.suite) {
 			console.log("you are teh winnar!!\n<-- flip card");
 		} else { console.log("unlucky buster");	}
 	} else { alert("You need to choose a card"); }
@@ -115,7 +115,9 @@ var gameContainer = document.getElementById("game-container"),
 	inputGuessSuite = document.getElementById("guess-suite"),
 	inputGuessRank = document.getElementById("guess-rank"),
 	inputGuessCard = document.getElementById("guess-card"),
-	textPlayerGuess = document.getElementById("playerGuess");
+	textPlayerGuess = document.getElementById("playerGuess"),
+	importedCards = document.getElementById("imported-cards"),
+	cardTemplate = document.getElementById("card-template").innerHTML;
 
 /*
  * event handlers
@@ -165,6 +167,36 @@ utils.getRadioVal = function(form, name){
         }
     }
     return val; // return value of checked radio or undefined if none checked
+};
+
+utils.convertTemplate = function(templateString, values){
+
+	// use regex to target double curly parentheses + key-value pairs from data.myDetails object
+	var regexMatch = /\{\{([a-zA-Z]*)\}\}/g; // g at end means global - it will not stop after the first instance
+
+	// new array containing strings that match regex expression
+	var matches = templateString.match(regexMatch);
+
+	// iterate over array using for loop
+	for (var i = 0; i < matches.length; i++) {
+
+		var key = matches[i];
+		key = key.replace(/{{/g, '').replace(/}}/g, '');
+
+		// assign value to variable
+		var correspondingValue = values[key];
+
+		// replace key with value
+		templateString = templateString.replace(matches[i], correspondingValue);
+
+	}
+
+	// write to DOM
+	// importedCards.appendChild(templateString);
+
+	var list = document.createElement("li");
+	list.innerHTML = templateString;
+	importedCards.appendChild(list);
 };
 
 /*
@@ -277,6 +309,23 @@ var hitorbust = new Game(gameData.name, gameData.instructions);
 hitorbust.startGame(); // need to pass all the below as arguments setCredits etc
 hitorbust.setRandomCard(); // tee-up first card to be flipped over
 hitorbust.flipCard(); // move randomCard from newCards[] to flippedCards[]
+
+// iterate through card collection and apply template for each card object
+// probably need to move this somewhwere else
+/*
+for (var i = 0; i < gameData.cards.length; i++) {
+
+	utils.convertTemplate(cardTemplate, gameData.cards[i]);
+
+}*/
+
+
+for (var i = 0; i < hitorbust.dealersHand.length; i++) {
+
+	utils.convertTemplate(cardTemplate, hitorbust.dealersHand[i]); // 51 cards due to first flipped
+
+}
+
 /*
  *
  */

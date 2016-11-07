@@ -8,7 +8,7 @@
 </head>
 <body>
 
-	<h1><span>🃏</span>*hit-or-bust</h1>
+	<h1>*hit-or-bust</h1>
 
 	<p>Flip cards. Make paper.</p>
 	<p>Open browser console and hit button below to start a new game.</p>
@@ -36,9 +36,11 @@
 
 				<p>Choose a card</p>
 
+				<ul id="imported-cards"></ul>
+
 				<!-- <input type="text" name="foo" id="foo" /> -->
 
-				<!-- mark-up will be dynamically generated using handlebars template -->
+				<!-- mark-up will be dynamically generated using custom template -->
 
 				<fieldset id="suite-diamonds" class="cards">
 					<p class="visually-hidden">Diamonds</p>
@@ -272,13 +274,13 @@
 					</ul>
 				</fieldset>
 
-				<!-- /handlebars template -->
+				<!-- /template -->
 
 			</div>
 
 		</form>
 
-		<p>Your guess: <span id="playerGuess"></span></p>
+		<p>Your guess: <span id="player-guess"></span></p>
 
 		<div>
 			<button id="make-bet">Make bet</button>
@@ -287,6 +289,11 @@
 			<button id="flip-card">Flip card</button><!-- player can *pass* for an arbitrary penalty cost -->
 		</div>
 	</div>
+
+	<script type="text/x-template" id="card-template">
+		<input type="radio" name="suite-rank" value="{{suite}}-{{rank}}" id="{{suite}}-{{rank}}">
+		<label class="card {{suite}}" for="{{suite}}-{{rank}}">{{symbol}}</label>
+	</script>
 
 	<script type="text/javascript" src="scripts/data.js"></script>
 	<script type="text/javascript" src="scripts/app.js"></script>
