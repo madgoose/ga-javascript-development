@@ -1,9 +1,12 @@
 $(function(){
 
 	// declare local variables
-	var $template = $("#my-custom-template").html();
+	var $templateDetails = $("#template-details").html();
+	var $templateJobs = $("#template-jobs").html();
 
 	function convertTemplate(templateString, values){
+
+		//console.log(values);
 
 		// use regex to target double curly parentheses + key-value pairs from data.myDetails object
 		var regexMatch = /\{\{([a-zA-Z]*)\}\}/g; // g at end means global - it will not stop after the first instance
@@ -16,32 +19,21 @@ $(function(){
 
 			var key = matches[i];
 			key = key.replace(/{{/g, '').replace(/}}/g, '');
-			
+
 			// assign value to variable
 			var correspondingValue = values[key];
-			
+
 			// replace key with value
 			templateString = templateString.replace(matches[i], correspondingValue);
+
 		}
 
-/*		
-		// iterate over array using Array.map()
-		matches.map(function(key, index){
-
-			// replace double parentheses with empty string
-			key = key.replace(/{{/g, '').replace(/}}/g, '');
-			
-			// assign value to variable
-			var correspondingValue = values[key];
-			
-			// replace key with value
-			templateString = templateString.replace(matches[index], correspondingValue);
-		});
-*/
 		// write to DOM
-		$("body").append(templateString);
+		//debugger
+		return templateString;
 	};
 
 	// function call
-	convertTemplate($template, data.myDetails);
+	$("body").append(convertTemplate($templateDetails, data.myDetails));
+	//$("body").append(convertTemplate($templateJobs, data.jobs));
 });

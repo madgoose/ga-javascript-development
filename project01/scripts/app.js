@@ -44,14 +44,14 @@ Game.prototype.setRandomCard = function(){
 //
 Game.prototype.flipCard = function(){
 	//  randomCard is the card the player is trying to guess, not presented on interface at this point but available in memory
-	console.log("dealer's hand", this.dealersHand.length, "flipped cards", this.flippedCards.length);
+	//console.log("dealer's hand", this.dealersHand.length, "flipped cards", this.flippedCards.length);
 	// extract randomCard from dealersHand
 	var position = this.dealersHand.indexOf(this.randomCard);
 	var splitArray = this.dealersHand.splice(position, 1);
 	var extractedCard = splitArray.shift();
-	console.log("dealer's hand", this.dealersHand.length, "flipped cards", this.flippedCards.length);
+	//console.log("dealer's hand", this.dealersHand.length, "flipped cards", this.flippedCards.length);
 	// add extractedCard to flippedCards
-	if (this.dealersHand.length > 0) {
+	if (this.dealersHand.length) {
 		this.flippedCards.push(extractedCard);
 		console.log("hint:", extractedCard.rank.toLowerCase(), "of", extractedCard.suite.toLowerCase());
 	} else {
@@ -166,6 +166,38 @@ utils.getRadioVal = function(form, name){
     }
     return val; // return value of checked radio or undefined if none checked
 };
+
+utils.convertTemplate = function(templateString, values){
+
+	// use regex to target double curly parentheses + key-value pairs from data.myDetails object
+	var regexMatch = /\{\{([a-zA-Z]*)\}\}/g; // g at end means global - it will not stop after the first instance
+
+	// new array containing strings that match regex expression
+	var matches = templateString.match(regexMatch);
+
+	// iterate over array using for loop
+	for (var i = 0; i < matches.length; i++) {
+
+		var key = matches[i];
+		key = key.replace(/{{/g, '').replace(/}}/g, '');
+
+		// assign value to variable
+		var correspondingValue = values[key];
+
+		// replace key with value
+		templateString = templateString.replace(matches[i], correspondingValue);
+	}
+
+	// jquery write to DOM
+	//$("body").append(templateString);
+};
+
+
+var cardTemplate = document.getElementById("card-template").innerHTML;
+//console.log(cardTemplate);
+utils.convertTemplate(cardTemplate, gameData.cards);
+
+
 
 /*
  * playground

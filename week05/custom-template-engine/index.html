@@ -11,13 +11,22 @@
 	<script type="text/javascript" src="scripts/data.js"></script>
 	<!-- browser will ignore attribute type anything other than "text/javascript" -->
 	<!-- use ID to target element in DOM -->
-	<script type="text/template" id="my-custom-template">
+	<script type="text/template" id="template-details">
 		<h1>
 			{{firstName}} {{lastName}}
 		</h1>
 		<p>
 			Date of birth: {{birthDate}}
 		</p>
+	</script>
+	<script type="text/template" id="template-jobs">
+		<h2>Jobs</h2>
+		<ul>
+			<li>{{companyName}}</li>
+			<li>{{startDate}}</li>
+			<li>{{endDate}}</li>
+			<li>{{jobTitle}}</li>
+		</ul>
 	</script>
 </head>
 <body>

@@ -5,6 +5,15 @@
 	<meta charset="utf-8" />
 	<link href="styles/style.css" rel="stylesheet" />
 
+	<script type="text/template" id="card-template">
+		<h1>
+			{{rank}} of {{suite}}
+		</h1>
+		<p>
+			{{symbol}}
+		</p>
+	</script>
+
 </head>
 <body>
 
@@ -35,6 +44,8 @@
 				<label for="spades" class="card">&spades;</label>
 
 				<p>Choose a card</p>
+
+				<div id="template"></div>
 
 				<!-- <input type="text" name="foo" id="foo" /> -->
 
@@ -290,6 +301,9 @@
 
 	<script type="text/javascript" src="scripts/data.js"></script>
 	<script type="text/javascript" src="scripts/app.js"></script>
+	<!-- <script type="text/javascript" src="scripts/parsetemplate.js"></script> -->
+	<script type="text/javascript" src="scripts/xtpl.js"></script>
+
 
 </body>
 </html>
