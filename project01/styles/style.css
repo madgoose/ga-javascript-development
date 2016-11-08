@@ -67,6 +67,8 @@ label {
 	border-radius: .5rem;
 	border-width: 3px;
 	border-color: #333;
+	width: 3.6rem;
+	height: 5.0rem;
 }
 label.card {
 	border-color: darkgreen;

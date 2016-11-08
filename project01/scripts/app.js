@@ -46,7 +46,7 @@ Game.prototype.setRandomCard = function(){
 
 	// update UI with extractedCard
 	// updatedealerCardUI()
-	txtDealerCard.innerHTML = "<span id=\"dealer-rank\">" + this.randomCard.rank + "</span>" + " of <span id=\"dealer-suite\">" + this.randomCard.suite + "</span>";
+	txtDealerCard.innerHTML = "<span id=\"dealer-rank\">" + this.randomCard.rank + "</span>" + " <span>of</span> <span id=\"dealer-suite\">" + this.randomCard.suite + "</span>";
 };
 
 //
@@ -70,18 +70,36 @@ Game.prototype.flipCard = function(){
 };
 
 // add .flipped css to show element with css3 animation and flip dealer card over
-Game.prototype.flipCardOver = function(dealerCard){
+Game.prototype.flipCardOver = function(card){
 
-	var twoSidedCard = dealerCard.getElementsByClassName("flipcard");
+	var twoSidedCard = card.getElementsByClassName("flipcard");
 	twoSidedCard = twoSidedCard.item(0);
+
+	var elements = twoSidedCard.getElementsByTagName("span");
+
+	for (var i = elements.length - 1; i >= 0; i--) {
+
+		elements[i].classList.remove("visually-hidden");
+	}
+
 	twoSidedCard.classList.add("flipped");
 };
 
 // remove .flipped css to hide element with css3 animation and flip dealer card over
-Game.prototype.flipCardBack = function(dealerCard){
+Game.prototype.flipCardBack = function(card){
 
-	var twoSidedCard = dealerCard.getElementsByClassName("flipcard");
+	var twoSidedCard = card.getElementsByClassName("flipcard");
 	twoSidedCard = twoSidedCard.item(0);
+	//twoSidedCard.classList.add("visually-hidden");
+	//twoSidedCard.getElementsByTagName("span").add("visually-hidden");
+
+	var elements = twoSidedCard.getElementsByTagName("span");
+
+	for (var i = elements.length - 1; i >= 0; i--) {
+
+		elements[i].classList.add("visually-hidden");
+	}
+
 	twoSidedCard.classList.remove("flipped");
 };
 
@@ -96,6 +114,7 @@ Game.prototype.compareCards = function(playerGuess) {
 			// remove containing/parent li of selected radio button from DOM // TODO
 			log("you are teh winnar!!\n<-- [flip card]");
 			// wait for "Flip card" click event…
+			//utils.removeElementFromDOM();
 
 		} else { log("unlucky buster");	}
 	} else { alert("You need to choose a card"); }
@@ -103,6 +122,8 @@ Game.prototype.compareCards = function(playerGuess) {
 
 // method to completely remove li from the DOM. this is needed to remove all focus from form element, to trigger "make bet"
 Game.prototype.destroyCard = function(defunctCard) {
+	var oldChild = node.removeChild(child);
+
 };
 
 
@@ -180,9 +201,11 @@ btnMakeBet.addEventListener("click", function() {
 // "Flip card" button click event
 btnFlipCard.addEventListener("click", function() {
 
+
 	// deduct 2 credits from Player.totalCredits
 	hitorbust.setRandomCard();
 	hitorbust.flipCard();
+	hitorbust.flipCardBack(dealerCard);
 
 }, false);
 
@@ -243,11 +266,14 @@ utils.convertTemplate = function(templateString, values){
 	// write to DOM
 	var list = document.createElement("li");
 	list.innerHTML = templateString;
-	importedCards.appendChild(list);
+	return list;
+	//importedCards.appendChild(list);
 };
 
-utils.removeElementFromDOM = function() {
-
+utils.removeElementFromDOM = function(elementToRemove) {
+	log(elementToRemove);
+	importedCards.removeChild(child); //card
+	//document.getElementById("imported-cards").removeChild(child);
 };
 
 
@@ -259,14 +285,14 @@ var hitorbust = new Game(gameData.name, gameData.instructions);
 /*
  * TEMP !!
  */
-hitorbust.startGame(); // need to pass all the below as arguments setCredits etc
+hitorbust.startGame();
 hitorbust.setRandomCard(); // tee-up first card to be flipped over
 
 // iterate through card collection and apply template for each card object
 for (var i = 0; i < hitorbust.dealersHand.length; ++i) {
-
-	utils.convertTemplate(cardTemplate, hitorbust.dealersHand[i]); // 51 cards due to first flipped
-
+	var list = utils.convertTemplate(cardTemplate, hitorbust.dealersHand[i]); // 51 cards due to first flipped
+	list.id = "card" + [i];
+	importedCards.appendChild(list);
 }
 
 hitorbust.flipCard(); // move randomCard from newCards[] to flippedCards[]
