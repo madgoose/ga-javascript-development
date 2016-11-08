@@ -92,8 +92,11 @@ Game.prototype.compareCards = function(playerGuess) {
 		var guessRank = playerGuess[1];
 		var guessSuite = playerGuess[0];
 		if (guessRank === this.randomCard.rank && guessSuite === this.randomCard.suite) {
+			this.flipCardOver(dealerCard);
 			// remove containing/parent li of selected radio button from DOM // TODO
 			log("you are teh winnar!!\n<-- [flip card]");
+			// wait for "Flip card" click event…
+
 		} else { log("unlucky buster");	}
 	} else { alert("You need to choose a card"); }
 };
@@ -177,6 +180,7 @@ btnMakeBet.addEventListener("click", function() {
 // "Flip card" button click event
 btnFlipCard.addEventListener("click", function() {
 
+	// deduct 2 credits from Player.totalCredits
 	hitorbust.setRandomCard();
 	hitorbust.flipCard();
 
@@ -184,27 +188,12 @@ btnFlipCard.addEventListener("click", function() {
 
 
 // div#dealer-card click event
-dealerCard.addEventListener("click", function() {
+/*dealerCard.addEventListener("click", function() {
 	hitorbust.flipCardOver(this);
 }, false);
-// div#dealer-card click event
 dealerCard.addEventListener("mouseleave", function() {
-	/*if (this.cardFrontShowing) {
-		hitorbust.flipCardBack(this);
-	}*/
-	//console.log(this.classList);
 	hitorbust.flipCardBack(this);
-
-/*
-	if (this.classList.contains("flipped")) {
-		log("flipping heck");
-		return
-	} else {
-		log("flipping derp");
-		hitorbust.flipCardOver(this);
-	}*/
-
-}, false);
+}, false);*/
 
 
 /*

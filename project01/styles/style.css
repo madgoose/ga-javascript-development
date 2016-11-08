@@ -9,7 +9,7 @@ h1:before {
 #game-container {
 	max-width: 960px;
 	background: #fefefe;
-	border: 1px solid #020202;
+	border: 2px solid #020202;
 	margin: 1rem auto;
 	padding: 1rem;
 }
@@ -180,23 +180,10 @@ input#spades:checked ~ #suite-spades {
   z-index: 1;
     background: black;
     color: white;
-    cursor: pointer;
+
 }
 .flip .flipcard .back {
   -webkit-transform: rotatex(-180deg);
 	background: #fff;
     color: black;
-    cursor: pointer;
 }
-
-
-
-/*
-label.card - text-transform uppercase + visually hidden = A, K, Q, J
-<li id="card1">
-	<input type="radio" name="suite-rank" value="diamonds-ace" id="diamonds-ace">
-	<label class="card diamonds" for="diamonds-ace" title="ace of diamonds">a<span class="visually-hidden">ce of Diamonds</span></label>
-</li>
-*/
-
-
