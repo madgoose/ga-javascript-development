@@ -8,13 +8,13 @@ h1:before {
 #game-intro,
 #game-container {
 	max-width: 960px;
-	/* background: #fefefe; */
+	background: #fefefe;
 	border: 1px solid #020202;
 	margin: 1rem auto;
 	padding: 1rem;
 }
 #game-container {
-	/* background: darkgreen; */
+	background: darkgreen;
 }
 label {
 	cursor: pointer;
@@ -26,12 +26,11 @@ label {
 	font-size: 1.6rem;
 }
 .card {
-	/* border: 2px dotted #00f; */
-	/* background: #fefefe; */
 	border-width: 2px;
 	border-style: solid;
 	border-color: #fff;
 	display: inline-block;
+	font-size: 2rem;
 	margin-bottom: .8rem;
 }
 .card.hearts,
@@ -41,24 +40,22 @@ label {
 .card .rank,
 .card .symbol {
 	display: block;
-	font-size: 1rem;
 	float: left;
 }
 .card .rank {
+	font-size: .4em;
+	font-weight: bold;
+	letter-spacing: .1em;
 	padding: .2rem 0 0 .2rem;
 }
 .card .rank::first-letter {
 	text-transform: uppercase;
 }
 .card .symbol {
-	font-size: 3rem;
+	font-size: 1.4em;
+
 	clear: left;
 	float: right;
-}
-.cards .card {
-
-	/* font-size: 5rem;
-	-webkit-font-size:8rem; */
 }
 .cards p {
 	margin-top: 0;
@@ -66,21 +63,26 @@ label {
 	font-style: italic;
 }
 #imported-cards .card {
+	background: #fff;
 	border-radius: .5rem;
 	border-width: 3px;
 	border-color: #333;
 }
-
+label.card {
+	border-color: darkgreen;
+}
 input[type=radio] {
 	position: absolute;
 	left: -9999px;
 }
 input[type=radio]:checked + label {
 	border-color: blue;
+	outline: 2px #0f0 dotted;
 }
 #imported-cards input[type=radio]:checked + label {
 	border-style: dotted;
 	border-color: blue;
+	outline-style: solid;
 }
 
 fieldset {
@@ -146,11 +148,11 @@ input#spades:checked ~ #suite-spades {
 
 
 .flip {
-  -webkit-perspective: 800;
-   width: 400px;
-   height: 200px;
-    position: relative;
-    margin: 50px auto;
+	-webkit-perspective: 800;
+	width: 400px;
+	height: 200px;
+	position: relative;
+	margin: 0 auto;
 }
 .flip .flipcard.flipped {
   -webkit-transform: rotatex(-180deg);
@@ -181,8 +183,7 @@ input#spades:checked ~ #suite-spades {
 }
 .flip .flipcard .back {
   -webkit-transform: rotatex(-180deg);
-    background: blue;
-    background: white;
+	background: black;
     color: black;
     cursor: pointer;
 }
