@@ -180,7 +180,7 @@ utils.getRadioVal = function(form, name){
 
 utils.convertTemplate = function(templateString, values){
 
-	// use regex to target double curly parentheses + key-value pairs from data.myDetails object
+	// use regex to target double curly parentheses + key-value pairs from gameData.cards
 	var regexMatch = /\{\{([a-zA-Z]*)\}\}/g; // g at end means global - it will not stop after the first instance
 
 	// new array containing strings that match regex expression

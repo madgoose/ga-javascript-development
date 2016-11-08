@@ -11,7 +11,7 @@
 	<div id="game-intro">
 		<h1>*hit-or-bust</h1>
 		<p>Flip cards. Make paper.</p>
-		<p>Open browser console and hit button below to start a new game.</p>
+		<p>The game needs a modern-ish browser to run (Firefox/Chrome/Safari/IE9+), and will not work with JavaScript blocked. Open browser console and hit button below to start a new game. </p>
 		<button id="start-new-game">Start new game</button>
 	</div>
 
@@ -40,7 +40,18 @@
 
 				<ul id="imported-cards"></ul>
 
-				<div id="dealer-card" class="card"></div>
+				<div class="flip">
+					<div class="flipcard">
+						<div class="card face front">
+							Back of card
+						</div>
+						<div id="dealer-card" class="card face back">
+							Face of card
+						</div>
+					</div>
+				</div>
+
+
 
 				<!-- mark-up will be dynamically generated using custom template -->
 
@@ -295,7 +306,10 @@
 
 	<script type="text/x-template" id="card-template">
 		<input type="radio" name="suite-rank" value="{{suite}}-{{rank}}" id="{{suite}}-{{rank}}">
-		<label class="card {{suite}}" for="{{suite}}-{{rank}}">{{symbol}}</label>
+		<label class="card {{suite}}" for="{{suite}}-{{rank}}">
+			<span class="rank">{{rank}}</span>
+			<span class="symbol">{{symbol}}</span>
+		</label>
 	</script>
 
 	<script type="text/javascript" src="scripts/data.js"></script>

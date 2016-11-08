@@ -27,10 +27,10 @@ label {
 }
 .card {
 	/* border: 2px dotted #00f; */
-	background: #fefefe;
+	/* background: #fefefe; */
 	border-width: 2px;
 	border-style: solid;
-	border-color: white;
+	border-color: #fff;
 	display: inline-block;
 	margin-bottom: .8rem;
 }
@@ -38,15 +38,37 @@ label {
 .card.diamonds {
 	color: #f00;
 }
+.card .rank,
+.card .symbol {
+	display: block;
+	font-size: 1rem;
+	float: left;
+}
+.card .rank {
+	padding: .2rem 0 0 .2rem;
+}
+.card .rank::first-letter {
+	text-transform: uppercase;
+}
+.card .symbol {
+	font-size: 3rem;
+	clear: left;
+	float: right;
+}
 .cards .card {
-	border-style: dotted;
-	font-size: 5rem;
-	-webkit-font-size:8rem;
+
+	/* font-size: 5rem;
+	-webkit-font-size:8rem; */
 }
 .cards p {
 	margin-top: 0;
 	font-size: smaller;
 	font-style: italic;
+}
+#imported-cards .card {
+	border-radius: .5rem;
+	border-width: 3px;
+	border-color: #333;
 }
 
 input[type=radio] {
@@ -56,25 +78,31 @@ input[type=radio] {
 input[type=radio]:checked + label {
 	border-color: blue;
 }
+#imported-cards input[type=radio]:checked + label {
+	border-style: dotted;
+	border-color: blue;
+}
 
 fieldset {
 	border: 0;
 	margin: 0;
 	padding: 0;
 }
+#imported-cards,
 fieldset ul {
 	margin: 0;
 	padding: 0;
 	text-align: center;
-}
+}/*
 #guess-card .choose-suite {
 	float: left;
 	margin-right: 2rem;
-}
+} */
 #guess-card li {
 	list-style-type: none;
 	display: inline-block;
 	text-align: center;
+	margin: 0 .3rem;
 }
 
 /* show/hide containers for each card suite
@@ -115,6 +143,52 @@ input#spades:checked ~ #suite-spades {
 
 
 
+
+
+.flip {
+  -webkit-perspective: 800;
+   width: 400px;
+   height: 200px;
+    position: relative;
+    margin: 50px auto;
+}
+.flip .flipcard.flipped {
+  -webkit-transform: rotatex(-180deg);
+}
+.flip .flipcard {
+  width: 100%;
+  height: 100%;
+  -webkit-transform-style: preserve-3d;
+  -webkit-transition: 0.5s;
+}
+.flip .flipcard .face {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  -webkit-backface-visibility: hidden ;
+  z-index: 2;
+    font-family: Georgia;
+    font-size: 3em;
+    text-align: center;
+    line-height: 200px;
+}
+.flip .flipcard .front {
+  position: absolute;
+  z-index: 1;
+    background: black;
+    color: white;
+    cursor: pointer;
+}
+.flip .flipcard .back {
+  -webkit-transform: rotatex(-180deg);
+    background: blue;
+    background: white;
+    color: black;
+    cursor: pointer;
+}
+
+
+
 /*
 label.card - text-transform uppercase + visually hidden = A, K, Q, J
 <li id="card1">
@@ -122,3 +196,5 @@ label.card - text-transform uppercase + visually hidden = A, K, Q, J
 	<label class="card diamonds" for="diamonds-ace" title="ace of diamonds">a<span class="visually-hidden">ce of Diamonds</span></label>
 </li>
 */
+
+

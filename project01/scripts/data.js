@@ -4,6 +4,8 @@ gameData.name = "*hit or bust";
 
 gameData.instructions = "Win money by guessing which card the computer will deal next.\nBe a hero. Live the dream.";
 
+gameData.rules = "The odds are aligned with the number of remaining cards. Skipping a card costs 2 credits.";
+
 gameData.startingCredit = 50;
 
 gameData.cards = [
