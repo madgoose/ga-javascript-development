@@ -1,4 +1,6 @@
 "use strict";
+var log = console.log;
+
 /*
  * Game class
  */
@@ -16,7 +18,7 @@ Game.prototype.startGame = function() {
 	gameContainer.className = "";
 	this.player1 = new Player("Bob", 100); // abstract later to something like this.setNewPlayer();
 	// display game name and instructions
-	console.log("Welcome to " + gameData.name + "!\n" + gameData.instructions + "\n");
+	log("Welcome to " + gameData.name + "!\n" + gameData.instructions + "\n" + gameData.easterEgg);
 	this.setNewCards(gameData.cards);
 };
 
@@ -26,6 +28,7 @@ Game.prototype.setNewCards = function(newCards) {
 	// initialise/reset card arrays
 	this.dealersHand = [];
 	this.flippedCards = [];
+	this.cardFrontShowing = false;
 	// sublime text 3 syntax helper, revised for loop // http://stackoverflow.com/questions/17484227/javascript-improved-native-for-loop
 	// iterate over cards collection from external JSON data.js
 	for (var i = newCards.length - 1; i >= 0; i--) {
@@ -43,13 +46,13 @@ Game.prototype.setRandomCard = function(){
 
 	// update UI with extractedCard
 	// updatedealerCardUI()
-	dealerCard.innerHTML = "<span id=\"dealer-rank\">" + this.randomCard.rank + "</span>" + " of <span id=\"dealer-suite\">" + this.randomCard.suite + "</span>";
+	txtDealerCard.innerHTML = "<span id=\"dealer-rank\">" + this.randomCard.rank + "</span>" + " of <span id=\"dealer-suite\">" + this.randomCard.suite + "</span>";
 };
 
 //
 Game.prototype.flipCard = function(){
 	//  randomCard is the card the player is trying to guess, not presented on interface at this point but available in memory
-	//console.log("dealer's hand", this.dealersHand.length, "flipped cards", this.flippedCards.length);
+	//log("dealer's hand", this.dealersHand.length, "flipped cards", this.flippedCards.length);
 
 	// extract randomCard from dealersHand
 	var position = this.dealersHand.indexOf(this.randomCard);
@@ -59,11 +62,27 @@ Game.prototype.flipCard = function(){
 	// add extractedCard to flippedCards
 	if (this.dealersHand.length) {
 		this.flippedCards.push(extractedCard);
-		console.log("flipped card hint:", extractedCard.rank, "of", extractedCard.suite);
-		console.log("dealer's hand", this.dealersHand.length, "flipped cards", this.flippedCards.length);
+		log("flipped card hint:", extractedCard.rank, "of", extractedCard.suite);
+		log("dealer's hand", this.dealersHand.length, "flipped cards", this.flippedCards.length);
 	} else {
-		console.log("no more cards left to flip!");
+		log("no more cards left to flip!");
 	};
+};
+
+// add .flipped css to show element with css3 animation and flip dealer card over
+Game.prototype.flipCardOver = function(dealerCard){
+
+	var twoSidedCard = dealerCard.getElementsByClassName("flipcard");
+	twoSidedCard = twoSidedCard.item(0);
+	twoSidedCard.classList.add("flipped");
+};
+
+// remove .flipped css to hide element with css3 animation and flip dealer card over
+Game.prototype.flipCardBack = function(dealerCard){
+
+	var twoSidedCard = dealerCard.getElementsByClassName("flipcard");
+	twoSidedCard = twoSidedCard.item(0);
+	twoSidedCard.classList.remove("flipped");
 };
 
 //
@@ -74,10 +93,15 @@ Game.prototype.compareCards = function(playerGuess) {
 		var guessSuite = playerGuess[0];
 		if (guessRank === this.randomCard.rank && guessSuite === this.randomCard.suite) {
 			// remove containing/parent li of selected radio button from DOM // TODO
-			console.log("you are teh winnar!!\n<-- flip card");
-		} else { console.log("unlucky buster");	}
+			log("you are teh winnar!!\n<-- [flip card]");
+		} else { log("unlucky buster");	}
 	} else { alert("You need to choose a card"); }
 };
+
+// method to completely remove li from the DOM. this is needed to remove all focus from form element, to trigger "make bet"
+Game.prototype.destroyCard = function(defunctCard) {
+};
+
 
 /*
  * Card class
@@ -89,6 +113,7 @@ var Card = function(rank, suite, symbol){
 	this.suite = suite;
 	this.symbol = symbol;
 };
+
 
 /*
  * Player class
@@ -120,20 +145,21 @@ var gameContainer = document.getElementById("game-container"),
 	btnMakeBet = document.getElementById("make-bet"),
 	btnFlipCard = document.getElementById("flip-card"),
 	btnStartNewGame = document.getElementById("start-new-game"),
-	inputGuessSuite = document.getElementById("guess-suite"),
-	inputGuessRank = document.getElementById("guess-rank"),
+	/*inputRadioGuessSuite = document.getElementById("guess-suite"),
+	inputRadioGuessRank = document.getElementById("guess-rank"),*/
 	inputGuessCard = document.getElementById("guess-card"),
-	textPlayerGuess = document.getElementById("playerGuess"),
+	/*inputStrPlayerGuess = document.getElementById("playerGuess"),*/
 	importedCards = document.getElementById("imported-cards"),
 	cardTemplate = document.getElementById("card-template").innerHTML,
-	dealerCard = document.getElementById("dealer-card");
+	dealerCard = document.getElementById("dealer-card"),
+	txtDealerCard = document.getElementById("text-dealer-card");
 
 /*
  * event handlers
  */
 
-// "Start new game" button clicked
-btnStartNewGame.addEventListener('click', function() {
+// "Start new game" button click event
+btnStartNewGame.addEventListener("click", function() {
 
 	hitorbust.startGame(); // need to pass all the below as arguments setCredits etc
 	hitorbust.setRandomCard(); // tee-up first card to be flipped over
@@ -141,20 +167,45 @@ btnStartNewGame.addEventListener('click', function() {
 
 }, false);
 
-// "Make bet" button clicked
-btnMakeBet.addEventListener('click', function() {
+// "Make bet" button click event
+btnMakeBet.addEventListener("click", function() {
 
 	hitorbust.player1.makeBet();
 
 }, false);
 
-// "Flip card" button clicked
-btnFlipCard.addEventListener('click', function() {
+// "Flip card" button click event
+btnFlipCard.addEventListener("click", function() {
 
 	hitorbust.setRandomCard();
 	hitorbust.flipCard();
 
 }, false);
+
+
+// div#dealer-card click event
+dealerCard.addEventListener("click", function() {
+	hitorbust.flipCardOver(this);
+}, false);
+// div#dealer-card click event
+dealerCard.addEventListener("mouseleave", function() {
+	/*if (this.cardFrontShowing) {
+		hitorbust.flipCardBack(this);
+	}*/
+	//console.log(this.classList);
+	hitorbust.flipCardBack(this);
+
+/*
+	if (this.classList.contains("flipped")) {
+		log("flipping heck");
+		return
+	} else {
+		log("flipping derp");
+		hitorbust.flipCardOver(this);
+	}*/
+
+}, false);
+
 
 /*
  * Utilities

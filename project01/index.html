@@ -19,11 +19,13 @@
 
 		<form id="guess-card">
 			<div>
-				<p class="choose-suite visually-hidden">Choose a suite</p>
 				<!-- whilst i've enjoyed the challenge of using :checked radio buttons to show/hide content,
 					 for next major iteration the suite selector will only be for smaller screens.
 					 desktop will show full deck of cards
 				-->
+				<!--
+				<p class="choose-suite visually-hidden">Choose a suite</p>
+
 				<input type="radio" name="suite" id="diamonds" class="suits" value="diamonds" checked="checked">
 				<label for="diamonds" class="card diamonds">&diams;</label>
 
@@ -35,17 +37,17 @@
 
 				<input type="radio" name="suite" id="spades" value="spades">
 				<label for="spades" class="card">&spades;</label>
-
+ -->
 				<p class="visually-hidden">Choose a card</p>
 
 				<ul id="imported-cards"></ul>
 
-				<div class="flip">
+				<div id="dealer-card" class="flip">
 					<div class="flipcard">
 						<div class="card face front">
 							Back of card
 						</div>
-						<div id="dealer-card" class="card face back">
+						<div id="text-dealer-card" class="card face back">
 							Face of card
 						</div>
 					</div>
