@@ -1,11 +1,20 @@
+body {}
+h1 {
+	margin: 0;
+}
 h1:before {
 	content: "🃏 ";
 }
+#game-intro,
 #game-container {
 	max-width: 960px;
+	/* background: #fefefe; */
 	border: 1px solid #020202;
-	margin: 1rem 0;
+	margin: 1rem auto;
 	padding: 1rem;
+}
+#game-container {
+	/* background: darkgreen; */
 }
 label {
 	cursor: pointer;
@@ -18,6 +27,7 @@ label {
 }
 .card {
 	/* border: 2px dotted #00f; */
+	background: #fefefe;
 	border-width: 2px;
 	border-style: solid;
 	border-color: white;
@@ -105,3 +115,10 @@ input#spades:checked ~ #suite-spades {
 
 
 
+/*
+label.card - text-transform uppercase + visually hidden = A, K, Q, J
+<li id="card1">
+	<input type="radio" name="suite-rank" value="diamonds-ace" id="diamonds-ace">
+	<label class="card diamonds" for="diamonds-ace" title="ace of diamonds">a<span class="visually-hidden">ce of Diamonds</span></label>
+</li>
+*/

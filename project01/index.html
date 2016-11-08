@@ -7,16 +7,18 @@
 </head>
 <body>
 
-	<h1>*hit-or-bust</h1>
+	<div id="game-intro">
+		<h1>*hit-or-bust</h1>
+		<p>Flip cards. Make paper.</p>
+		<p>Open browser console and hit button below to start a new game.</p>
+		<button id="start-new-game">Start new game</button>
+	</div>
 
-	<p>Flip cards. Make paper.</p>
-	<p>Open browser console and hit button below to start a new game.</p>
-	<button id="start-new-game">Start new game</button>
 	<div id="game-container" class="hidden">
 
-		<form id="guess-card"><!-- change to guess-card once radio inputs foreach value=rank-suite -->
+		<form id="guess-card">
 			<div>
-				<p class="choose-suite">Choose a suite</p>
+				<p class="choose-suite visually-hidden">Choose a suite</p>
 				<!-- whilst i've enjoyed the challenge of using :checked radio buttons to show/hide content,
 					 for next major iteration the suite selector will only be for smaller screens.
 					 desktop will show full deck of cards
@@ -33,13 +35,15 @@
 				<input type="radio" name="suite" id="spades" value="spades">
 				<label for="spades" class="card">&spades;</label>
 
-				<p>Choose a card</p>
+				<p class="visually-hidden">Choose a card</p>
 
 				<ul id="imported-cards"></ul>
 
-				<!-- <input type="text" name="foo" id="foo" /> -->
+				<div id="dealer-card" class="card"></div>
 
 				<!-- mark-up will be dynamically generated using custom template -->
+
+				<!--
 
 				<fieldset id="suite-diamonds" class="cards">
 					<p class="visually-hidden">Diamonds</p>
@@ -272,14 +276,13 @@
 						</li>
 					</ul>
 				</fieldset>
+				-->
 
 				<!-- /template -->
 
 			</div>
 
 		</form>
-
-		<p>Your guess: <span id="player-guess"></span></p>
 
 		<div>
 			<button id="make-bet">Make bet</button>

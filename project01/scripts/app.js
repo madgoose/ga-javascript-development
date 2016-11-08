@@ -1,3 +1,4 @@
+"use strict";
 /*
  * Game class
  */
@@ -39,16 +40,22 @@ Game.prototype.setNewCards = function(newCards) {
 Game.prototype.setRandomCard = function(){
 	var random = Math.floor((Math.random() * this.dealersHand.length));
 	this.randomCard = this.dealersHand[random];
+
+	// update UI with extractedCard
+	// updatedealerCardUI()
+	dealerCard.innerHTML = "<span id=\"dealer-rank\">" + this.randomCard.rank + "</span>" + " of <span id=\"dealer-suite\">" + this.randomCard.suite + "</span>";
 };
 
 //
 Game.prototype.flipCard = function(){
 	//  randomCard is the card the player is trying to guess, not presented on interface at this point but available in memory
 	//console.log("dealer's hand", this.dealersHand.length, "flipped cards", this.flippedCards.length);
+
 	// extract randomCard from dealersHand
 	var position = this.dealersHand.indexOf(this.randomCard);
 	var splitArray = this.dealersHand.splice(position, 1);
 	var extractedCard = splitArray.shift();
+
 	// add extractedCard to flippedCards
 	if (this.dealersHand.length) {
 		this.flippedCards.push(extractedCard);
@@ -66,6 +73,7 @@ Game.prototype.compareCards = function(playerGuess) {
 		var guessRank = playerGuess[1];
 		var guessSuite = playerGuess[0];
 		if (guessRank === this.randomCard.rank && guessSuite === this.randomCard.suite) {
+			// remove containing/parent li of selected radio button from DOM // TODO
 			console.log("you are teh winnar!!\n<-- flip card");
 		} else { console.log("unlucky buster");	}
 	} else { alert("You need to choose a card"); }
@@ -117,7 +125,8 @@ var gameContainer = document.getElementById("game-container"),
 	inputGuessCard = document.getElementById("guess-card"),
 	textPlayerGuess = document.getElementById("playerGuess"),
 	importedCards = document.getElementById("imported-cards"),
-	cardTemplate = document.getElementById("card-template").innerHTML;
+	cardTemplate = document.getElementById("card-template").innerHTML,
+	dealerCard = document.getElementById("dealer-card");
 
 /*
  * event handlers
@@ -192,110 +201,14 @@ utils.convertTemplate = function(templateString, values){
 	}
 
 	// write to DOM
-	// importedCards.appendChild(templateString);
-
 	var list = document.createElement("li");
 	list.innerHTML = templateString;
 	importedCards.appendChild(list);
 };
 
-/*
- * playground
- */
-
-// http://stackoverflow.com/questions/16483560/how-to-implement-dom-data-binding-in-javascript
-// http://jsfiddle.net/SJYWY/5/
-function Template(template) {
-    // Look for identifiers in the template
-    var regularExpression = /{{{(\w+)}}}/g;
-
-    // Split on the identifiers. The ID will be retained because of the capture group
-    var parts = template.split(regularExpression);
-
-    // Here our template object will hold the MyCtor objects
-    this.bindings = {};
-
-    // Grab the identifiers from the parts (they're at odd indices)
-    for (var i = 0; i < parts.length; i++) {
-        if (i % 2 === 1) { // its an identifier
-            var id = parts[i];
-            // Make a temporary object holding the IDs until we make the elements.
-            this.bindings[id] = {id: id, target:id + "__target__"};
-
-            // Replace the ID with a span used to target the updates
-            parts[i] = "<span id='" + id + "__target__'></span>";
-        }
-    }
-//debugger
-    // Render the HTML with the new spans
-    document.getElementById("guess-card").innerHTML = parts.join("");
-
-    // Replace the temporary objects that held the IDs with MyCtor objects that coordinate the updates.
-    for (var b in this.bindings) {
-        this.bindings[b] = new MyCtor(this.bindings[b].id,
-                                      this.bindings[b].target);
-    }
-}
-// Provide an interface to make changes by ID
-Template.prototype.change = function(prop, value) {
-    this.bindings[prop].change(value);
-};
-// And to retrieve the value by ID
-Template.prototype.getValue = function(prop) {
-    return this.bindings[prop].data;
-};
-
-// This holds the data, the input, and the target Element.
-// A "change" handler is added to the input.
-var MyCtor = function(input, target){
-
-	this.data = "";
-    this.target = document.getElementById(target);
-    this.input = document.getElementById(input);
-
-    this.input.addEventListener("change", this, false);
+utils.removeElementFromDOM = function() {
 
 };
-
-
-// Implement the EventListener interface
-MyCtor.prototype.handleEvent = function (event) {
-    switch (event.type) {
-        case "change":
-            this.change(this.input.value);
-    }
-};
-// Coordinate changes to both elements and the data
-MyCtor.prototype.change = function (value) {
-    this.data = value;
-    this.input.value = value;
-    this.target.textContent = value;
-};
-
-// Make a template
-var template = "<pre>The value is: {{{myvalue}}}</pre>" +
-    "<br>Enter a new value <input id='myvalue'>";
-
-// Parse it
-//var obj = new Template(template);
-
-// Apply a change
-//obj.change("myvalue", "foo");
-
-// Apply changes every 10s to simulate JavaScript interaction.
-/*setInterval(function() {
-    var val = obj.getValue("myvalue");
-    if (val.length < 50)
-        obj.change("myvalue", val + val);
-}, 10000);*/
-
-
-
-
-
-
-
-
 
 
 //
@@ -308,23 +221,15 @@ var hitorbust = new Game(gameData.name, gameData.instructions);
  */
 hitorbust.startGame(); // need to pass all the below as arguments setCredits etc
 hitorbust.setRandomCard(); // tee-up first card to be flipped over
-hitorbust.flipCard(); // move randomCard from newCards[] to flippedCards[]
 
 // iterate through card collection and apply template for each card object
-// probably need to move this somewhwere else
-/*
-for (var i = 0; i < gameData.cards.length; i++) {
-
-	utils.convertTemplate(cardTemplate, gameData.cards[i]);
-
-}*/
-
-
-for (var i = 0; i < hitorbust.dealersHand.length; i++) {
+for (var i = 0; i < hitorbust.dealersHand.length; ++i) {
 
 	utils.convertTemplate(cardTemplate, hitorbust.dealersHand[i]); // 51 cards due to first flipped
 
 }
+
+hitorbust.flipCard(); // move randomCard from newCards[] to flippedCards[]
 
 /*
  *

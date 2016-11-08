@@ -10,262 +10,262 @@ gameData.cards = [
 	{
 		rank: "2",
 		suite: "diamonds",
-		symbol: "🃂"
+		symbol: "&diams;"
 	},
 	{
 		rank: "3",
 		suite: "diamonds",
-		symbol: "🃃"
+		symbol: "&diams;"
 	},
 	{
 		rank: "4",
 		suite: "diamonds",
-		symbol: "🃄"
+		symbol: "&diams;"
 	},
 	{
 		rank: "5",
 		suite: "diamonds",
-		symbol: "🃅"
+		symbol: "&diams;"
 	},
 	{
 		rank: "6",
 		suite: "diamonds",
-		symbol: "🃆"
+		symbol: "&diams;"
 	},
 	{
 		rank: "7",
 		suite: "diamonds",
-		symbol: "🃇"
+		symbol: "&diams;"
 	},
 	{
 		rank: "8",
 		suite: "diamonds",
-		symbol: "🃈"
+		symbol: "&diams;"
 	},
 	{
 		rank: "9",
 		suite: "diamonds",
-		symbol: "🃉"
+		symbol: "&diams;"
 	},
 	{
 		rank: "10",
 		suite: "diamonds",
-		symbol: "🃊"
+		symbol: "&diams;"
 	},
 	{
-		rank: "Jack",
+		rank: "jack",
 		suite: "diamonds",
-		symbol: "🃋"
+		symbol: "&diams;"
 	},
 	{
-		rank: "Queen",
+		rank: "queen",
 		suite: "diamonds",
-		symbol: "🃍"
+		symbol: "&diams;"
 	},
 	{
-		rank: "King",
+		rank: "king",
 		suite: "diamonds",
-		symbol: "🃎"
+		symbol: "&diams;"
 	},
 	{
-		rank: "Ace",
+		rank: "ace",
 		suite: "diamonds",
-		symbol: "🃁"
+		symbol: "&diams;"
 	},
 	{
 		rank: "2",
 		suite: "clubs",
-		symbol: "🃒"
+		symbol: "&clubs;"
 	},
 	{
 		rank: "3",
 		suite: "clubs",
-		symbol: "🃓"
+		symbol: "&clubs;"
 	},
 	{
 		rank: "4",
 		suite: "clubs",
-		symbol: "🃔"
+		symbol: "&clubs;"
 	},
 	{
 		rank: "5",
 		suite: "clubs",
-		symbol: "🃕"
+		symbol: "&clubs;"
 	},
 	{
 		rank: "6",
 		suite: "clubs",
-		symbol: "🃖"
+		symbol: "&clubs;"
 	},
 	{
 		rank: "7",
 		suite: "clubs",
-		symbol: "🃗"
+		symbol: "&clubs;"
 	},
 	{
 		rank: "8",
 		suite: "clubs",
-		symbol: "🃘"
+		symbol: "&clubs;"
 	},
 	{
 		rank: "9",
 		suite: "clubs",
-		symbol: "🃙"
+		symbol: "&clubs;"
 	},
 	{
 		rank: "10",
 		suite: "clubs",
-		symbol: "🃚"
+		symbol: "&clubs;"
 	},
 	{
-		rank: "Jack",
+		rank: "jack",
 		suite: "clubs",
-		symbol: "🃛"
+		symbol: "&clubs;"
 	},
 	{
-		rank: "Queen",
+		rank: "queen",
 		suite: "clubs",
-		symbol: "🃝"
+		symbol: "&clubs;"
 	},
 	{
-		rank: "King",
+		rank: "king",
 		suite: "clubs",
-		symbol: "🃞"
+		symbol: "&clubs;"
 	},
 	{
-		rank: "Ace",
+		rank: "ace",
 		suite: "clubs",
-		symbol: "🃑"
+		symbol: "&clubs;"
 	},
 	{
 		rank: "2",
 		suite: "hearts",
-		symbol: "🂲"
+		symbol: "&hearts;"
 	},
 	{
 		rank: "3",
 		suite: "hearts",
-		symbol: "🂳"
+		symbol: "&hearts;"
 	},
 	{
 		rank: "4",
 		suite: "hearts",
-		symbol: "🂴"
+		symbol: "&hearts;"
 	},
 	{
 		rank: "5",
 		suite: "hearts",
-		symbol: "🂵"
+		symbol: "&hearts;"
 	},
 	{
 		rank: "6",
 		suite: "hearts",
-		symbol: "🂶"
+		symbol: "&hearts;"
 	},
 	{
 		rank: "7",
 		suite: "hearts",
-		symbol: "🂷"
+		symbol: "&hearts;"
 	},
 	{
 		rank: "8",
 		suite: "hearts",
-		symbol: "🂸"
+		symbol: "&hearts;"
 	},
 	{
 		rank: "9",
 		suite: "hearts",
-		symbol: "🂹"
+		symbol: "&hearts;"
 	},
 	{
 		rank: "10",
 		suite: "hearts",
-		symbol: "🂺"
+		symbol: "&hearts;"
 	},
 	{
-		rank: "Jack",
+		rank: "jack",
 		suite: "hearts",
-		symbol: "🂻"
+		symbol: "&hearts;"
 	},
 	{
-		rank: "Queen",
+		rank: "queen",
 		suite: "hearts",
-		symbol: "🂽"
+		symbol: "&hearts;"
 	},
 	{
-		rank: "King",
+		rank: "king",
 		suite: "hearts",
-		symbol: "🂾"
+		symbol: "&hearts;"
 	},
 	{
-		rank: "Ace",
+		rank: "ace",
 		suite: "hearts",
-		symbol: "🂱"
+		symbol: "&hearts;"
 	},
 	{
 		rank: "2",
 		suite: "spades",
-		symbol: "🂢"
+		symbol: "&spades;"
 	},
 	{
 		rank: "3",
 		suite: "spades",
-		symbol: "🂣"
+		symbol: "&spades;"
 	},
 	{
 		rank: "4",
 		suite: "spades",
-		symbol: "🂤"
+		symbol: "&spades;"
 	},
 	{
 		rank: "5",
 		suite: "spades",
-		symbol: "🂥"
+		symbol: "&spades;"
 	},
 	{
 		rank: "6",
 		suite: "spades",
-		symbol: "🂦"
+		symbol: "&spades;"
 	},
 	{
 		rank: "7",
 		suite: "spades",
-		symbol: "🂧"
+		symbol: "&spades;"
 	},
 	{
 		rank: "8",
 		suite: "spades",
-		symbol: "🂨"
+		symbol: "&spades;"
 	},
 	{
 		rank: "9",
 		suite: "spades",
-		symbol: "🂩"
+		symbol: "&spades;"
 	},
 	{
 		rank: "10",
 		suite: "spades",
-		symbol: "🂪"
+		symbol: "&spades;"
 	},
 	{
-		rank: "Jack",
+		rank: "jack",
 		suite: "spades",
-		symbol: "🂫"
+		symbol: "&spades;"
 	},
 	{
-		rank: "Queen",
+		rank: "queen",
 		suite: "spades",
-		symbol: "🂭"
+		symbol: "&spades;"
 	},
 	{
-		rank: "King",
+		rank: "king",
 		suite: "spades",
-		symbol: "🂮"
+		symbol: "&spades;"
 	},
 	{
-		rank: "Ace",
+		rank: "ace",
 		suite: "spades",
-		symbol: "🂡"
+		symbol: "&spades;"
 	}
 ];
 
