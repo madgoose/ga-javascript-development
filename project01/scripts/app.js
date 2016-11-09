@@ -69,38 +69,31 @@ Game.prototype.flipCard = function(){
 	};
 };
 
-// add .flipped css to show element with css3 animation and flip dealer card over
-Game.prototype.flipCardOver = function(card){
+// toggle .flipped css to show/hide element with css3 animation and flip dealer-card over
+Game.prototype.flipCardUI = function(card){
 
 	var twoSidedCard = card.getElementsByClassName("flipcard");
 	twoSidedCard = twoSidedCard.item(0);
 
-	var elements = twoSidedCard.getElementsByTagName("span");
+	var innerSpans = twoSidedCard.getElementsByTagName("span");
 
-	for (var i = elements.length - 1; i >= 0; i--) {
+	// visually hide spans due to flash-of-content from text update
+	if (!(twoSidedCard.classList.contains("flipped"))) {
 
-		elements[i].classList.remove("visually-hidden");
+		for (var i = innerSpans.length - 1; i >= 0; i--) {
+
+			innerSpans[i].classList.remove("visually-hidden");
+		}
+		twoSidedCard.classList.add("flipped");
+
+	} else {
+
+		for (var i = innerSpans.length - 1; i >= 0; i--) {
+
+			innerSpans[i].classList.add("visually-hidden");
+		}
+		twoSidedCard.classList.remove("flipped");
 	}
-
-	twoSidedCard.classList.add("flipped");
-};
-
-// remove .flipped css to hide element with css3 animation and flip dealer card over
-Game.prototype.flipCardBack = function(card){
-
-	var twoSidedCard = card.getElementsByClassName("flipcard");
-	twoSidedCard = twoSidedCard.item(0);
-	//twoSidedCard.classList.add("visually-hidden");
-	//twoSidedCard.getElementsByTagName("span").add("visually-hidden");
-
-	var elements = twoSidedCard.getElementsByTagName("span");
-
-	for (var i = elements.length - 1; i >= 0; i--) {
-
-		elements[i].classList.add("visually-hidden");
-	}
-
-	twoSidedCard.classList.remove("flipped");
 };
 
 //
@@ -110,7 +103,7 @@ Game.prototype.compareCards = function(playerGuess) {
 		var guessRank = playerGuess[1];
 		var guessSuite = playerGuess[0];
 		if (guessRank === this.randomCard.rank && guessSuite === this.randomCard.suite) {
-			this.flipCardOver(dealerCard);
+			this.flipCardUI(dealerCard);
 			// remove containing/parent li of selected radio button from DOM // TODO
 			log("you are teh winnar!!\n<-- [flip card]");
 			// wait for "Flip card" click event…
@@ -205,7 +198,7 @@ btnFlipCard.addEventListener("click", function() {
 	// deduct 2 credits from Player.totalCredits
 	hitorbust.setRandomCard();
 	hitorbust.flipCard();
-	hitorbust.flipCardBack(dealerCard);
+	hitorbust.flipCardUI(dealerCard);
 
 }, false);
 
