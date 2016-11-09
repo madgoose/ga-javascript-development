@@ -28,7 +28,8 @@ Game.prototype.setNewCards = function(newCards) {
 	// initialise/reset card arrays
 	this.dealersHand = [];
 	this.flippedCards = [];
-	this.cardFrontShowing = false;
+	// clear any existing cards from UI
+	importedCards.innerHTML = "";
 	// sublime text 3 syntax helper, revised for loop // http://stackoverflow.com/questions/17484227/javascript-improved-native-for-loop
 	// iterate over cards collection from external JSON data.js
 	for (var i = newCards.length - 1; i >= 0; i--) {
@@ -36,6 +37,12 @@ Game.prototype.setNewCards = function(newCards) {
 		var card = new Card(newCards[i].rank, newCards[i].suite, newCards[i].symbol);
 		// push new Card instance to dealersHand array
 		this.dealersHand.push(card);
+	}
+	// iterate through card collection and apply template for each card object
+	for (var i = 0; i < hitorbust.dealersHand.length; ++i) {
+		var list = utils.convertTemplate(cardTemplate, hitorbust.dealersHand[i]); // 51 cards due to first flipped
+		list.id = "card" + [i];
+		importedCards.appendChild(list);
 	}
 };
 
@@ -131,7 +138,6 @@ var Card = function(rank, suite, symbol){
 	this.symbol = symbol;
 };
 
-
 /*
  * Player class
  */
@@ -162,12 +168,9 @@ var gameContainer = document.getElementById("game-container"),
 	btnMakeBet = document.getElementById("make-bet"),
 	btnFlipCard = document.getElementById("flip-card"),
 	btnStartNewGame = document.getElementById("start-new-game"),
-	/*inputRadioGuessSuite = document.getElementById("guess-suite"),
-	inputRadioGuessRank = document.getElementById("guess-rank"),*/
 	inputGuessCard = document.getElementById("guess-card"),
-	/*inputStrPlayerGuess = document.getElementById("playerGuess"),*/
 	importedCards = document.getElementById("imported-cards"),
-	cardTemplate = document.getElementById("card-template").innerHTML,
+	cardTemplate = document.getElementById("card-template").innerHTML, // html mark-up plus delimited placeholder text
 	dealerCard = document.getElementById("dealer-card"),
 	txtDealerCard = document.getElementById("text-dealer-card");
 
@@ -201,16 +204,6 @@ btnFlipCard.addEventListener("click", function() {
 	hitorbust.flipCardUI(dealerCard);
 
 }, false);
-
-
-// div#dealer-card click event
-/*dealerCard.addEventListener("click", function() {
-	hitorbust.flipCardOver(this);
-}, false);
-dealerCard.addEventListener("mouseleave", function() {
-	hitorbust.flipCardBack(this);
-}, false);*/
-
 
 /*
  * Utilities
@@ -270,21 +263,3 @@ utils.convertTemplate = function(templateString, values){
 // construct new Game instance, assign to local variable hitorbust
 //
 var hitorbust = new Game(gameData.name, gameData.instructions);
-/*
- * TEMP !!
- */
-hitorbust.startGame();
-hitorbust.setRandomCard(); // tee-up first card to be flipped over
-
-// iterate through card collection and apply template for each card object
-for (var i = 0; i < hitorbust.dealersHand.length; ++i) {
-	var list = utils.convertTemplate(cardTemplate, hitorbust.dealersHand[i]); // 51 cards due to first flipped
-	list.id = "card" + [i];
-	importedCards.appendChild(list);
-}
-
-hitorbust.flipCard(); // move randomCard from newCards[] to flippedCards[]
-
-/*
- *
- */

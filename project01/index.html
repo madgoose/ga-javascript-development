@@ -17,43 +17,31 @@
 
 	<div id="game-container" class="hidden">
 
+		<p id="player-score">
+			Score <span></span>
+		</p>
+		<p id="player-card">Your guess: </p>
+		<div id="dealer-card" class="flip">
+			<div class="flipcard">
+				<div class="card face front"></div>
+				<div id="text-dealer-card" class="card face back"></div>
+			</div>
+		</div>
+
+
+		<div class="button button-bet">
+			<button id="make-bet">Make bet</button>
+		</div>
+
+		<div class="button button-flip">
+			<button id="flip-card">Next bet</button><!-- player can *pass* for an arbitrary penalty cost -->
+		</div>
+
 		<form id="guess-card">
 			<div>
-				<!-- whilst i've enjoyed the challenge of using :checked radio buttons to show/hide content,
-					 for next major iteration the suite selector will only be for smaller screens.
-					 desktop will show full deck of cards
-				-->
-				<!--
-				<p class="choose-suite visually-hidden">Choose a suite</p>
-
-				<input type="radio" name="suite" id="diamonds" class="suits" value="diamonds" checked="checked">
-				<label for="diamonds" class="card diamonds">&diams;</label>
-
-				<input type="radio" name="suite" id="clubs" class="suits" value="clubs">
-				<label for="clubs" class="card">&clubs;</label>
-
-				<input type="radio" name="suite" id="hearts" value="hearts">
-				<label for="hearts" class="card hearts">&hearts;</label>
-
-				<input type="radio" name="suite" id="spades" value="spades">
-				<label for="spades" class="card">&spades;</label>
- -->
 				<p class="visually-hidden">Choose a card</p>
 
 				<ul id="imported-cards"></ul>
-
-				<div id="dealer-card" class="flip">
-					<div class="flipcard">
-						<div class="card face front">
-							Back of card
-						</div>
-						<div id="text-dealer-card" class="card face back">
-							Face of card
-						</div>
-					</div>
-				</div>
-
-
 
 				<!-- mark-up will be dynamically generated using custom template -->
 
@@ -298,12 +286,6 @@
 
 		</form>
 
-		<div>
-			<button id="make-bet">Make bet</button>
-		</div>
-		<div>
-			<button id="flip-card">Flip card</button><!-- player can *pass* for an arbitrary penalty cost -->
-		</div>
 	</div>
 
 	<script type="text/x-template" id="card-template">
