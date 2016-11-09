@@ -270,11 +270,6 @@ utils.convertTemplate = function(templateString, values){
 	//importedCards.appendChild(list);
 };
 
-utils.removeElementFromDOM = function(elementToRemove) {
-	log(elementToRemove);
-	importedCards.removeChild(child); //card
-	//document.getElementById("imported-cards").removeChild(child);
-};
 
 
 //
