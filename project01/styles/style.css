@@ -16,18 +16,40 @@ h1:before {
 #game-container {
 	background: darkgreen;
 	overflow: hidden;
+	font-family: sans-serif;
 }
+#player-score,
+#text-player-card {
+	max-width: 5rem;
+
+}
+#text-player-card/* ,
+ */ {
+	float: left;
+	width: 50%;
+}
+#text-player-card {
+	float: left;
+	font-size: 1rem;
+	background: #fff;
+	margin: 0;
+	max-width: 5rem;
+    height: 6.5rem;
+    border-radius: .5rem;
+}
+#dealer-card {}
+#dealer-card #dealer-rank {}
+#dealer-card #dealer-suite {}
 label {
 	cursor: pointer;
 	font-size: 1.4rem;
-	font-family: sans-serif;
 	padding: .2rem;
 }
 #guess-suite label {
 	font-size: 1.6rem;
 }
 .card {
-	border-width: 2px;
+	border-width: 3px;
 	border-style: solid;
 	border-color: #fff;
 	display: inline-block;
@@ -38,20 +60,24 @@ label {
 .card.diamonds {
 	color: #f00;
 }
+#dealer-card #dealer-rank,
 .card .rank,
 .card .symbol {
 	display: block;
 	float: left;
 }
+#dealer-card #dealer-rank,
 .card .rank {
 	font-size: .4em;
 	font-weight: bold;
 	letter-spacing: .1em;
 	padding: .2rem 0 0 .2rem;
 }
+#dealer-card #dealer-rank::first-letter,
 .card .rank::first-letter {
 	text-transform: uppercase;
 }
+#dealer-card #dealer-symbol,
 .card .symbol {
 	font-size: 1.4em;
 
@@ -69,7 +95,6 @@ label {
 #imported-cards .card {
 	background: #fff;
 	border-radius: .5rem;
-	border-width: 3px;
 	border-color: #333;
 	width: 3.6rem;
 	height: 5.0rem;
@@ -176,7 +201,6 @@ input#spades:checked ~ #suite-spades {
 	height: 100%;
 	position: absolute;
 	-webkit-backface-visibility: hidden ;
-	font-size: 1em;
 	text-align: center;
 }
 .flip .flipcard .front {
@@ -190,4 +214,5 @@ input#spades:checked ~ #suite-spades {
 
 button {
 	margin: 1rem;
+	min-width: 5.4rem;
 }

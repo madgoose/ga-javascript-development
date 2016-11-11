@@ -53,7 +53,7 @@ Game.prototype.setRandomCard = function(){
 
 	// update UI with extractedCard
 	// updatedealerCardUI()
-	txtDealerCard.innerHTML = "<span id=\"dealer-rank\">" + this.randomCard.rank + "</span>" + " <span>of</span> <span id=\"dealer-suite\">" + this.randomCard.suite + "</span>";
+	txtDealerCard.innerHTML = "<span id=\"dealer-rank\">" + this.randomCard.rank + "</span>" + "<span id=\"dealer-suite\" class=\"symbol\">" + this.randomCard.symbol + "</span>";
 };
 
 //
@@ -112,7 +112,7 @@ Game.prototype.compareCards = function(playerGuess) {
 		if (guessRank === this.randomCard.rank && guessSuite === this.randomCard.suite) {
 			this.flipCardUI(dealerCard);
 			// remove containing/parent li of selected radio button from DOM // TODO
-			log("you are teh winnar!!\n<-- [flip card]");
+			log("you are teh winnar!!\n<-- [Next bet]");
 			// wait for "Flip card" click event…
 			//utils.removeElementFromDOM();
 
@@ -179,14 +179,14 @@ var gameContainer = document.getElementById("game-container"),
  */
 
 // "Start new game" button click event
-btnStartNewGame.addEventListener("click", function() {
+/*btnStartNewGame.addEventListener("click", function() {
 
 	hitorbust.startGame(); // need to pass all the below as arguments setCredits etc
 	hitorbust.setRandomCard(); // tee-up first card to be flipped over
 	hitorbust.flipCard(); // move randomCard from newCards[] to flippedCards[]
 
 }, false);
-
+*/
 // "Make bet" button click event
 btnMakeBet.addEventListener("click", function() {
 
@@ -263,3 +263,7 @@ utils.convertTemplate = function(templateString, values){
 // construct new Game instance, assign to local variable hitorbust
 //
 var hitorbust = new Game(gameData.name, gameData.instructions);
+
+	hitorbust.startGame(); // need to pass all the below as arguments setCredits etc
+	hitorbust.setRandomCard(); // tee-up first card to be flipped over
+	hitorbust.flipCard(); // move randomCard from newCards[] to flippedCards[]
