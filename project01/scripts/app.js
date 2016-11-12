@@ -121,8 +121,13 @@ Game.prototype.compareCards = function(playerGuess) {
 };
 
 // method to completely remove li from the DOM. this is needed to remove all focus from form element, to trigger "make bet"
-Game.prototype.destroyCard = function(defunctCard) {
-	var oldChild = node.removeChild(child);
+//Game.prototype.destroyCard = function(defunctCard) {
+Game.prototype.destroyCard = function() {
+	var defunctCard = document.getElementById("card38");
+log(defunctCard);
+	var node = defunctCard.parent;
+	//var oldChild = node.removeChild(child);
+	var oldChild = node.removeChild(defunctCard);
 
 };
 

@@ -1,6 +1,4 @@
-#Things and actions required for turn-based games
-
-##*hit-or-bust
+#*hit-or-bust
 
 "Make a one player game where people down on their luck can lose all their money by guessing which card the computer will deal next!"
 
