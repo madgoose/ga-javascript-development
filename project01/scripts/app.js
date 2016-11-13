@@ -40,7 +40,6 @@ Game.prototype.setNewCards = function(newCards) {
 	// iterate through card collection and apply template for each card object
 	for (var i = 0; i < hitorbust.dealersHand.length; ++i) {
 		var list = utils.convertTemplate(cardTemplate, hitorbust.dealersHand[i]); // 51 cards due to first flipped
-		list.id = "card" + [i];
 		importedCards.appendChild(list);
 	}
 };
@@ -113,12 +112,9 @@ Game.prototype.compareCards = function(playerGuess) {
 		var guessSuite = playerGuess[0];
 		if (guessRank === this.randomCard.rank && guessSuite === this.randomCard.suite) {
 			this.flipCardUI(dealerCard);
-		//this.destroyCard(); // needs argument
-			// remove containing/parent li of selected radio button from DOM // TODO
-			log("you are teh winnar!!\n<-- [Next bet]");
-			// wait for "Flip card" click event…
 
-			//utils.removeElementFromDOM();
+			log("you are teh winnar!!\n<-- [Next bet]");
+
 
 		} else { log("unlucky buster");	}
 	} else { alert("You need to choose a card"); }
