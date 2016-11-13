@@ -114,9 +114,17 @@ Game.prototype.compareCards = function(playerGuess) {
 			this.flipCardUI(dealerCard);
 
 			log("you are teh winnar!!\n<-- [Next bet]");
+			btnMakeBet.classList.add("hidden");
+			btnNextCard.classList.remove("hidden");
 
+		} else {
 
-		} else { log("unlucky buster");	}
+			this.flipCardUI(dealerCard);
+
+			log("unlucky buster");
+			btnMakeBet.classList.add("hidden");
+			btnNextCard.classList.remove("hidden");
+		}
 	} else { alert("You need to choose a card"); }
 };
 
@@ -169,7 +177,7 @@ Player.prototype.makeBet = function(){
  */
 var gameContainer = document.getElementById("game-container"),
 	btnMakeBet = document.getElementById("make-bet"),
-	btnFlipCard = document.getElementById("flip-card"),
+	btnNextCard = document.getElementById("next-card"),
 	btnStartNewGame = document.getElementById("start-new-game"),
 	inputGuessCard = document.getElementById("guess-card"),
 	importedCards = document.getElementById("imported-cards"),
@@ -198,8 +206,10 @@ btnMakeBet.addEventListener("click", function() {
 }, false);
 
 // "Flip card" button click event
-btnFlipCard.addEventListener("click", function() {
+btnNextCard.addEventListener("click", function() {
 
+	btnNextCard.classList.add("hidden");
+	btnMakeBet.classList.remove("hidden");
 
 	// deduct 2 credits from Player.totalCredits
 	hitorbust.setRandomCard();
