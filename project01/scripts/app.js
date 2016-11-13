@@ -22,7 +22,6 @@ Game.prototype.startGame = function() {
 	this.setNewCards(gameData.cards);
 };
 
-
 // populate dealersHand array with data from external JSON i.e. deal a new hand
 Game.prototype.setNewCards = function(newCards) {
 	// initialise/reset card arrays
@@ -53,7 +52,7 @@ Game.prototype.setRandomCard = function(){
 
 	// update UI with extractedCard
 	// updatedealerCardUI()
-	txtDealerCard.innerHTML = "<span id=\"dealer-rank\">" + this.randomCard.rank + "</span>" + "<span id=\"dealer-suite\" class=\"symbol\">" + this.randomCard.symbol + "</span>";
+	txtDealerCard.innerHTML = "<span id=\"dealer-rank\" class=" + this.randomCard.suite + ">" + this.randomCard.rank + "</span>" + "<span id=\"dealer-suite\" class=\"symbol " + this.randomCard.suite + "\">" + this.randomCard.symbol + "</span>";
 };
 
 //
@@ -106,14 +105,19 @@ Game.prototype.flipCardUI = function(card){
 //
 Game.prototype.compareCards = function(playerGuess) {
 	if (typeof playerGuess !== "undefined") {
+
+		this.destroyCard(playerGuess);
+
 		playerGuess = playerGuess.split("-");
 		var guessRank = playerGuess[1];
 		var guessSuite = playerGuess[0];
 		if (guessRank === this.randomCard.rank && guessSuite === this.randomCard.suite) {
 			this.flipCardUI(dealerCard);
+		//this.destroyCard(); // needs argument
 			// remove containing/parent li of selected radio button from DOM // TODO
 			log("you are teh winnar!!\n<-- [Next bet]");
 			// wait for "Flip card" click event…
+
 			//utils.removeElementFromDOM();
 
 		} else { log("unlucky buster");	}
@@ -122,13 +126,11 @@ Game.prototype.compareCards = function(playerGuess) {
 
 // method to completely remove li from the DOM. this is needed to remove all focus from form element, to trigger "make bet"
 //Game.prototype.destroyCard = function(defunctCard) {
-Game.prototype.destroyCard = function() {
-	var defunctCard = document.getElementById("card38");
-log(defunctCard);
-	var node = defunctCard.parent;
-	//var oldChild = node.removeChild(child);
-	var oldChild = node.removeChild(defunctCard);
-
+Game.prototype.destroyCard = function(defunctCard) {
+	defunctCard = document.getElementById(defunctCard);
+	defunctCard= defunctCard.parentNode;
+	var node = defunctCard.parentNode;
+	node.removeChild(defunctCard);
 };
 
 
