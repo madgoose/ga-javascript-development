@@ -20,7 +20,15 @@ h1:before {
 	overflow: hidden;
 	font-family: sans-serif;
 }
-#player-score,
+#player-score {
+	max-width: 6rem;
+	background: #fefefe;
+	padding: .2rem;
+}
+#player-score::before {
+	content: "Score: "
+}
+
 #text-player-card {
 	max-width: 5rem;
 

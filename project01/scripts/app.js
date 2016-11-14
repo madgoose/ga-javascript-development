@@ -16,13 +16,14 @@ var Game = function(name, instructions){
 Game.prototype.startGame = function() {
 	// show game container on web page
 	gameContainer.className = "";
-	this.player1 = new Player("Bob", 100); // abstract later to something like this.setNewPlayer();
+	this.player1 = new Player("Bob", 50); // abstract later to something like this.setNewPlayer();
 	// display game name and instructions
 	log("Welcome to " + gameData.name + "!\n" + gameData.instructions + "\n" + gameData.easterEgg);
+	this.player1.updatePlayerScore(this.player1.credits);
 	this.setNewCards(gameData.cards);
 };
 
-// populate dealersHand array with data from external JSON i.e. deal a new hand
+// populate dealersHand array with data from external JSON i.eplayer. deal a new hand
 Game.prototype.setNewCards = function(newCards) {
 	// initialise/reset card arrays
 	this.dealersHand = [];
@@ -56,6 +57,7 @@ Game.prototype.setRandomCard = function(){
 
 //
 Game.prototype.flipCard = function(){
+
 	//  randomCard is the card the player is trying to guess, not presented on interface at this point but available in memory
 	//log("dealer's hand", this.dealersHand.length, "flipped cards", this.flippedCards.length);
 
@@ -105,7 +107,9 @@ Game.prototype.flipCardUI = function(card){
 Game.prototype.compareCards = function(playerGuess) {
 	if (typeof playerGuess !== "undefined") {
 
-		this.destroyCard(playerGuess);
+		this.destroyCard(playerGuess); // remove guessed card from the dom
+
+		this.player1.updatePlayerScore(); //  need to pass through wager * odds --> (wager * -1)
 
 		playerGuess = playerGuess.split("-");
 		var guessRank = playerGuess[1];
@@ -172,6 +176,12 @@ Player.prototype.makeBet = function(){
 	hitorbust.compareCards(playerGuess);
 };
 
+// output player score
+Player.prototype.updatePlayerScore = function(){
+	playerScore.textContent = this.credits;
+};
+
+
 /*
  * assign DOM elements to local variables
  */
@@ -183,6 +193,7 @@ var gameContainer = document.getElementById("game-container"),
 	importedCards = document.getElementById("imported-cards"),
 	cardTemplate = document.getElementById("card-template").innerHTML, // html mark-up plus delimited placeholder text
 	dealerCard = document.getElementById("dealer-card"),
+	playerScore = document.getElementById("player-score"),
 	txtDealerCard = document.getElementById("text-dealer-card");
 
 /*
