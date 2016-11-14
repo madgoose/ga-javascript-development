@@ -121,7 +121,7 @@ Game.prototype.compareCards = function(playerGuess) {
 
 			this.flipCardUI(dealerCard);
 
-			log("unlucky buster");
+			log("unlucky buster\n<-- [Next bet]");
 			btnMakeBet.classList.add("hidden");
 			btnNextCard.classList.remove("hidden");
 		}
