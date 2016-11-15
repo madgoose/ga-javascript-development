@@ -21,12 +21,16 @@ h1:before {
 	font-family: sans-serif;
 }
 #player-score {
-	max-width: 6rem;
+	float: left;
 	background: #fefefe;
-	padding: .2rem;
+	padding: .3rem;
+	font-size: 0.8em;
 }
 #player-score::before {
 	content: "Credits: ";
+}
+#odds {
+	clear: left;
 }
 #text-player-card {
 	max-width: 5rem;
@@ -95,14 +99,13 @@ label {
 	font-size: smaller;
 	font-style: italic;
 }
-#dealer-card #text-player-card #dealer-rank {
-	font-size: 1em;
+#dealer-card #text-player-card .rank {
+	font-size: 4em;
 }
-,
 #dealer-card #text-dealer-card #dealer-rank {
-	font-size: 1.3em;
+	font-size: 0.6em;
 }
-#dealer-card #text-player-card #dealer-symbol,
+#dealer-card #text-player-card .symbol,
 #dealer-card #text-dealer-card #dealer-symbol {
 	font-size: 2em;
 	line-height: 0.7em;

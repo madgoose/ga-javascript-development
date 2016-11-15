@@ -8,17 +8,18 @@
 </head>
 <!-- TODO add aria roles -->
 <body>
+	<div id="game-intro">
+		<h1>*hit-or-bust</h1>
+		<p>Flip cards. Make paper.</p>
+		<p>The game needs a modern-ish browser to run (Firefox/Chrome/Safari/IE9+), and will not work with JavaScript blocked. Open browser console and hit button below to start a new game. </p>
+		<button id="start-new-game">Start new game</button>
+	</div>
 
-<!-- 	<div id="game-intro">
-	<h1>*hit-or-bust</h1>
-	<p>Flip cards. Make paper.</p>
-	<p>The game needs a modern-ish browser to run (Firefox/Chrome/Safari/IE9+), and will not work with JavaScript blocked. Open browser console and hit button below to start a new game. </p>
-	<button id="start-new-game">Start new game</button>
-</div>
- -->
-	<div id="game-container" class="">
+	<div id="game-container" class="hidden">
 
 		<p id="player-score"></p>
+
+		<p id="odds"></p>
 
 		<p class="visually-hidden">Current guess: </p>
 

@@ -16,12 +16,15 @@ var Game = function(name, instructions){
 Game.prototype.startGame = function() {
 	// show game container on web page
 	gameContainer.className = "";
-	this.player1 = new Player("Bob", 50); // abstract later to something like this.setNewPlayer();
+	this.player1 = new Player("Bob"); // abstract later to something like this.setNewPlayer() and bind credits to number of cards
 	// display game name and instructions
 	log("Welcome to " + gameData.name + "!\n" + gameData.instructions + "\n" + gameData.easterEgg);
 	txtPlayerCard.innerText = "choose a card from below";
-	this.player1.updatePlayerScore(this.player1.credits);
+
 	this.setNewCards(gameData.cards);
+	this.player1.credits = this.dealersHand.length;
+	this.player1.updatePlayerScore(this.player1.credits);
+	this.updateGameOddsUI();
 };
 
 // populate dealersHand array with data from external JSON i.eplayer. deal a new hand
@@ -120,7 +123,7 @@ Game.prototype.compareCards = function(playerGuess) {
 
 			this.flipCardUI(dealerCard);
 
-			this.player1.updatePlayerScore(this.player1.credits = this.player1.credits + this.player1.credits);
+			this.player1.updatePlayerScore(this.player1.credits = this.player1.credits + (this.player1.credits * this.dealersHand.length));
 
 			btnMakeBet.classList.add("hidden");
 			btnNextCard.classList.remove("hidden");
@@ -141,6 +144,10 @@ Game.prototype.compareCards = function(playerGuess) {
 		}
 	} else { alert("You need to choose a card"); }
 };
+
+Game.prototype.updateGameOddsUI = function() {
+	//txtOdds.innerHTML = "A correct answer wins " + variableThing + ", an incorrect answer will cost you " + variableThing2
+}
 
 // method to completely remove li from the DOM. this is needed to remove all focus from form element, to trigger "make bet"
 //Game.prototype.destroyCard = function(defunctCard) {
@@ -209,6 +216,7 @@ Player.prototype.updatePlayerScore = function(adjustedScore){
  * assign DOM elements to local variables
  */
 var gameContainer = document.getElementById("game-container"),
+	txtOdds = document.getElementById("odds"),
 	btnMakeBet = document.getElementById("make-bet"),
 	btnNextCard = document.getElementById("next-card"),
 	btnStartNewGame = document.getElementById("start-new-game"),
@@ -225,14 +233,14 @@ var gameContainer = document.getElementById("game-container"),
  */
 
 // "Start new game" button click event
-/*btnStartNewGame.addEventListener("click", function() {
+btnStartNewGame.addEventListener("click", function() {
 
 	hitorbust.startGame(); // need to pass all the below as arguments setCredits etc
 	hitorbust.setRandomCard(); // tee-up first card to be flipped over
 	hitorbust.flipCard(); // move randomCard from newCards[] to flippedCards[]
 
 }, false);
-*/
+
 // "Make bet" button click event
 btnMakeBet.addEventListener("click", function() {
 
@@ -317,6 +325,6 @@ utils.convertTemplate = function(templateString, values){
 //
 var hitorbust = new Game(gameData.name, gameData.instructions);
 
-	hitorbust.startGame(); // need to pass all the below as arguments setCredits etc
-	hitorbust.setRandomCard(); // tee-up first card to be flipped over
-	hitorbust.flipCard(); // move randomCard from newCards[] to flippedCards[]
+	//hitorbust.startGame(); // need to pass all the below as arguments setCredits etc
+	//hitorbust.setRandomCard(); // tee-up first card to be flipped over
+	//hitorbust.flipCard(); // move randomCard from newCards[] to flippedCards[]
