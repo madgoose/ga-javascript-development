@@ -20,12 +20,9 @@
 
 		<p id="player-score"></p>
 
-		<p id="text-player-card" class="card">
-			Current guess:
-			<span id="player-rank">{{rank}}</span> <span>of</span> <span id="player-suite">{{suite}}</span>
-		</p>
+		<p class="visually-hidden">Current guess: </p>
 
-
+		<p id="text-player-card" class="card"></p>
 
 		<div id="dealer-card" class="flip">
 			<div class="flipcard">
@@ -33,7 +30,6 @@
 				<div id="text-dealer-card" class="card face back"></div>
 			</div>
 		</div>
-
 
 		<div class="button button-bet">
 			<button id="make-bet">Make bet</button>

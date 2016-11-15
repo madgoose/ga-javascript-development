@@ -19,6 +19,7 @@ Game.prototype.startGame = function() {
 	this.player1 = new Player("Bob", 50); // abstract later to something like this.setNewPlayer();
 	// display game name and instructions
 	log("Welcome to " + gameData.name + "!\n" + gameData.instructions + "\n" + gameData.easterEgg);
+	txtPlayerCard.innerText = "choose a card from below";
 	this.player1.updatePlayerScore(this.player1.credits);
 	this.setNewCards(gameData.cards);
 };
@@ -52,7 +53,7 @@ Game.prototype.setRandomCard = function(){
 
 	// update UI with extractedCard
 	// updatedealerCardUI()
-	txtDealerCard.innerHTML = "<span id=\"dealer-rank\" class=" + this.randomCard.suite + ">" + this.randomCard.rank + "</span>" + "<span id=\"dealer-suite\" class=\"symbol " + this.randomCard.suite + "\">" + this.randomCard.symbol + "</span>";
+	//txtDealerCard.innerHTML = "<span id=\"dealer-rank\" class=" + this.randomCard.suite + ">" + this.randomCard.rank + "</span>" + "<span id=\"dealer-suite\" class=\"symbol " + this.randomCard.suite + "\">" + this.randomCard.symbol + "</span>";
 };
 
 //
@@ -109,25 +110,34 @@ Game.prototype.compareCards = function(playerGuess) {
 
 		this.destroyCard(playerGuess); // remove guessed card from the dom
 
-		this.player1.updatePlayerScore(); //  need to pass through wager * odds --> (wager * -1)
+		// update view from model
+		txtDealerCard.innerHTML = "<span id=\"dealer-rank\" class=" + this.randomCard.suite + ">" + this.randomCard.rank + "</span>" + "<span id=\"dealer-symbol\" class=\"symbol " + this.randomCard.suite + "\">" + this.randomCard.symbol + "</span>";
 
 		playerGuess = playerGuess.split("-");
 		var guessRank = playerGuess[1];
 		var guessSuite = playerGuess[0];
 		if (guessRank === this.randomCard.rank && guessSuite === this.randomCard.suite) {
+
 			this.flipCardUI(dealerCard);
 
-			log("you are teh winnar!!\n<-- [Next bet]");
+			this.player1.updatePlayerScore(this.player1.credits = this.player1.credits + this.player1.credits);
+
 			btnMakeBet.classList.add("hidden");
 			btnNextCard.classList.remove("hidden");
+
+			log("you are teh winnar!!\n<-- [Next bet]");
 
 		} else {
 
 			this.flipCardUI(dealerCard);
 
-			log("unlucky buster\n<-- [Next bet]");
+			this.player1.updatePlayerScore(this.player1.credits = this.player1.credits - (this.player1.credits / 2));
+
 			btnMakeBet.classList.add("hidden");
 			btnNextCard.classList.remove("hidden");
+
+			log("unlucky buster\n<-- [Next bet]");
+
 		}
 	} else { alert("You need to choose a card"); }
 };
@@ -177,8 +187,21 @@ Player.prototype.makeBet = function(){
 };
 
 // output player score
-Player.prototype.updatePlayerScore = function(){
-	playerScore.textContent = this.credits;
+Player.prototype.updatePlayerGuess = function(e){
+
+	var playerGuess = e.target.nextSibling.nextSibling.innerHTML;
+
+	var guessSuite = e.target.value.split("-");
+	guessSuite = guessSuite[0];
+
+	txtPlayerCard.className = "card " + guessSuite;
+	txtPlayerCard.innerHTML = playerGuess;
+
+};
+
+// output player score
+Player.prototype.updatePlayerScore = function(adjustedScore){
+	playerScore.textContent = adjustedScore;
 };
 
 
@@ -194,6 +217,7 @@ var gameContainer = document.getElementById("game-container"),
 	cardTemplate = document.getElementById("card-template").innerHTML, // html mark-up plus delimited placeholder text
 	dealerCard = document.getElementById("dealer-card"),
 	playerScore = document.getElementById("player-score"),
+	txtPlayerCard = document.getElementById("text-player-card"),
 	txtDealerCard = document.getElementById("text-dealer-card");
 
 /*
@@ -228,6 +252,11 @@ btnNextCard.addEventListener("click", function() {
 	hitorbust.flipCardUI(dealerCard);
 
 }, false);
+
+importedCards.addEventListener("change", function() {
+	//log("form changed");
+	hitorbust.player1.updatePlayerGuess(event);
+})
 
 /*
  * Utilities

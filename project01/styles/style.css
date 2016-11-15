@@ -26,16 +26,13 @@ h1:before {
 	padding: .2rem;
 }
 #player-score::before {
-	content: "Score: "
+	content: "Credits: ";
 }
-
 #text-player-card {
 	max-width: 5rem;
-
-}
-#text-player-card {
 	float: left;
 	width: 50%;
+	text-align: center;
 }
 #text-player-card {
 	float: left;
@@ -90,7 +87,6 @@ label {
 #dealer-card #dealer-symbol,
 .card .symbol {
 	font-size: 1.4em;
-
 	clear: left;
 	float: right;
 }
@@ -98,6 +94,18 @@ label {
 	margin-top: 0;
 	font-size: smaller;
 	font-style: italic;
+}
+#dealer-card #text-player-card #dealer-rank {
+	font-size: 1em;
+}
+,
+#dealer-card #text-dealer-card #dealer-rank {
+	font-size: 1.3em;
+}
+#dealer-card #text-player-card #dealer-symbol,
+#dealer-card #text-dealer-card #dealer-symbol {
+	font-size: 2em;
+	line-height: 0.7em;
 }
 #imported-cards {
 	clear: both;
