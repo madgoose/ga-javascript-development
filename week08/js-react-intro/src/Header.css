@@ -1,0 +1,10 @@
+.Header-logo {
+  height: 80px;
+}
+
+.Header {
+  background-color: #222;
+  min-height: 150px;
+  padding: 20px;
+  color: white;
+}

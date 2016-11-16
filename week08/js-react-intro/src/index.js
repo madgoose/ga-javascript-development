@@ -21,4 +21,3 @@ ReactDOM.render(
 	 </Router>, // this is only possible because we're importing it from line 4
 	document.getElementById("root")
 );
-

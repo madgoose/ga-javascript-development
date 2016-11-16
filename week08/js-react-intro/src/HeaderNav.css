@@ -1,0 +1,13 @@
+.HeaderNav a {
+    color: white;
+    padding: 0 0.5em;
+}
+
+.HeaderNav a.active {
+    cursor: default;
+    text-decoration: none;
+}
+
+.HeaderNav li {
+    display: inline-block;
+}
