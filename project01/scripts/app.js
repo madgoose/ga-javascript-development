@@ -34,7 +34,6 @@ Game.prototype.setNewCards = function(newCards) {
 	this.flippedCards = [];
 	// clear any existing cards from UI
 	importedCards.innerHTML = "";
-	// sublime text 3 syntax helper, revised for loop // http://stackoverflow.com/questions/17484227/javascript-improved-native-for-loop
 	// iterate over cards collection from external JSON data.js
 	for (var i = newCards.length - 1; i >= 0; i--) {
 		// construct new Card instance for each item of "card" collection
