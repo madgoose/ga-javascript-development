@@ -24,7 +24,8 @@ Game.prototype.startGame = function() {
 	this.setNewCards(gameData.cards);
 	this.player1.credits = this.dealersHand.length;
 	this.player1.updatePlayerScore(this.player1.credits);
-	this.updateGameOddsUI();
+	this.playerWager = inputPlayerWager.value;
+	this.updateGameOdds(this.playerWager);
 };
 
 // populate dealersHand array with data from external JSON i.eplayer. deal a new hand
@@ -144,8 +145,14 @@ Game.prototype.compareCards = function(playerGuess) {
 	} else { alert("You need to choose a card"); }
 };
 
-Game.prototype.updateGameOddsUI = function() {
-	//txtOdds.innerHTML = "A correct answer wins " + variableThing + ", an incorrect answer will cost you " + variableThing2
+Game.prototype.updateGameOdds = function(wager) {
+	var gameOdds = this.dealersHand.length;
+	var wager = wager;
+	this.updateGameOddsUI(gameOdds, wager);
+}
+Game.prototype.updateGameOddsUI = function(gameOdds, wager) {
+	// gameOdds undefined
+	txtOdds.innerHTML = "A correct answer wins " + (gameOdds /** this.player1.credits*/) + ", an incorrect answer will cost you " + wager
 }
 
 // method to completely remove li from the DOM. this is needed to remove all focus from form element, to trigger "make bet"
@@ -192,7 +199,7 @@ Player.prototype.makeBet = function(){
 	hitorbust.compareCards(playerGuess);
 };
 
-// output player score
+// output currently selected card
 Player.prototype.updatePlayerGuess = function(e){
 
 	var playerGuess = e.target.nextSibling.nextSibling.innerHTML;
@@ -203,6 +210,11 @@ Player.prototype.updatePlayerGuess = function(e){
 	txtPlayerCard.className = "card " + guessSuite;
 	txtPlayerCard.innerHTML = playerGuess;
 
+};
+
+// output player wager
+Player.prototype.updatePlayerWager = function(wager){
+	hitorbust.playerWager = wager;
 };
 
 // output player score
@@ -220,6 +232,7 @@ var gameContainer = document.getElementById("game-container"),
 	btnNextCard = document.getElementById("next-card"),
 	btnStartNewGame = document.getElementById("start-new-game"),
 	inputGuessCard = document.getElementById("guess-card"),
+	inputPlayerWager = document.getElementById("player-wager"),
 	importedCards = document.getElementById("imported-cards"),
 	cardTemplate = document.getElementById("card-template").innerHTML, // html mark-up plus delimited placeholder text
 	dealerCard = document.getElementById("dealer-card"),
@@ -261,9 +274,13 @@ btnNextCard.addEventListener("click", function() {
 }, false);
 
 importedCards.addEventListener("change", function() {
-	//log("form changed");
 	hitorbust.player1.updatePlayerGuess(event);
-})
+}, false);
+
+inputPlayerWager.addEventListener("change", function(e) {
+	var val = e.target.value;
+	hitorbust.updateGameOdds(val);
+}, false);
 
 /*
  * Utilities
@@ -324,6 +341,6 @@ utils.convertTemplate = function(templateString, values){
 //
 var hitorbust = new Game(gameData.name, gameData.instructions);
 
-	//hitorbust.startGame(); // need to pass all the below as arguments setCredits etc
-	//hitorbust.setRandomCard(); // tee-up first card to be flipped over
-	//hitorbust.flipCard(); // move randomCard from newCards[] to flippedCards[]
+	hitorbust.startGame(); // need to pass all the below as arguments setCredits etc
+	hitorbust.setRandomCard(); // tee-up first card to be flipped over
+	hitorbust.flipCard(); // move randomCard from newCards[] to flippedCards[]

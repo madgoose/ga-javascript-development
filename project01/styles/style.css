@@ -21,16 +21,28 @@ h1:before {
 	font-family: sans-serif;
 }
 #player-score {
-	float: left;
+	/* float: left; */
 	background: #fefefe;
 	padding: .3rem;
 	font-size: 0.8em;
+	/* border: 1px solid #020202; */
 }
 #player-score::before {
 	content: "Credits: ";
 }
-#odds {
+#player-wager {
+	display: block;
 	clear: left;
+	border: 0;
+	padding: .3rem;
+	font-size: 0.8em;
+}
+#odds {
+	/* clear: left;
+	float: left; */
+	background: #fefefe;
+	padding: .3rem;
+	font-size: 0.8em;
 }
 #text-player-card {
 	max-width: 5rem;
