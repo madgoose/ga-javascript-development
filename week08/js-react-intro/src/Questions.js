@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+import QuestionsForm from './QuestionsForm';
+import QuestionsItem from './QuestionsItem';
+
 // setting state on a class-based component
 class Questions extends Component {
 
@@ -37,24 +40,30 @@ class Questions extends Component {
     return (
       <div className="Questions">
 
-        <form onSubmit={this.handleSubmit}>
-          <input
-            type="text"
-            onChange={this.handleChange}
-            value={question}
-          />
-        </form>
+        <QuestionsForm
+          handleSubmit={this.handleSubmit} // key={value}
+          handleChange={this.handleChange}
+          question={this.state.question}
+        />
+
         <section className="Questions-questions">
+
           <div className="Questions-questions-preview">
             <p>{ question ? question : 'Your question preview here'}</p>
           </div>
+
           <ul className="Questions-questions-list">
             {
-              questions.map((item, index) => {
-                return <li key={index}><p>{item}</p></li>
+              questions.map((item, index) => {  // this would usually be iterating over a JSON object, that would have a name:value pair of ID
+                return (<QuestionsItem
+                   key={item} // this would be item.id when iterating over JSON object
+                   item={item}
+                />)
               })
             }
+
           </ul>
+
         </section>
       </div>
     )
