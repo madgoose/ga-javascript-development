@@ -17,12 +17,20 @@
 
 	<div id="game-container" class="hidden">
 
-		<p id="player-score"></p>
+		<div id="player-wrap">
 
-		<label for="player-wager">How much do you bet?</label>
-		<input type="number" id="player-wager" name="player-wager" value="0" />
+			<p id="player-score"></p>
 
-		<p id="odds"></p>
+			<p id="odds"></p>
+
+			<p>
+				<label for="player-wager" id="player-wager-label">
+					How much do you bet?
+					<input type="number" id="player-wager" name="player-wager" value="0" />
+				</label>
+			</p>
+
+		</div>
 
 		<p class="visually-hidden">Current guess: </p>
 
@@ -35,13 +43,8 @@
 			</div>
 		</div>
 
-		<div class="button button-bet">
-			<button id="make-bet">Make bet</button>
-		</div>
-
-		<div class="button button-flip">
-			<button id="next-card" class="hidden">Next bet</button>
-		</div>
+		<button id="make-bet">Make bet</button>
+		<button id="next-card" class="hidden">Next bet</button>
 
 		<form id="guess-card">
 			<div>

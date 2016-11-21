@@ -25,6 +25,7 @@ Game.prototype.startGame = function() {
 	this.player1.credits = this.dealersHand.length;
 	this.player1.updatePlayerScore(this.player1.credits);
 	this.playerWager = inputPlayerWager.value;
+	//this.gameOdds = this.dealersHand.length;
 	this.updateGameOdds(this.playerWager);
 };
 
@@ -47,6 +48,7 @@ Game.prototype.setNewCards = function(newCards) {
 		var list = utils.convertTemplate(cardTemplate, hitorbust.dealersHand[i]); // 51 cards due to first flipped
 		importedCards.appendChild(list);
 	}
+	this.gameOdds = this.dealersHand.length;
 };
 
 // assigns randomCard with value of random item from dealersHand array
@@ -74,10 +76,13 @@ Game.prototype.flipCard = function(){
 	if (this.dealersHand.length) {
 		this.flippedCards.push(extractedCard);
 		log("flipped card hint:", extractedCard.rank, "of", extractedCard.suite);
-		log("dealer's hand", this.dealersHand.length, "flipped cards", this.flippedCards.length);
 	} else {
 		log("no more cards left to flip!");
 	};
+
+	this.gameOdds = this.dealersHand.length + 1;
+
+	this.updateGameOddsUI(this.gameOdds, this.wager);
 };
 
 // toggle .flipped css to show/hide element with css3 animation and flip dealer-card over
@@ -123,9 +128,9 @@ Game.prototype.compareCards = function(playerGuess) {
 
 			this.flipCardUI(dealerCard);
 
-			this.player1.updatePlayerScore(this.player1.credits = this.player1.credits + (this.player1.credits * this.dealersHand.length));
+			this.player1.updatePlayerScore(this.player1.credits = this.player1.credits + (this.gameOdds * this.wager));
 
-			btnMakeBet.classList.add("hidden");
+			//btnMakeBet.classList.add("hidden");
 			btnNextCard.classList.remove("hidden");
 
 			log("you are teh winnar!!\n<-- [Next bet]");
@@ -134,9 +139,9 @@ Game.prototype.compareCards = function(playerGuess) {
 
 			this.flipCardUI(dealerCard);
 
-			this.player1.updatePlayerScore(this.player1.credits = this.player1.credits - (this.player1.credits / 2));
+			this.player1.updatePlayerScore(this.player1.credits = this.player1.credits - (this.wager));
 
-			btnMakeBet.classList.add("hidden");
+			//btnMakeBet.classList.add("hidden");
 			btnNextCard.classList.remove("hidden");
 
 			log("unlucky buster\n<-- [Next bet]");
@@ -145,14 +150,15 @@ Game.prototype.compareCards = function(playerGuess) {
 	} else { alert("You need to choose a card"); }
 };
 
+// stuff
 Game.prototype.updateGameOdds = function(wager) {
-	var gameOdds = this.dealersHand.length;
-	var wager = wager;
-	this.updateGameOddsUI(gameOdds, wager);
+	//var wager = wager;
+	this.wager = wager;
+	this.updateGameOddsUI(this.gameOdds, wager);
 }
+// thangs
 Game.prototype.updateGameOddsUI = function(gameOdds, wager) {
-	// gameOdds undefined
-	txtOdds.innerHTML = "A correct answer wins " + (gameOdds /** this.player1.credits*/) + ", an incorrect answer will cost you " + wager
+	txtOdds.innerHTML = "Correct answer wins " + (this.gameOdds * wager) + " credits; incorrect answer costs " + wager + " credits";
 }
 
 // method to completely remove li from the DOM. this is needed to remove all focus from form element, to trigger "make bet"
@@ -241,48 +247,6 @@ var gameContainer = document.getElementById("game-container"),
 	txtDealerCard = document.getElementById("text-dealer-card");
 
 /*
- * event handlers
- */
-
-// "Start new game" button click event
-btnStartNewGame.addEventListener("click", function() {
-
-	hitorbust.startGame(); // need to pass all the below as arguments setCredits etc
-	hitorbust.setRandomCard(); // tee-up first card to be flipped over
-	hitorbust.flipCard(); // move randomCard from newCards[] to flippedCards[]
-
-}, false);
-
-// "Make bet" button click event
-btnMakeBet.addEventListener("click", function() {
-
-	hitorbust.player1.makeBet();
-
-}, false);
-
-// "Flip card" button click event
-btnNextCard.addEventListener("click", function() {
-
-	btnNextCard.classList.add("hidden");
-	btnMakeBet.classList.remove("hidden");
-
-	// deduct 2 credits from Player.totalCredits
-	hitorbust.setRandomCard();
-	hitorbust.flipCard();
-	hitorbust.flipCardUI(dealerCard);
-
-}, false);
-
-importedCards.addEventListener("change", function() {
-	hitorbust.player1.updatePlayerGuess(event);
-}, false);
-
-inputPlayerWager.addEventListener("change", function(e) {
-	var val = e.target.value;
-	hitorbust.updateGameOdds(val);
-}, false);
-
-/*
  * Utilities
  */
 
@@ -333,6 +297,49 @@ utils.convertTemplate = function(templateString, values){
 	//importedCards.appendChild(list);
 };
 
+
+/*
+ * event handlers
+ */
+
+// "Start new game" button click event
+btnStartNewGame.addEventListener("click", function() {
+
+	hitorbust.startGame(); // need to pass all the below as arguments setCredits etc
+	hitorbust.setRandomCard(); // tee-up first card to be flipped over
+	hitorbust.flipCard(); // move randomCard from newCards[] to flippedCards[]
+
+}, false);
+
+// "Make bet" button click event
+btnMakeBet.addEventListener("click", function() {
+
+	hitorbust.player1.makeBet();
+
+}, false);
+
+// "Flip card" button click event
+btnNextCard.addEventListener("click", function() {
+
+	btnNextCard.classList.add("hidden");
+	btnMakeBet.classList.remove("hidden");
+
+	// deduct 2 credits from Player.totalCredits
+	hitorbust.setRandomCard();
+	hitorbust.flipCard();
+	hitorbust.flipCardUI(dealerCard);
+
+}, false);
+
+importedCards.addEventListener("change", function() {
+	hitorbust.player1.updatePlayerGuess(event);
+}, false);
+
+inputPlayerWager.addEventListener("change", function(e) {
+	// needs to not run on the first occasion of change hmmmm
+	var val = e.target.value;
+	hitorbust.updateGameOdds(val);
+}, false);
 
 
 //

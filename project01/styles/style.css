@@ -22,27 +22,32 @@ h1:before {
 }
 #player-score {
 	/* float: left; */
-	background: #fefefe;
+	/* background: #fefefe;
 	padding: .3rem;
-	font-size: 0.8em;
+	font-size: 0.8em; */
 	/* border: 1px solid #020202; */
 }
 #player-score::before {
 	content: "Credits: ";
 }
 #player-wager {
-	display: block;
+	/* display: block;
 	clear: left;
-	border: 0;
+	border: 0; */
+
+}
+#player-wrap {
+	background: #fefefe;
 	padding: .3rem;
 	font-size: 0.8em;
+	margin: 0 auto 1em;
 }
 #odds {
 	/* clear: left;
 	float: left; */
-	background: #fefefe;
+	/* background: #fefefe;
 	padding: .3rem;
-	font-size: 0.8em;
+	font-size: 0.8em; */
 }
 #text-player-card {
 	max-width: 5rem;
@@ -58,6 +63,12 @@ h1:before {
 	max-width: 5rem;
     height: 6.5rem;
     border-radius: .5rem;
+}
+#text-player-card .rank {
+	font-size: 1rem;
+}
+#text-player-card .symbol {
+	font-size: 4rem;
 }
 #text-player-card,
 #text-dealer-card {
