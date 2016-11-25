@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Firebase ES6</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/3.6.0/firebase.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/hellojs/1.14.0/hello.all.min.js"></script>
+	<script type="text/javascript" src="dist/main.js"></script>
+
+	<script id="message-template" type="text/x-handlebars-template">
+		<li class="collection-item avatar">
+			<img src="{{user.thumbnail}}" alt="" class="circle">
+			<span class="title"><em>{{user.name}}</em> Said</span>
+			<p>{{message}}</p>
+		</li>
+	</script>
+
+	<script id="chat-template" type="text/x-handlebars-template">
+		<div clas="row">
+			<ul id="messages-list" class="collection col m12">
+
+			</ul>
+
+		</div>
+		<div class="row">
+			<div class="m4">
+				Logged in as {{name}}<br>
+				<img src="{{thumbnail}}" id="profile-picture">
+			</div>
+			<div class="m8">
+				<input type="text" id="message-input" name="Message" >
+				<button class="btn" id="send-message">Send</button>
+			</div>
+		</div>
+	</script>
+
+</head>
+<body>
+
+	<nav>
+		<div class="nav-wrapper">
+			<a href="#" class="brand-logo">Chat App with Firebase and HelloJS</a>
+			<ul id="nav-mobile" class="right hide-on-med-and-down">
+				<li id="login">
+					<a href="#" id="facebook-login">Login with Facebook</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+
+</body>
+</html>
