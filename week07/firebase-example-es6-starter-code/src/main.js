@@ -20,14 +20,14 @@ $( () => {
 
 	const writeNewMessage = (user, message) => {
 		let key = firebase.database().ref().child("messages").push().key
-		firebase.database().ref(`messages/${key}`.set({ user, message }))
+		firebase.database().ref(`messages/${key}`).set({ user, message })
 	}
 
 	const fetchMessages = () => {
 		// add event listener
 		messagesRef.on("child_added", (data) => {
 			const message = data.val();
-			$("#messages").append(`<li>${message.user} said {message.message}</li>`)
+			$("#messages").append(`<li>${message.user} said ${message.message}</li>`)
 		})
 	}
 

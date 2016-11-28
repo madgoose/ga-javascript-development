@@ -22,20 +22,20 @@ $(function () {
 
 	var writeNewMessage = function writeNewMessage(user, message) {
 		var key = firebase.database().ref().child("messages").push().key;
-		firebase.database().ref(("messages/" + key).set({ user: user, message: message }));
+		firebase.database().ref("messages/" + key).set({ user: user, message: message });
 	};
 
 	var fetchMessages = function fetchMessages() {
 		// add event listener
 		messagesRef.on("child_added", function (data) {
 			var message = data.val();
-			$("#messages").append("<li>" + message.user + " said {message.message}</li>");
+			$("#messages").append("<li>" + message.user + " said " + message.message + "</li>");
 		});
 	};
 
 	fetchMessages();
 
 	$("#new-message").on("click", function () {
-		writeNewMessage($("#user").val(), $("#message").val());
+		writeNewMessage($("#username").val(), $("#message").val());
 	});
 });
