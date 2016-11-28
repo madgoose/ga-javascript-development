@@ -331,12 +331,14 @@ btnNextCard.addEventListener("click", function() {
 
 }, false);
 
-importedCards.addEventListener("change", function() {
+
+// add onkeypress event to capture numbers typed in
+
+importedCards.addEventListener("click", function() {
 	hitorbust.player1.updatePlayerGuess(event);
 }, false);
 
-inputPlayerWager.addEventListener("change", function(e) {
-	// needs to not run on the first occasion of change hmmmm
+inputPlayerWager.addEventListener("keyup", function(e) {
 	var val = e.target.value;
 	hitorbust.updateGameOdds(val);
 }, false);
