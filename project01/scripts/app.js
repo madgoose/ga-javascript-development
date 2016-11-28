@@ -16,14 +16,14 @@ var Game = function(name, instructions){
 Game.prototype.startGame = function() {
 	// show game container on web page
 	gameContainer.className = "";
-	this.player1 = new Player("Bob"); // abstract later to something like this.setNewPlayer() and bind credits to number of cards
+	this.player = new Player("Bob"); // abstract later to something like this.setNewPlayer() and bind credits to number of cards
 	// display game name and instructions
 	log("Welcome to " + gameData.name + "!\n" + gameData.instructions + "\n" + gameData.easterEgg);
 	txtPlayerCard.innerText = "choose a card from below";
 
 	this.setNewCards(gameData.cards);
-	this.player1.credits = this.dealersHand.length;
-	this.player1.updatePlayerScore(this.player1.credits);
+	this.player.credits = this.dealersHand.length;
+	this.player.updatePlayerScore(this.player.credits);
 	this.playerWager = inputPlayerWager.value;
 	//this.gameOdds = this.dealersHand.length;
 	this.updateGameOdds(this.playerWager);
@@ -129,7 +129,7 @@ Game.prototype.compareCards = function(playerGuess) {
 
 			this.flipCardUI(dealerCard);
 
-			this.player1.updatePlayerScore(this.player1.credits = this.player1.credits + (this.gameOdds * this.wager));
+			this.player.updatePlayerScore(this.player.credits = this.player.credits + (this.gameOdds * this.wager));
 
 			//btnMakeBet.classList.add("hidden");
 			btnNextCard.classList.remove("hidden");
@@ -140,7 +140,7 @@ Game.prototype.compareCards = function(playerGuess) {
 
 			this.flipCardUI(dealerCard);
 
-			this.player1.updatePlayerScore(this.player1.credits = this.player1.credits - (this.wager));
+			this.player.updatePlayerScore(this.player.credits = this.player.credits - (this.wager));
 
 			//btnMakeBet.classList.add("hidden");
 			btnNextCard.classList.remove("hidden");
@@ -155,6 +155,13 @@ Game.prototype.compareCards = function(playerGuess) {
 Game.prototype.updateGameOdds = function(wager) {
 	//var wager = wager;
 	this.wager = wager;
+	// if wager > credits
+	if (this.wager > this.player.credits) {
+		alert("You can't bet more than you have");
+		wager = this.player.credits;
+		this.wager = this.player.credits;
+		inputPlayerWager.value = this.player.credits;
+	}
 	this.updateGameOddsUI(this.gameOdds, wager);
 }
 // thangs
@@ -310,7 +317,7 @@ btnStartNewGame.addEventListener("click", function() {
 // "Make bet" button click event
 btnMakeBet.addEventListener("click", function() {
 
-	hitorbust.player1.makeBet();
+	hitorbust.player.makeBet();
 
 }, false);
 
@@ -328,7 +335,7 @@ btnNextCard.addEventListener("click", function() {
 }, false);
 
 importedCards.addEventListener("change", function() {
-	hitorbust.player1.updatePlayerGuess(event);
+	hitorbust.player.updatePlayerGuess(event);
 }, false);
 
 inputPlayerWager.addEventListener("keyup", function(e) {
