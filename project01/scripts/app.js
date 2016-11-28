@@ -116,7 +116,8 @@ Game.prototype.flipCardUI = function(card){
 Game.prototype.compareCards = function(playerGuess) {
 	if (typeof playerGuess !== "undefined") {
 
-		this.destroyCard(playerGuess); // remove guessed card from the dom
+		// remove guessed card from the dom
+		this.destroyCard(playerGuess);
 
 		// update view from model
 		txtDealerCard.innerHTML = "<span id=\"dealer-rank\" class=" + this.randomCard.suite + ">" + this.randomCard.rank + "</span>" + "<span id=\"dealer-symbol\" class=\"symbol " + this.randomCard.suite + "\">" + this.randomCard.symbol + "</span>";
@@ -216,11 +217,6 @@ Player.prototype.updatePlayerGuess = function(e){
 	txtPlayerCard.className = "card " + guessSuite;
 	txtPlayerCard.innerHTML = playerGuess;
 
-};
-
-// output player wager
-Player.prototype.updatePlayerWager = function(wager){
-	hitorbust.playerWager = wager;
 };
 
 // output player score
@@ -331,10 +327,7 @@ btnNextCard.addEventListener("click", function() {
 
 }, false);
 
-
-// add onkeypress event to capture numbers typed in
-
-importedCards.addEventListener("click", function() {
+importedCards.addEventListener("change", function() {
 	hitorbust.player1.updatePlayerGuess(event);
 }, false);
 
