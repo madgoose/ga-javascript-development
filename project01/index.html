@@ -11,7 +11,9 @@
 	<div id="game-intro">
 		<h1>*hit-or-bust</h1>
 		<p>Flip cards. Make paper.</p>
-		<p>The game needs a modern-ish browser to run (Firefox/Chrome/Safari/IE9+), and will not work with JavaScript blocked. Open browser console and hit button below to start a new game. </p>
+		<p>Win credits by guessing which card the computer will deal next.</p>
+		<p>Be a hero. Live the dream.</p>
+		<p class="disclaimer">The game needs a modern-ish browser to run (Firefox/Chrome/Safari/IE9+), and will not work with JavaScript blocked.</p>
 		<button id="start-new-game">Start new game</button>
 	</div>
 
@@ -32,14 +34,26 @@
 
 		</div>
 
-		<p class="visually-hidden">Current guess: </p>
+		<p id="message" class="messaging hidden"></p>
 
-		<p id="text-player-card" class="card"></p>
+		<div class="card-area">
+			<p class="labels">Current guess</p>
+			<div id="player-card">
+				<div class="card">
+					<p id="text-player-card"></p>
+				</div>
+			</div>
+		</div>
 
-		<div id="dealer-card" class="flip">
-			<div class="flipcard">
-				<div class="card face front"></div>
-				<div id="text-dealer-card" class="card face back"></div>
+		<div class="card-area">
+			<p class="labels">Dealer's card</p>
+			<div id="dealer-card" class="flip-container" ontouchstart="this.classList.toggle('hover');">
+				<div class="flipper">
+					<div class="front"></div>
+					<div class="back">
+						<p id="text-dealer-card"></p>
+					</div>
+				</div>
 			</div>
 		</div>
 
@@ -287,26 +301,26 @@
 						</li>
 					</ul>
 				</fieldset>
-				-->
+			-->
 
-				<!-- /template -->
+			<!-- /template -->
 
-			</div>
+		</div>
 
-		</form>
+	</form>
 
-	</div>
+</div>
 
-	<script type="text/x-template" id="card-template">
-		<input type="radio" name="suite-rank" value="{{suite}}-{{rank}}" id="{{suite}}-{{rank}}">
-		<label class="card {{suite}}" for="{{suite}}-{{rank}}">
-			<span class="rank">{{rank}}</span>
-			<span class="symbol">{{symbol}}</span>
-		</label>
-	</script>
+<script type="text/x-template" id="card-template">
+	<input type="radio" name="suite-rank" value="{{suite}}-{{rank}}" id="{{suite}}-{{rank}}">
+	<label class="card {{suite}}" for="{{suite}}-{{rank}}">
+		<span class="rank">{{rank}}</span>
+		<span class="symbol">{{symbol}}</span>
+	</label>
+</script>
 
-	<script type="text/javascript" src="scripts/data.js"></script>
-	<script type="text/javascript" src="scripts/app.js"></script>
+<script type="text/javascript" src="scripts/data.js"></script>
+<script type="text/javascript" src="scripts/app.js"></script>
 
 </body>
 </html>

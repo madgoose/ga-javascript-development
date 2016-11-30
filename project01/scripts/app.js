@@ -18,8 +18,8 @@ Game.prototype.startGame = function() {
 	gameContainer.className = "";
 	this.player = new Player("Bob"); // abstract later to something like this.setNewPlayer() and bind credits to number of cards
 	// display game name and instructions
-	log("Welcome to " + gameData.name + "!\n" + gameData.instructions + "\n" + gameData.easterEgg);
-	txtPlayerCard.innerText = "choose a card from below";
+	log("Welcome to " + gameData.name + "!\n"+  gameData.easterEgg);
+	txtPlayerCard.innerHTML = "<span class=\"instructions\">Choose a card from below</span>";
 
 	this.setNewCards(gameData.cards);
 	this.player.credits = this.dealersHand.length;
@@ -88,7 +88,7 @@ Game.prototype.flipCard = function(){
 // toggle .flipped css to show/hide element with css3 animation and flip dealer-card over
 Game.prototype.flipCardUI = function(card){
 
-	var twoSidedCard = card.getElementsByClassName("flipcard");
+	var twoSidedCard = card.getElementsByClassName("flipper");
 	twoSidedCard = twoSidedCard.item(0);
 
 	var innerSpans = twoSidedCard.getElementsByTagName("span");
@@ -98,7 +98,7 @@ Game.prototype.flipCardUI = function(card){
 
 		for (var i = innerSpans.length - 1; i >= 0; i--) {
 
-			innerSpans[i].classList.remove("visually-hidden");
+			innerSpans[i].classList.remove("hidden");
 		}
 		twoSidedCard.classList.add("flipped");
 
@@ -106,7 +106,7 @@ Game.prototype.flipCardUI = function(card){
 
 		for (var i = innerSpans.length - 1; i >= 0; i--) {
 
-			innerSpans[i].classList.add("visually-hidden");
+			innerSpans[i].classList.add("hidden");
 		}
 		twoSidedCard.classList.remove("flipped");
 	}
@@ -115,6 +115,9 @@ Game.prototype.flipCardUI = function(card){
 //
 Game.prototype.compareCards = function(playerGuess) {
 	if (typeof playerGuess !== "undefined") {
+
+		// disable makeBet button
+		btnMakeBet.setAttribute("disabled", "true");
 
 		// remove guessed card from the dom
 		this.destroyCard(playerGuess);
@@ -136,6 +139,12 @@ Game.prototype.compareCards = function(playerGuess) {
 
 			log("you are teh winnar!!\n<-- [Next bet]");
 
+			message.innerText = "POW! You won " + (this.gameOdds * this.wager) + " credits. Bet again?";
+
+			message.classList.remove("hidden");
+
+			// unhide #messaging and insert content
+
 		} else {
 
 			this.flipCardUI(dealerCard);
@@ -147,6 +156,10 @@ Game.prototype.compareCards = function(playerGuess) {
 
 			log("unlucky buster\n<-- [Next bet]");
 
+			message.innerText = "Unlucky buster :-( Bet again?";
+
+			message.classList.remove("hidden");
+
 		}
 	} else { alert("You need to choose a card"); }
 };
@@ -157,7 +170,7 @@ Game.prototype.updateGameOdds = function(wager) {
 	this.wager = wager;
 	// if wager > credits
 	if (this.wager > this.player.credits) {
-		alert("You can't bet more than you have");
+		alert("You can't bet more credits than you have!");
 		wager = this.player.credits;
 		this.wager = this.player.credits;
 		inputPlayerWager.value = this.player.credits;
@@ -166,7 +179,7 @@ Game.prototype.updateGameOdds = function(wager) {
 }
 // thangs
 Game.prototype.updateGameOddsUI = function(gameOdds, wager) {
-	txtOdds.innerHTML = "Correct answer wins " + (this.gameOdds * wager) + " credits; incorrect answer costs " + wager + " credits";
+	txtOdds.innerHTML = "Correct answer wins " + (this.gameOdds * wager) + " credits; incorrect answer loses " + wager + " credits";
 }
 
 // method to completely remove li from the DOM. this is needed to remove all focus from form element, to trigger "make bet"
@@ -221,7 +234,8 @@ Player.prototype.updatePlayerGuess = function(e){
 	var guessSuite = e.target.value.split("-");
 	guessSuite = guessSuite[0];
 
-	txtPlayerCard.className = "card " + guessSuite;
+	/*txtPlayerCard.className = "card " + guessSuite;*/
+	txtPlayerCard.className = guessSuite;
 	txtPlayerCard.innerHTML = playerGuess;
 
 };
@@ -237,6 +251,7 @@ Player.prototype.updatePlayerScore = function(adjustedScore){
  */
 var gameContainer = document.getElementById("game-container"),
 	txtOdds = document.getElementById("odds"),
+	message = document.getElementById("message"),
 	btnMakeBet = document.getElementById("make-bet"),
 	btnNextCard = document.getElementById("next-card"),
 	btnStartNewGame = document.getElementById("start-new-game"),
@@ -274,7 +289,7 @@ utils.getRadioVal = function(form, name){
 utils.convertTemplate = function(templateString, values){
 
 	// use regex to target double curly parentheses + key-value pairs from gameData.cards
-	var regexMatch = /\{\{([a-zA-Z]*)\}\}/g; // g at end means global - it will not stop after the first instance
+	var regexMatch = /\{\{([a-zA-Z]*)\}\}/g;
 
 	// new array containing strings that match regex expression
 	var matches = templateString.match(regexMatch);
@@ -297,7 +312,6 @@ utils.convertTemplate = function(templateString, values){
 	var list = document.createElement("li");
 	list.innerHTML = templateString;
 	return list;
-	//importedCards.appendChild(list);
 };
 
 
@@ -324,10 +338,16 @@ btnMakeBet.addEventListener("click", function() {
 // "Flip card" button click event
 btnNextCard.addEventListener("click", function() {
 
+	message.classList.add("hidden");
+
 	btnNextCard.classList.add("hidden");
 	btnMakeBet.classList.remove("hidden");
+	btnMakeBet.removeAttribute("disabled");
 
-	// deduct 2 credits from Player.totalCredits
+	txtPlayerCard.innerHTML = "<span class=\"instructions\">Choose a card from below</span>";
+
+	txtPlayerCard.className = "";
+
 	hitorbust.setRandomCard();
 	hitorbust.flipCard();
 	hitorbust.flipCardUI(dealerCard);
