@@ -27,7 +27,6 @@ h1:before {
 	background: darkgreen;
 	overflow: hidden;
 	font-family: sans-serif;
-	position: relative;
 }
 
 #player-score::before {
@@ -44,10 +43,6 @@ h1:before {
 	background: #f0f;
 	text-align: center;
 	padding: .5rem;
-	position: absolute;
-	left: 50%;
-	-webkit-transform: translateX(-50%);
-	transform: translateX(-50%);
 }
 .messaging p {
 	padding: .5rem;
