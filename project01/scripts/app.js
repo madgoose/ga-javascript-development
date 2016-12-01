@@ -2,6 +2,31 @@
 var log = console.log;
 
 /*
+LOGIC NEEDED!
+
+CONDITION:
+incorrectly-guessed card needs to be removed from dealerHand[] as well as dealerCard !!
+
+only destroy card if guess === dealer
+	else destroy dealerCard
+
+*/
+
+
+/*
+
+also: killstreak (consecutive victories)
+
+*/
+
+
+/*
+
+weird bug : screenshot
+
+*/
+
+/*
  * Game class
  */
 
@@ -338,6 +363,10 @@ btnMakeBet.addEventListener("click", function() {
 // "Flip card" button click event
 btnNextCard.addEventListener("click", function() {
 
+	if (!(hitorbust.dealersHand)) {
+		message.innerText = "No more cards left!";
+	}
+
 	message.classList.add("hidden");
 
 	btnNextCard.classList.add("hidden");
@@ -369,7 +398,3 @@ inputPlayerWager.addEventListener("keyup", function(e) {
 // construct new Game instance, assign to local variable hitorbust
 //
 var hitorbust = new Game(gameData.name, gameData.instructions);
-
-	hitorbust.startGame(); // need to pass all the below as arguments setCredits etc
-	hitorbust.setRandomCard(); // tee-up first card to be flipped over
-	hitorbust.flipCard(); // move randomCard from newCards[] to flippedCards[]
